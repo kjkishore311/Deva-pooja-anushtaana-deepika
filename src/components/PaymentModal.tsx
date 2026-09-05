@@ -685,20 +685,16 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
               <div className="bg-[#140404] border border-[#ffd700]/25 rounded-2xl p-3 sm:p-4 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-sans font-bold text-[#ff9933]">
-                    {lang === 'kn' ? 'ಸಹಾಯ & ಮಾರ್ಗದರ್ಶನ ಸಂಪರ್ಕ' : 'Support & Scholar Contacts'}
+                    {lang === 'kn' ? 'ಸಹಾಯ & ಸ್ಪಷ್ಟೀಕರಣ ಸಂಪರ್ಕ' : 'Support & Clarification Contact'}
                   </span>
                   <span className="text-[10px] text-[#ffd700]/70 font-sans">
                     {lang === 'kn' ? 'ನೇರ ಕರೆ / ವಾಟ್ಸಾಪ್' : 'Direct Call / WhatsApp'}
                   </span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans">
+                <div className="grid grid-cols-1 gap-2 text-xs font-sans">
                   <div className="bg-[#250a0a] p-2.5 rounded-xl border border-[#ffd700]/15">
                     <p className="text-[11px] text-[#fef3c7]/60">{lang === 'kn' ? 'ಆ್ಯಪ್ ನೆರವು & ಸ್ಪಷ್ಟೀಕರಣ:' : 'App Assistance & Clarifications:'}</p>
                     <p className="font-bold text-[#fef3c7] mt-0.5">Kishore: <a href="tel:+917259458890" className="text-[#ffd700] hover:underline">+91 7259458890</a></p>
-                  </div>
-                  <div className="bg-[#2d0d0d] p-2.5 rounded-xl border border-[#ffd700]/30">
-                    <p className="text-[11px] text-[#ff9933] font-semibold">{lang === 'kn' ? 'ಸಂಪೂರ್ಣ ಆವೃತ್ತಿ ₹350+ ಪಾವತಿಗೆ (ದೇವಪೂಜಾ ಸಮಾಧಾನ):' : 'For Complete Tier (₹350+) - Deva Pooja Queries:'}</p>
-                    <p className="font-bold text-[#ffd700] mt-0.5">Pt. Venugopalachar Gudi: <a href="tel:+917811804262" className="text-[#ff9933] hover:underline">+91 7811804262</a></p>
                   </div>
                 </div>
               </div>
