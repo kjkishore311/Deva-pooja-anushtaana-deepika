@@ -24,7 +24,6 @@ import { MudraHandDiagram } from './components/MudraHandDiagram';
 import { PanchaMudraMobileStepper } from './components/PanchaMudraMobileStepper';
 import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraWidget';
 import { AnjaniputraChatbot } from './components/AnjaniputraChatbot';
-import { GooglePlayPublishModal } from './components/GooglePlayPublishModal';
 
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
@@ -42,7 +41,6 @@ export default function App() {
   const [paymentModalTier, setPaymentModalTier] = useState<PoojaMode>('30min');
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [isAnjaniputraOpen, setIsAnjaniputraOpen] = useState(false);
-  const [isPlayStoreModalOpen, setIsPlayStoreModalOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState<TabType>('darshan');
   const [landingViewMode, setLandingViewMode] = useState<'video' | 'photo'>('video');
@@ -101,7 +99,6 @@ export default function App() {
         onSelectTab={setActiveTab}
         unlockedTiers={unlockedTiers}
         onOpenAnjaniputra={() => setIsAnjaniputraOpen(true)}
-        onOpenPlayStore={() => setIsPlayStoreModalOpen(true)}
       />
 
       <div className="flex-1 flex w-full">
@@ -111,7 +108,6 @@ export default function App() {
           onChangeTab={setActiveTab}
           lang={lang}
           onOpenAnjaniputra={() => setIsAnjaniputraOpen(true)}
-          onOpenPlayStore={() => setIsPlayStoreModalOpen(true)}
         />
 
         {/* Main Screen Content View */}
@@ -278,13 +274,6 @@ export default function App() {
         </button>
       )}
 
-      {/* Google Play Store Publishing & Direct Android Installation Modal */}
-      <GooglePlayPublishModal
-        isOpen={isPlayStoreModalOpen}
-        onClose={() => setIsPlayStoreModalOpen(false)}
-        lang={lang}
-      />
-
       {/* Mobile / Tablet Left-Aligned Navigation Bar */}
       <div className="lg:hidden">
         <BottomNav
@@ -293,7 +282,6 @@ export default function App() {
           lang={lang}
           onOpenSupport={() => setIsSupportModalOpen(true)}
           onOpenAnjaniputra={() => setIsAnjaniputraOpen(true)}
-          onOpenPlayStore={() => setIsPlayStoreModalOpen(true)}
         />
       </div>
     </div>

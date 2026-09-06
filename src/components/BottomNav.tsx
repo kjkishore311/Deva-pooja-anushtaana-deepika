@@ -22,7 +22,6 @@ interface BottomNavProps {
   lang: Language;
   onOpenSupport?: () => void;
   onOpenAnjaniputra?: () => void;
-  onOpenPlayStore?: () => void;
 }
 
 export const BottomNav: React.FC<BottomNavProps> = ({
@@ -31,7 +30,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   lang,
   onOpenSupport,
   onOpenAnjaniputra,
-  onOpenPlayStore,
 }) => {
   // Toggle state to hide or view the navigation icons on the left side
   const [isOpen, setIsOpen] = useState<boolean>(true);
@@ -188,22 +186,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             </button>
           )}
 
-          {/* Google Play Store & Direct Install Shortcut */}
-          {onOpenPlayStore && (
-            <button
-              id="nav-tab-playstore-icon"
-              onClick={onOpenPlayStore}
-              title={lang === 'kn' ? 'ಗೂಗಲ್ ಪ್ಲೇ ಸ್ಟೋರ್ & ಆ್ಯಪ್' : 'Google Play Store & App'}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-xl text-left transition-all text-emerald-300 hover:bg-emerald-950/60 border border-emerald-500/30"
-            >
-              <div className="p-1 rounded-lg bg-emerald-500/20 text-xs leading-none">
-                ▶️
-              </div>
-              <span className="text-xs font-sans font-bold whitespace-nowrap">
-                {lang === 'kn' ? 'ಪ್ಲೇ ಸ್ಟೋರ್' : 'Play Store'}
-              </span>
-            </button>
-          )}
         </div>
       </div>
 

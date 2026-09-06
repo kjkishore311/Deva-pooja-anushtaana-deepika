@@ -226,21 +226,21 @@ export const NaivedyaServingProtocol: React.FC<{ lang: Language }> = ({ lang }) 
       titleEn: 'Portion A: Maha Naivedya (To Sri Hari)',
       itemsKn: 'ಅನ್ನ ಮತ್ತು ಪಾಯಸ',
       itemsEn: 'Rice & Payasa',
-      gheeTulasiKn: 'ಕೇವಲ ತುಪ್ಪ ಮತ್ತು ತುಳಸಿ ಮಾತ್ರ',
-      gheeTulasiEn: 'Only pure Cow Ghee & Tulasi',
-      descKn: 'ಶ್ರೀಹರಿಗೆ ಮಾತ್ರ ಪ್ರಥಮ ಸಮರ್ಪಣೆ. ಸಮಸ್ತ ಜಗತ್ತಿನ ಒಡೆಯನಾದ ಲಕ್ಷ್ಮೀನಾರಾಯಣನಿಗೆ ಪ್ರೀತ್ಯರ್ಥವಾಗಿ ಸಮರ್ಪಿಸುವ ಮುಖ್ಯ ನೈವೇದ್ಯ.',
-      descEn: 'Offered primarily to Sri Hari alone. The sanctified root of all subsequent offerings.'
+      gheeTulasiKn: 'ಮೊದಲು ತುಪ್ಪ ಮತ್ತು ತುಳಸಿ; ಶ್ರೀಹರಿ ಸಮರ್ಪಣೆಯ ನಂತರ ಮಾತ್ರ ತೀರ್ಥ',
+      gheeTulasiEn: 'Begin with Ghee & Tulasi; add Teertha only after offering to Sri Hari',
+      descKn: 'ಮೊದಲು ಶ್ರೀಹರಿಗೆ ಮಾತ್ರ ಮಹಾ ನೈವೇದ್ಯ ಸಮರ್ಪಿಸಿ. ನಂತರ A, B ಮತ್ತು C ಭಾಗಗಳಿಗೆ ಮಾತ್ರ ತೀರ್ಥ ಪ್ರೋಕ್ಷಿಸಿ ರಮಾ ಹಾಗೂ ವಾಯುದೇವರ ನೈವೇದ್ಯ ಮಾಡಬೇಕು.',
+      descEn: 'First offer this Maha Naivedya to Sri Hari alone. Afterwards sprinkle Teertha only on A, B and C for the Rama and Vayu offerings.'
     },
     {
       id: 'B',
-      titleKn: 'ಭಾಗ B: ರಮಾ & ಮುಖ್ಯಪ್ರಾಣ ದೇವರಿಗೆ',
-      titleEn: 'Portion B: To Rama & Mukhyaprana',
+      titleKn: 'ಭಾಗ B: ರಮಾ-ವಾಯು & ಪರಿವಾರ ದೇವತೆಗಳಿಗೆ',
+      titleEn: 'Portion B: Rama-Vayu & Parivara Deities',
       itemsKn: 'ಅನ್ನ ಮತ್ತು ಪಾಯಸ',
       itemsEn: 'Rice & Payasa',
-      gheeTulasiKn: 'ತುಪ್ಪ, ತುಳಸಿ ಮತ್ತು ತೀರ್ಥ ಪ್ರೋಕ್ಷಣೆ',
-      gheeTulasiEn: 'Ghee, Tulasi & Holy Teertha',
-      descKn: 'ಮಹಾನೈವೇದ್ಯದಿಂದ (A) ಸ್ವಲ್ಪ ಅನ್ನ-ಪಾಯಸವನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ, ತುಪ್ಪ-ತುಳಸಿ ಹಾಕಿ ದೇವರ ನಿರ್ಮಾಲ್ಯ ತೀರ್ಥ ಪ್ರೋಕ್ಷಿಸಿ ರಮಾ ಹಾಗೂ ಮುಖ್ಯಪ್ರಾಣ ದೇವರಿಗೆ ನೈವೇದ್ಯ ಮಾಡಬೇಕು.',
-      descEn: 'Separated from Maha Naivedya (A), sprinkled with ghee, tulasi, and Sri Hari’s Nirmalya Theertha, offered to Rama and Mukhyaprana.'
+      gheeTulasiKn: 'ಮೊದಲು ತುಪ್ಪ-ತುಳಸಿ; ನಂತರ ತೀರ್ಥ ಪ್ರೋಕ್ಷಣೆ',
+      gheeTulasiEn: 'Ghee & Tulasi first; Teertha in the second offering stage',
+      descKn: 'A ಭಾಗದಿಂದ ಅನ್ನ-ಪಾಯಸವನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ B ಭಾಗ ಮಾಡಿ. ರಮಾ-ವಾಯು ನೈವೇದ್ಯದ ನಂತರ ಗರುಡ, ಶೇಷ, ರುದ್ರಾದಿ ಪರಿವಾರ ದೇವತೆಗಳಿಗೆ ಸಮರ್ಪಿಸಿ; ಪೂಜೆ ಮುಗಿದ ಬಳಿಕ ಶುದ್ಧ ನೀರಿನಲ್ಲಿ ವಿಸರ್ಜಿಸಿ.',
+      descEn: 'Separate rice and Payasa from A as portion B. After the Rama-Vayu offering, offer it to Garuda, Shesha, Rudra and other Parivara deities; immerse it in clean water after pooja.'
     },
     {
       id: 'C',
@@ -248,10 +248,10 @@ export const NaivedyaServingProtocol: React.FC<{ lang: Language }> = ({ lang }) 
       titleEn: 'Portion C: To Garuda, Shesha, Rudra & Parivara',
       itemsKn: 'ಅನ್ನ ಮತ್ತು ಪಾಯಸ',
       itemsEn: 'Rice & Payasa',
-      gheeTulasiKn: 'ತುಪ್ಪ, ತುಳಸಿ ಮತ್ತು ತೀರ್ಥ ಪ್ರೋಕ್ಷಣೆ',
-      gheeTulasiEn: 'Ghee, Tulasi & Holy Teertha',
-      descKn: 'ಗರುಡ, ಶೇಷ, ರುದ್ರ, ಇಂದ್ರಾದಿ ಪರಿವಾರ ದೇವತೆಗಳಿಗೆ ಸಮರ್ಪಣೆ. ಪೂಜೆ ಸಂಪೂರ್ಣವಾದ ನಂತರ ಈ ಭಾಗವನ್ನು ಶುದ್ಧ ಜಲದಲ್ಲಿ ವಿಸರ್ಜಿಸಬೇಕು.',
-      descEn: 'Offered to Garuda, Shesha, Rudra and family deities. Immersed in pure water after puja.'
+      gheeTulasiKn: 'ಮೊದಲು ತುಪ್ಪ-ತುಳಸಿ; ನಂತರ ತೀರ್ಥ ಪ್ರೋಕ್ಷಣೆ',
+      gheeTulasiEn: 'Ghee & Tulasi first; Teertha in the second offering stage',
+      descKn: 'A ಭಾಗದಿಂದ ಅನ್ನ-ಪಾಯಸವನ್ನು ಪ್ರತ್ಯೇಕಿಸಿ C ಭಾಗ ಮಾಡಿ. ರಮಾ-ವಾಯು ನೈವೇದ್ಯದ ನಂತರ ಗರುಡ, ಶೇಷ, ರುದ್ರಾದಿ ನಾನಾಕಾರಿ ದೇವತೆಗಳಿಗೆ ಸಮರ್ಪಿಸಿ; ಪೂಜೆ ಮುಗಿದ ಬಳಿಕ ಶುದ್ಧ ನೀರಿನಲ್ಲಿ ವಿಸರ್ಜಿಸಿ.',
+      descEn: 'Separate rice and Payasa from A as portion C. After the Rama-Vayu offering, offer it to Garuda, Shesha, Rudra and the other attendant deities; immerse it in clean water after pooja.'
     },
     {
       id: 'D',
@@ -322,6 +322,70 @@ export const NaivedyaServingProtocol: React.FC<{ lang: Language }> = ({ lang }) 
         <span className="text-[10px] font-sans font-bold bg-[#ff9933]/20 text-[#ffd700] px-2.5 py-0.5 rounded-full border border-[#ff9933]/40">
           Image 3 ಚಾರ್ಟ್
         </span>
+      </div>
+
+      <div className="rounded-2xl border border-[#ff9933]/30 bg-[#140404] p-3 sm:p-4 space-y-3">
+        <div className="flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-[#ff9933]" />
+          <h5 className="font-serif font-bold text-sm text-[#ffd700]">
+            {lang === 'kn' ? 'ಸಂಪೂರ್ಣ ನೈವೇದ್ಯ ಮಾಡುವ ಕ್ರಮ' : 'Complete Naivedya Procedure'}
+          </h5>
+        </div>
+
+        <ol className="grid gap-2 sm:grid-cols-2">
+          {[
+            {
+              kn: 'A ಭಾಗದಲ್ಲಿ ಅನ್ನ ಮತ್ತು ಪಾಯಸಕ್ಕೆ ತುಪ್ಪ-ತುಳಸಿ ಹಾಕಿ ಮೊದಲು ಶ್ರೀಹರಿಗೆ ಮಹಾ ನೈವೇದ್ಯ ಸಮರ್ಪಿಸಿ.',
+              en: 'Prepare portion A with rice, Payasa, ghee and Tulasi, then offer Maha Naivedya first to Sri Hari.'
+            },
+            {
+              kn: 'A ಭಾಗದಿಂದ B ಮತ್ತು Cಗೆ ಅನ್ನ-ಪಾಯಸ, Dಗೆ ಅನ್ನ ಮಾತ್ರ ಪ್ರತ್ಯೇಕಿಸಿ; ಮೂರಕ್ಕೂ ತುಪ್ಪ ಮತ್ತು ತುಳಸಿ ಹಾಕಿ.',
+              en: 'From A, separate rice and Payasa for B and C, and rice only for D; add ghee and Tulasi to all three.'
+            },
+            {
+              kn: 'D ಭಾಗವನ್ನು ವೈಶ್ವದೇವಕ್ಕೆ ಮಾತ್ರ ಇಡಿ. ಅದಕ್ಕೆ ತೀರ್ಥ ಹಾಕಬೇಡಿ ಮತ್ತು ರಮಾ-ವಾಯು ನೈವೇದ್ಯ ಮಾಡಬೇಡಿ.',
+              en: 'Reserve D only for Vaishvadeva. Do not sprinkle Teertha on D and do not use it for Rama-Vayu Naivedya.',
+              warning: true
+            },
+            {
+              kn: 'ಶ್ರೀಹರಿಯ ಸಮರ್ಪಣೆಯ ನಂತರ A, B ಮತ್ತು Cಗೆ ಮಾತ್ರ ತೀರ್ಥ ಪ್ರೋಕ್ಷಿಸಿ ರಮಾ ಹಾಗೂ ವಾಯುದೇವರಿಗೆ ನೈವೇದ್ಯ ಮಾಡಿ.',
+              en: 'After Sri Hari’s offering, sprinkle Teertha only on A, B and C and perform the Rama and Vayu offerings.'
+            },
+            {
+              kn: 'B ಮತ್ತು C ಭಾಗಗಳನ್ನು ಗರುಡ, ಶೇಷ, ರುದ್ರಾದಿ ದೇವತೆಗಳಿಗೆ ಸಮರ್ಪಿಸಿ; ಪೂಜೆ ಮುಗಿದ ಮೇಲೆ ಶುದ್ಧ ನೀರಿನಲ್ಲಿ ವಿಸರ್ಜಿಸಿ.',
+              en: 'Offer B and C to Garuda, Shesha, Rudra and the attendant deities; immerse these portions in clean water after pooja.'
+            },
+            {
+              kn: 'ವೈಶ್ವದೇವದ ಶೇಷಾನ್ನವನ್ನು ಮಹಾ ನೈವೇದ್ಯದೊಂದಿಗೆ ಸೇರಿಸಿ E, F, G ಎಂದು ಮೂರು ಭಾಗ ಮಾಡಿ; ತುಪ್ಪ-ತುಳಸಿ-ತೀರ್ಥ ಹಾಕಿ ಕ್ರಮವಾಗಿ ಗೋಗ್ರಾಸ, ತುಳಸಿ ನೈವೇದ್ಯ ಮತ್ತು ಹಸ್ತೋದಕ ಮಾಡಿ.',
+              en: 'Mix the Vaishvadeva remainder with Maha Naivedya, divide it into E, F and G, add ghee, Tulasi and Teertha, then offer Gograsa, Tulasi Naivedya and Hastodaka.'
+            }
+          ].map((step, index) => (
+            <li
+              key={index}
+              className={`flex items-start gap-2 rounded-xl border p-2.5 text-[11px] leading-relaxed font-sans ${
+                step.warning
+                  ? 'border-red-500/45 bg-red-950/30 text-red-100'
+                  : 'border-[#ffd700]/15 bg-[#250a0a]/70 text-[#fef3c7]/85'
+              }`}
+            >
+              <span className={`flex w-5 h-5 shrink-0 items-center justify-center rounded-full font-bold ${
+                step.warning ? 'bg-red-500/25 text-red-200' : 'bg-[#ff9933]/20 text-[#ff9933]'
+              }`}>
+                {index + 1}
+              </span>
+              <span>{lang === 'kn' ? step.kn : step.en}</span>
+            </li>
+          ))}
+        </ol>
+
+        <div className="flex items-start gap-2 rounded-xl border border-[#ffd700]/20 bg-[#ffd700]/5 p-3 text-[11px] leading-relaxed text-[#fef3c7]/80">
+          <Info className="w-4 h-4 shrink-0 text-[#ffd700] mt-0.5" />
+          <span>
+            {lang === 'kn'
+              ? 'ಹಸ್ತೋದಕವನ್ನು ಚಿತ್ರದಲ್ಲಿರುವ ಒಂದೇ ಗುರುಭಾಗಕ್ಕೆ ಸೀಮಿತಗೊಳಿಸದೆ, ನಿಮ್ಮ ಪರಂಪರೆಯಂತೆ ಯಥಾಶಕ್ತಿಯಾಗಿ ಎಲ್ಲ ಗುರುಗಳಿಗೆ ಪ್ರತ್ಯೇಕವಾಗಿ ಸಮರ್ಪಿಸಿ.'
+              : 'The diagram shows one Hastodaka portion for illustration. Following your tradition and capacity, offer Hastodaka separately to all Gurus in the lineage.'}
+          </span>
+        </div>
       </div>
 
       {/* Visual Plantain Leaf Diagram (SVG) with Interactive Clickable Portions */}

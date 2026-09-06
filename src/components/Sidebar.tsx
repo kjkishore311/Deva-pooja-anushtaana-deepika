@@ -16,7 +16,6 @@ interface SidebarProps {
   onChangeTab: (tab: TabType) => void;
   lang: Language;
   onOpenAnjaniputra?: () => void;
-  onOpenPlayStore?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -24,7 +23,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onChangeTab,
   lang,
   onOpenAnjaniputra,
-  onOpenPlayStore,
 }) => {
   const tabs = [
     {
@@ -129,27 +127,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </div>
               </div>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            </button>
-          </div>
-        )}
-
-        {/* Google Play Store & Direct Android Install Link */}
-        {onOpenPlayStore && (
-          <div className="pt-1.5">
-            <button
-              id="sidebar-btn-playstore"
-              onClick={onOpenPlayStore}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-gradient-to-r from-emerald-950/60 to-[#1b0606] hover:from-emerald-900/80 hover:to-[#2b0a0a] border border-emerald-500/40 text-emerald-300 transition-all group shadow-sm active:scale-95"
-            >
-              <span className="text-base group-hover:scale-110 transition-transform inline-block">▶️</span>
-              <div className="text-left flex-1">
-                <div className="text-xs font-bold text-emerald-300 font-sans">
-                  {lang === 'kn' ? 'ಪ್ಲೇ ಸ್ಟೋರ್ & ಆ್ಯಪ್' : 'Google Play Store'}
-                </div>
-                <div className="text-[10px] text-[#fef3c7]/70 font-sans">
-                  {lang === 'kn' ? 'ಮೊಬೈಲ್‌ನಲ್ಲಿ ಇನ್‌ಸ್ಟಾಲ್' : 'Install on Android'}
-                </div>
-              </div>
             </button>
           </div>
         )}
