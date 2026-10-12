@@ -1,5 +1,5 @@
 // Service Worker for Tantrasarokta Deva Pooja Anushtana PWA
-const CACHE_NAME = 'deva-pooja-cache-v1';
+const CACHE_NAME = 'deva-pooja-cache-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -32,6 +32,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  const pathname = new URL(event.request.url).pathname;
+  if (pathname.startsWith('/api/') || pathname.startsWith('/.netlify/')) return;
   // Navigation request fallback or network first
   if (event.request.mode === 'navigate') {
     event.respondWith(

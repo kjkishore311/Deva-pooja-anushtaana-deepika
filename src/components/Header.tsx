@@ -18,7 +18,6 @@ interface HeaderProps {
   onSelectTab?: (tab: any) => void;
   unlockedTiers?: PoojaMode[];
   onOpenAnjaniputra?: () => void;
-  onOpenPlayStore?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -36,7 +35,6 @@ export const Header: React.FC<HeaderProps> = ({
   onSelectTab,
   unlockedTiers = ['10min'],
   onOpenAnjaniputra,
-  onOpenPlayStore,
 }) => {
   const is30MinUnlocked = unlockedTiers.includes('30min') || unlockedTiers.includes('full');
   const isFullUnlocked = unlockedTiers.includes('full');
@@ -169,21 +167,6 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="text-sm group-hover:scale-125 transition-transform inline-block">🐒</span>
             <span className="font-sans font-bold">
               {lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ' : 'Anjaniputra'}
-            </span>
-          </button>
-        )}
-
-        {/* Google Play Store & Direct App Installation */}
-        {onOpenPlayStore && (
-          <button
-            id="btn-open-playstore-header"
-            onClick={onOpenPlayStore}
-            className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-emerald-950/80 to-[#1e0707] hover:from-emerald-900/90 hover:to-[#2e0b0b] text-emerald-300 border border-emerald-500/40 font-bold text-xs flex items-center gap-1.5 transition-all active:scale-95 shadow-sm group shrink-0"
-            title={lang === 'kn' ? 'ಗೂಗಲ್ ಪ್ಲೇ ಸ್ಟೋರ್ ಪ್ರಕಟಣೆ & ಮೊಬೈಲ್ ಇನ್‌ಸ್ಟಾಲ್' : 'Google Play Store & Mobile App Install'}
-          >
-            <span className="text-xs group-hover:scale-110 transition-transform inline-block">▶️</span>
-            <span className="font-sans font-semibold">
-              {lang === 'kn' ? 'ಪ್ಲೇ ಸ್ಟೋರ್ / ಇನ್‌ಸ್ಟಾಲ್' : 'Play Store'}
             </span>
           </button>
         )}

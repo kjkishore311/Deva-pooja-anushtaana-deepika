@@ -14,7 +14,7 @@ import {
   Menu
 } from 'lucide-react';
 
-export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna';
+export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna' | 'sandhyavandane' | 'guru-stuti';
 
 interface BottomNavProps {
   activeTab: TabType;
@@ -22,7 +22,6 @@ interface BottomNavProps {
   lang: Language;
   onOpenSupport?: () => void;
   onOpenAnjaniputra?: () => void;
-  onOpenPlayStore?: () => void;
 }
 
 export const BottomNav: React.FC<BottomNavProps> = ({
@@ -31,12 +30,23 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   lang,
   onOpenSupport,
   onOpenAnjaniputra,
-  onOpenPlayStore,
 }) => {
   // Toggle state to hide or view the navigation icons on the left side
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const tabs = [
+    {
+      id: 'guru-stuti' as TabType,
+      labelKn: 'ಮಧ್ವ ಗುರು ಸ್ತುತಿ',
+      labelEn: 'Guru Stuti',
+      icon: Scroll,
+    },
+    {
+      id: 'sandhyavandane' as TabType,
+      labelKn: 'ಸಂಧ್ಯಾವಂದನೆ',
+      labelEn: 'Sandhyavandane',
+      icon: Scroll,
+    },
     {
       id: 'darshan' as TabType,
       labelKn: 'ದರ್ಶನ',
@@ -91,13 +101,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   return (
     <aside aria-label="Quick navigation" className="fixed left-2 sm:left-3 top-1/2 -translate-y-1/2 z-40 flex items-center select-none pointer-events-auto">
       {/* Left-Aligned Docked Navigation Panel */}
-      <div
-        className={`transition-all duration-300 ease-in-out flex items-center ${
-          isOpen
-            ? 'translate-x-0 opacity-100'
-            : '-translate-x-[110%] opacity-0 pointer-events-none absolute'
-        }`}
-      >
+      {isOpen && <div id="quick-navigation-options" className="flex items-center">
         <div className="bg-[#1a0505]/95 backdrop-blur-xl border border-[#ffd700]/30 rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-[0_10px_30px_rgba(0,0,0,0.85)] flex flex-col gap-1 max-h-[85vh] overflow-y-auto no-scrollbar">
           {/* Header with quick hide button */}
           <div className="flex items-center justify-between px-1.5 py-1 border-b border-[#ffd700]/15 mb-0.5">
@@ -123,7 +127,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               <button
                 key={tab.id}
                 id={`nav-tab-${tab.id}`}
-                onClick={() => onChangeTab(tab.id)}
+              onClick={() => { onChangeTab(tab.id); setIsOpen(false); }}
                 title={lang === 'kn' ? tab.labelKn : tab.labelEn}
                 className={`flex items-center gap-2 px-2 py-1.5 rounded-xl text-left transition-all relative group ${
                   isActive
@@ -187,30 +191,15 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               </span>
             </button>
           )}
-
-          {/* Google Play Store & Direct Install Shortcut */}
-          {onOpenPlayStore && (
-            <button
-              id="nav-tab-playstore-icon"
-              onClick={onOpenPlayStore}
-              title={lang === 'kn' ? 'ಗೂಗಲ್ ಪ್ಲೇ ಸ್ಟೋರ್ & ಆ್ಯಪ್' : 'Google Play Store & App'}
-              className="flex items-center gap-2 px-2 py-1.5 rounded-xl text-left transition-all text-emerald-300 hover:bg-emerald-950/60 border border-emerald-500/30"
-            >
-              <div className="p-1 rounded-lg bg-emerald-500/20 text-xs leading-none">
-                ▶️
-              </div>
-              <span className="text-xs font-sans font-bold whitespace-nowrap">
-                {lang === 'kn' ? 'ಪ್ಲೇ ಸ್ಟೋರ್' : 'Play Store'}
-              </span>
-            </button>
-          )}
         </div>
-      </div>
+      </div>}
 
       {/* Floating Toggle Button to Hide or View the Left Icons */}
       {!isOpen && (
         <button
           id="btn-nav-expand-toggle"
+          aria-expanded={isOpen}
+          aria-controls="quick-navigation-options"
           onClick={() => setIsOpen(true)}
           className="p-2 sm:p-2.5 rounded-2xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] text-[#1a0606] font-bold shadow-[0_4px_16px_rgba(255,153,51,0.5)] border border-[#ffd700] flex items-center gap-1 active:scale-95 transition-all group"
           title={lang === 'kn' ? 'ಮೆನು ಐಕಾನ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ' : 'View Navigation Icons'}

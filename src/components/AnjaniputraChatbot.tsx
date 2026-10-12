@@ -15,6 +15,7 @@ import {
   RotateCcw
 } from 'lucide-react';
 import { Language, PoojaMode } from '../types';
+import { useDraggablePanel } from '../hooks/useDraggablePanel';
 
 interface AnjaniputraChatbotProps {
   lang: Language;
@@ -118,6 +119,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
   const [inputVal, setInputVal] = useState('');
   const [isJumping, setIsJumping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const drag = useDraggablePanel(isOpen);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -190,11 +192,11 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-      <div className="relative w-full max-w-lg h-[640px] max-h-[92vh] bg-gradient-to-b from-[#2a0c0c] via-[#1a0505] to-[#120303] border-2 border-[#ffd700]/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] text-[#fef3c7] flex flex-col overflow-hidden">
+    <div ref={drag.panelRef} style={drag.style} role="dialog" aria-modal="false" aria-label={lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ ಸಹಾಯಕ' : 'Anjaniputra guide'} className="fixed z-50 w-[calc(100vw-24px)] max-w-lg">
+      <div className="relative w-full h-[640px] max-h-[calc(100dvh-24px)] bg-gradient-to-b from-[#2a0c0c] via-[#1a0505] to-[#120303] border-2 border-[#ffd700]/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] text-[#fef3c7] flex flex-col overflow-hidden">
         
         {/* Top Header: Anjaniputra Mascot Branding */}
-        <div className="bg-gradient-to-r from-[#3d1111] via-[#2d0909] to-[#3d1111] border-b border-[#ffd700]/30 px-4 py-3 flex items-center justify-between shadow-md">
+        <div {...drag.handlers} tabIndex={0} role="group" aria-label={lang === 'kn' ? 'ಶೀರ್ಷಿಕೆ ಎಳೆದು ಚಾಟ್ ಸರಿಸಿ ಅಥವಾ ಬಾಣದ ಕೀಲಿಗಳನ್ನು ಬಳಸಿ' : 'Drag this header to move the chat. Arrow keys move it; Home resets its position.'} className={`touch-none select-none bg-gradient-to-r from-[#3d1111] via-[#2d0909] to-[#3d1111] border-b border-[#ffd700]/30 px-4 py-3 flex items-center justify-between shadow-md focus-visible:outline-2 focus-visible:outline-[#ffd700] ${drag.isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}>
           <div className="flex items-center gap-3">
             {/* Playful Interactive Jumping Hanuman Icon */}
             <div 
@@ -219,7 +221,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
                 </span>
               </div>
               <p className="text-[11px] text-[#fef3c7]/75 font-sans">
-                {lang === 'kn' ? 'ದೇವಪೂಜೆ & ತಂತ್ರಸಾರ ಶಾಸ್ತ್ರ ಸಹಾಯಕ' : 'Deva Pooja & Tantrasara Helper'}
+                {lang === 'kn' ? 'ಸರಿಸಲು ಶೀರ್ಷಿಕೆ ಎಳೆಯಿರಿ' : 'Drag this header to move'}
               </p>
             </div>
           </div>
