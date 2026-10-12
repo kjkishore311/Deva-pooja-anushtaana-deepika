@@ -332,8 +332,8 @@ export const GooglePlayPublishModal: React.FC<GooglePlayPublishModalProps> = ({
       "url": "/?mode=30min"
     },
     {
-      "name": "ಅಂಜನೀಪುತ್ರ ಚಾಟ್‌ಬಾಟ್",
-      "short_name": "Anjaniputra",
+      "name": "ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್",
+      "short_name": "Vayu putra",
       "description": "Ask questions to Hanuman Guide",
       "url": "/?bot=open"
     }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { SAMAGRI_DATA } from '../data/inventoryData';
 import { Language, SamagriItem } from '../types';
 import { AccessoryGraphic } from './AccessoryGraphic';
+import { additionalSetupPhotos, setupPhotosByItem } from '../data/setupPhotos';
+import { SetupPhotoLink } from './SetupPhotoLink';
 import {
   CheckSquare,
   Square,
@@ -97,7 +99,7 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
             <p className="text-xs sm:text-sm text-[#ffd700]/70 font-sans">
               {lang === 'kn'
                 ? 'ಪ್ರತಿಯೊಂದು ಉಪಕರಣದ ದರ್ಶನ, ವಿವರಣೆ ಹಾಗೂ ಶಾಸ್ತ್ರೋಕ್ತ ಬದಲಿ ವ್ಯವಸ್ಥೆ'
-                : 'Authentic accessory illustrations, shastric substitutions and home setup'}
+                : 'Supplied accessory photos, shastric substitutions and home setup'}
             </p>
           </div>
         </div>
@@ -151,6 +153,7 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
         {filteredItems.map((item) => {
           const isHave = checkedIds[item.id];
+          const photos = setupPhotosByItem[item.id];
 
           return (
             <div
@@ -166,7 +169,11 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
               <div className="flex items-start gap-3">
                 {/* Authentic Accessory Vector Graphic */}
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-b from-[#2a0c0c] to-[#140404] border border-[#ffd700]/20 p-1 flex items-center justify-center shrink-0 shadow-inner">
-                  <AccessoryGraphic id={item.id} className="w-full h-full" />
+                  {photos ? (
+                    <img src={`/images/setup/${photos[0].file}`} alt={lang === 'kn' ? photos[0].nameKn : photos[0].nameEn} loading="lazy" className="h-full w-full rounded-xl bg-white object-contain" />
+                  ) : (
+                    <AccessoryGraphic id={item.id} className="w-full h-full" />
+                  )}
                 </div>
 
                 <div className="flex-1 min-w-0 space-y-1">
@@ -193,6 +200,12 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
                 </div>
               </div>
 
+              {photos && (
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {photos.map((photo) => <SetupPhotoLink key={photo.file} photo={photo} lang={lang} />)}
+                </div>
+              )}
+
               {/* Shastric Substitute Guide */}
               {item.substituteKn && (
                 <div className="bg-[#140404]/90 border border-[#ffd700]/15 rounded-xl p-2 sm:p-2.5 text-xs text-[#fef3c7]/90 space-y-0.5">
@@ -209,6 +222,18 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
           );
         })}
       </div>
+
+      <section className="rounded-2xl border border-[#ffd700]/20 bg-[#250a0a]/70 p-4 space-y-3">
+        <h3 className="font-serif font-bold text-[#ffd700]">{lang === 'kn' ? 'ಹೆಚ್ಚುವರಿ ಪೂಜಾ ಸಾಮಗ್ರಿ ಮತ್ತು ಉಲ್ಲೇಖ ಚಿತ್ರಗಳು' : 'Additional Setup Items & Reference Images'}</h3>
+        <p className="text-xs text-[#fef3c7]/75">
+          {lang === 'kn'
+            ? 'ನೀವು ನೀಡಿದ ಮೂಲ ಚಿತ್ರಗಳು. ಪೂರ್ಣ ಚಿತ್ರವನ್ನು ನೋಡಲು ಆಯ್ಕೆ ಮಾಡಿ. ಧೇನು ಮುದ್ರೆಯ ಚಿತ್ರವು ಬೆರಳು ಜೋಡಣೆಯ ಟಿಪ್ಪಣಿಯಾಗಿದೆ; ಕೈ ಸಂಕೇತದ ಚಿತ್ರವಲ್ಲ.'
+            : 'Original supplied images; select a photo to view it in full. The Dhenu Mudra attachment is a finger-pairing note, not a hand-signal photograph.'}
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {additionalSetupPhotos.map((photo) => <SetupPhotoLink key={photo.file} photo={photo} lang={lang} />)}
+        </div>
+      </section>
 
       {/* Bottom Actions for Missing Items */}
       {missingItems.length > 0 && (

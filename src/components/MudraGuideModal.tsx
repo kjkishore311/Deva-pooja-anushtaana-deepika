@@ -121,8 +121,8 @@ export const MudraGuideModal: React.FC<MudraGuideModalProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start">
                 {/* Visual Hand Diagram Card */}
                 <div className="md:col-span-5 bg-[#250a0a]/90 p-4 rounded-2xl border border-[#ffd700]/20 flex flex-col items-center justify-center text-center shadow-xl">
-                  <div className="w-36 h-36 sm:w-40 sm:h-40 rounded-2xl bg-gradient-to-b from-[#2a0c0c] to-[#120303] border-2 border-[#ff9933]/40 flex items-center justify-center mb-3 relative overflow-hidden shadow-inner p-2">
-                    <MudraHandDiagram id={currentMudra.id} className="w-full h-full" showLabels={true} />
+                  <div className="w-52 h-56 sm:w-64 sm:h-64 max-w-full rounded-2xl bg-white border-2 border-[#ff9933]/40 flex items-center justify-center mb-3 relative overflow-hidden shadow-inner p-2">
+                    <MudraHandDiagram id={currentMudra.id} className="w-full h-full" showLabels={true} allowZoom />
                     <div className="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-[#ff9933]/20 text-[10px] font-bold text-[#ff9933] border border-[#ff9933]/40 font-sans">
                       {currentMudra.badge}
                     </div>
