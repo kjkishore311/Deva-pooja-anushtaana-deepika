@@ -26,7 +26,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಬ್ರಹ್ಮಾಂತಾ ಗುರವಃ ಸಾಕ್ಷಾದಿಷ್ಟಂ ದೈವಂ ಶ್ರಿಯಃ ಪತಿಃ ।\nಆಚಾರ್ಯಾಃ ಶ್ರೀಮದಾಚಾರ್ಯಾಃ ಸಂತು ಮೇ ಜನ್ಮಜನ್ಮನಿ ॥",
       "en": "brahmāṃtā guravaḥ sākṣādiṣṭaṃ daivaṃ śriyaḥ patiḥ |\nācāryāḥ śrīmadācāryāḥ saṃtu me janmajanmani ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/001-shlokas-1-3.m4a"
   },
   {
     "id": "sri-padmanabha-tirtha",
@@ -40,7 +40,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಪೂರ್ಣಪ್ರಜ್ಞಕೃತಂ ಭಾಷ್ಯಮಾದೌ ತದ್ಭಾವಪೂರ್ವಕಮ್ ।\nಯೋ ವ್ಯಾಕರೋನ್ನಮಸ್ತಸ್ಮೈ ಪದ್ಮನಾಭಾಖ್ಯಯೋಗಿನೇ॥",
       "en": "pūrṇaprajñakṛtaṃ bhāṣyamādau tadbhāvapūrvakam |\nyo vyākaronnamastasmai padmanābhākhyayogine||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/001-shlokas-1-3.m4a"
   },
   {
     "id": "sri-narahari-tirtha",
@@ -54,7 +54,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "॥ ಸಸೀತಾಮೂಲರಾಮಾರ್ಚಾ ಕೋಶೇ ಗಜಪತೇಃ ಸ್ಥಿತಾ।\nಯೇನಾನೀತಾ ನಮಸ್ತಸ್ಮೈ ಶ್ರೀಮನ್ನೃಹರಿಭಿಕ್ಷವೇ॥",
       "en": "|| sasītāmūlarāmārcā kośe gajapateḥ sthitā|\nyenānītā namastasmai śrīmannṛharibhikṣave||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/001-shlokas-1-3.m4a"
   },
   {
     "id": "sri-madhava-tirtha",
@@ -68,7 +68,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "॥ ಸಾಧಿತಾಖಿಲಸತ್ತತ್ವಮ್ ಬಾಧಿತಾಖಿಲದುರ್ಮತಮ್।\nಬೋಧಿತಾಖಿಲಸನ್ಮಾರ್ಗಂ ಮಾಧವಾಖ್ಯಯತಿಂ ಭಜೇ॥",
       "en": "|| sādhitākhilasattatvam bādhitākhiladurmatam|\nbodhitākhilasanmārgaṃ mādhavākhyayatiṃ bhaje||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/002-shlokas-4-5.m4a"
   },
   {
     "id": "sri-akshobhya-tirtha",
@@ -82,7 +82,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "॥ ಯೋ ವಿದ್ಯಾರಣ್ಯವಿಪಿನಂ ತತ್ತ್ವಮಸ್ಯಸಿನಾಚ್ಛಿನತ್।\nಶ್ರೀಮದಕ್ಷೋಭ್ಯತೀರ್ಥಾರ್ಯಹಂಸಿನಂ ತಂ ನಮಾಮ್ಯಹಮ್॥",
       "en": "|| yo vidyāraṇyavipinaṃ tattvamasyasinācchinat|\nśrīmadakṣobhyatīrthāryahaṃsinaṃ taṃ namāmyaham||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/002-shlokas-4-5.m4a"
   },
   {
     "id": "sri-jayateertha",
@@ -96,7 +96,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಯಸ್ಯ ವಾಕ್ಕಾಮಧೇನುರ್ನಃ ಕಾಮಿತಾರ್ಥಾನ್ ಪ್ರಯಚ್ಛತಿ ।\nಸೇವೇ ತಂ ಜಯಯೋಗೀನ್ದ್ರಂ ಕಾಮಬಾಣಚ್ಛಿದಂ ಸದಾ ॥",
       "en": "yasya vākkāmadhenurnaḥ kāmitārthān prayacchati |\nseve taṃ jayayogīndraṃ kāmabāṇacchidaṃ sadā ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-jayateertha.m4a"
   },
   {
     "id": "sri-vidyadhiraja-tirtha",
@@ -138,7 +138,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ವಾಸುದೇವಪದದ್ವನ್ದ್ವವಾರಿಜಾಸಕ್ತಮಾನಸಮ್।\nಪದವ್ಯಾಖ್ಯಾನಕುಶಲಂ ವಾಗೀಶಯತಿಮಾಶ್ರಯೇ॥",
       "en": "vāsudevapadadvandvavārijāsaktamānasam|\npadavyākhyānakuśalaṃ vāgīśayatimāśraye||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-vagisha-tirtha.mp3"
   },
   {
     "id": "sri-ramachandra-tirtha",
@@ -264,7 +264,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ವೇದನಿಧ್ಯಾಲವಾಲೋತ್ಥಃ ವಿದುಷಾಂ ಚಿನ್ತಿತಪ್ರದಃ।\nಸತ್ಯವ್ರತಾಖ್ಯಕಲ್ಪದ್ರುಃ ಭೂಯಾದಿಷ್ಟಾರ್ಥಸಿದ್ಧಯೇ॥",
       "en": "vedanidhyālavālotthaḥ viduṣāṃ cintitapradaḥ|\nsatyavratākhyakalpadruḥ bhūyādiṣṭārthasiddhaye||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyavrata-tirtha.m4a"
   },
   {
     "id": "sri-satyanidhi-tirtha",
@@ -334,7 +334,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಸತ್ಯಪೂರ್ಣಾಮ್ಬುಧೇರ್ಜಾತೋ ವಿದ್ವಜ್ಜನವಿಜೃಮ್ಭಿತಃ।\nಧನೀಧ್ವಂಸೀತು ನಸ್ತಾಪಂ ಶ್ರೀಸತ್ಯವಿಜಯೋಡುಪಃ॥",
       "en": "satyapūrṇāmbudherjāto vidvajjanavijṛmbhitaḥ|\ndhanīdhvaṃsītu nastāpaṃ śrīsatyavijayoḍupaḥ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyavijaya-tirtha.m4a"
   },
   {
     "id": "sri-satyapriya-tirtha",
@@ -348,7 +348,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಶ್ರೀಸತ್ಯವಿಜಯಾಮ್ಬೋಧೇಃ ಜಾತಂ ಸತ್ಯಪ್ರಿಯಾಮೃತಮ್ ।\nಜರಾಮೃತೀ ಜಙ್ಘನೀತು ವಿಬುಧಾನಾಂ ಮುದೇ ಸದಾ ॥",
       "en": "śrīsatyavijayāmbodheḥ jātaṃ satyapriyāmṛtam |\njarāmṛtī jaṅghanītu vibudhānāṃ mude sadā ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyapriya-tirtha.m4a"
   },
   {
     "id": "sri-satyabodha-tirtha",
@@ -362,7 +362,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ನೈವೇದ್ಯಗವಿಷಂ ರಾಮೇ ವೀಕ್ಷ್ಯ ತದ್ಭುಕ್ತಿಭಾಕ್ ಗುರುಃ।\nಯೋಽದರ್ಶಯದ್ರವಿಂ ರಾತ್ರೌ ಸತ್ಯಬೋಧೋಽಸ್ತು ಮೇ ಮುದೇ॥",
       "en": "naivedyagaviṣaṃ rāme vīkṣya tadbhuktibhāk guruḥ|\nyo'darśayadraviṃ rātrau satyabodho'stu me mude||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyabodha-tirtha.m4a"
   },
   {
     "id": "sri-satyasandha-tirtha",
@@ -418,7 +418,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಸತ್ಯಧರ್ಮಾಬ್ಧಿಸಮ್ಭೂತಃ ಚಿನ್ತಾಮಣಿವಿಜೃಮ್ಭಿತಃ ।\nಸತ್ಯಸಂಕಲ್ಪಕಲ್ಪದ್ರುಃ ಕಲ್ಪಯೇತ್ಕಾಮಧುಙ್ಮಮ ।।",
       "en": "satyadharmābdhisambhūtaḥ cintāmaṇivijṛmbhitaḥ |\nsatyasaṃkalpakalpadruḥ kalpayetkāmadhuṅmama ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyasankalpa-and-satyasanthushta.m4a"
   },
   {
     "id": "sri-satyasanthushta-theertha",
@@ -432,7 +432,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಸತ್ಯಸಂಕಲ್ಪವಾರ್ಧ್ಯೂತ್ಥಃ ಸತ್ಯಸಂತುಷ್ಟಚಂದ್ರಮಾಃ ।\nಪ್ರಾರ್ಥಿತಾಶೇಷದಾತಾ ಚ ಭಕ್ತವೃಂದಸ್ಯ ನಿತ್ಯದಾ ॥",
       "en": "satyasaṃkalpavārdhyūtthaḥ satyasaṃtuṣṭacaṃdramāḥ |\nprārthitāśeṣadātā ca bhaktavṛṃdasya nityadā ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyasankalpa-and-satyasanthushta.m4a"
   },
   {
     "id": "sri-satyaparayana-theertha",
@@ -488,7 +488,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಸತ್ಯೇಷ್ಟಾರ್ಯಸರಿನ್ನಾಥಾದುದ್ಭೂತೋದ್ಭುತದರ್ಶನಃ ।\nನಾಶಯೇತ್ ಹೃದಯಧ್ವಾನ್ತಂ ಸತ್ಪರಾಕ್ರಮಕೌಸ್ತುಭಃ ।।",
       "en": "satyeṣṭāryasarinnāthādudbhūtodbhutadarśanaḥ |\nnāśayet hṛdayadhvāntaṃ satparākramakaustubhaḥ ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyaparakrama-tirtha.m4a"
   },
   {
     "id": "sri-satyaveera-tirtha",
@@ -530,7 +530,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "॥ ಸತ್ಯಧೀರಕರಾಬ್ಜೋತ್ಥೋ ಜ್ಞಾನವೈರಾಗ್ಯಸಾಗರಃ ।\nಸತ್ಯಜ್ಞಾನಾಖ್ಯತರಣಿಃ ಸ್ವಾಂತಧ್ವಾಂತಂ ನಿಕೃಂತತು ॥",
       "en": "|| satyadhīrakarābjottho jñānavairāgyasāgaraḥ |\nsatyajñānākhyataraṇiḥ svāṃtadhvāṃtaṃ nikṛṃtatu ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyajnana-tirtha.m4a"
   },
   {
     "id": "sri-satyadhyana-tirtha",

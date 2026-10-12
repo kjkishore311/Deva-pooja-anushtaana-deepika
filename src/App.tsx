@@ -291,7 +291,7 @@ export default function App() {
         lang={lang}
       />
 
-      {/* Interactive Jumping Hanuman Chatbot - Anjaniputra */}
+      {/* Interactive Jumping Hanuman Chatbot - Vayu putra */}
       <AnjaniputraChatbot
         isOpen={isAnjaniputraOpen}
         onClose={() => setIsAnjaniputraOpen(false)}

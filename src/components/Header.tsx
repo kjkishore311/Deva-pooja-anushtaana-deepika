@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
         </p>
       </div>
 
-      {/* Options Row Below App Name: Centered with Darshan, Pooja, Music, Language and Anjaniputra */}
+      {/* Options Row Below App Name: Centered with Darshan, Pooja, Music, Language and Vayu putra */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-1.5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 border-t border-[#ffd700]/10">
         {/* Darshan Trigger */}
         {onOpenDarshan && (
@@ -157,17 +157,17 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Anjaniputra Chatbot Quick Access */}
+        {/* Vayu putra Chatbot Quick Access */}
         {onOpenAnjaniputra && (
           <button
             id="btn-open-anjaniputra-header"
             onClick={onOpenAnjaniputra}
             className="px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ff9933] to-[#ffd700] hover:from-[#ffaa44] hover:to-[#ffe055] text-[#1a0606] font-bold text-xs flex items-center gap-1.5 border border-[#ffd700] shadow-[0_0_12px_rgba(255,153,51,0.4)] active:scale-95 transition-all group shrink-0"
-            title={lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ ಚಾಟ್‌ಬಾಟ್ ಮಾರ್ಗದರ್ಶಿ' : 'Anjaniputra Guide Chatbot'}
+            title={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್ ಮಾರ್ಗದರ್ಶಿ' : 'Vayu putra Guide Chatbot'}
           >
-            <span className="text-sm group-hover:scale-125 transition-transform inline-block">🐒</span>
+            <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="h-5 w-5 rounded-full object-cover ring-1 ring-[#1a0606]/40 group-hover:scale-125 transition-transform" />
             <span className="font-sans font-bold">
-              {lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ' : 'Anjaniputra'}
+              {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
             </span>
           </button>
         )}
