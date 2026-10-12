@@ -81,11 +81,11 @@ const FAQ_KNOWLEDGE_BASE = [
     action: { labelKn: 'ನೈವೇದ್ಯ ಕ್ರಮ ತಿಳಿಯಿರಿ', labelEn: 'Learn Naivedya Steps', tab: 'pooja' }
   },
   {
-    keywords: ['pandit', 'acharya', 'venugopalachar', 'kishore', 'contact', 'ಫೋನ್', 'ಸಂಪರ್ಕ'],
+    keywords: ['support', 'help', 'kishore', 'contact', 'ಫೋನ್', 'ಸಂಪರ್ಕ'],
     answerKn:
-      'ಪೂಜ್ಯ ಸುಧಾ ಪಂಡಿತ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿ (ಗುಡಿ) ಮತ್ತು ಸಂಯೋಜಕ ಶ್ರೀ ಕಿಶೋರ್ ಅವರ ಸಂಪರ್ಕ: ದೂರವಾಣಿ / WhatsApp: +91 97415 69403. ಇಮೇಲ್: kjkishore311@gmail.com. ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ಹಾಗೂ ಧರ್ಮ ಸಂದೇಹಗಳಿಗಾಗಿ ಸಂಪರ್ಕಿಸಿ!',
+      'ಸಂಯೋಜಕ ಶ್ರೀ ಕಿಶೋರ್ ಅವರ ಸಂಪರ್ಕ: ದೂರವಾಣಿ / WhatsApp: +91 72594 58890. ಇಮೇಲ್: kjkishore311@gmail.com. ಆ್ಯಪ್ ಬಳಕೆ ಹಾಗೂ ಸ್ಪಷ್ಟೀಕರಣಗಳಿಗಾಗಿ ಸಂಪರ್ಕಿಸಿ!',
     answerEn:
-      'To consult Pt. Venugopalachar Gudi & coordinator Kishore: Phone / WhatsApp: +91 97415 69403. Email: kjkishore311@gmail.com. Reach out for authentic guidance on Madhwa rituals and Tantrasara pooja.',
+      'To reach coordinator Kishore: Phone / WhatsApp: +91 72594 58890. Email: kjkishore311@gmail.com. Reach out for app assistance and general clarifications.',
     action: { labelKn: 'ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗ', labelEn: 'Q&A Section', tab: 'qa' }
   },
   {
@@ -171,9 +171,9 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
           id: `bot-${Date.now()}`,
           sender: 'bot',
           textKn:
-            'ಸುಂದರ ಪ್ರಶ್ನೆ! ಮಧ್ವ ಸಿದ್ಧಾಂತ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿಯಲ್ಲಿ ಶ್ರೀಹರಿಯ ಪೂಜೆಯು ಅತ್ಯುನ್ನತ ಸಾಧನ. ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗೆ ನಮ್ಮ ೧೦ ನಿಮಿಷ ಅಥವಾ ೩೦ ನಿಮಿಷದ ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ನೋಡಿ, ಅಥವಾ ಪೂಜ್ಯ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿಯವರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ!',
+            'ಸುಂದರ ಪ್ರಶ್ನೆ! ಮಧ್ವ ಸಿದ್ಧಾಂತ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿಯಲ್ಲಿ ಶ್ರೀಹರಿಯ ಪೂಜೆಯು ಅತ್ಯುನ್ನತ ಸಾಧನ. ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗೆ ನಮ್ಮ ೧೦ ನಿಮಿಷ ಅಥವಾ ೩೦ ನಿಮಿಷದ ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ನೋಡಿ, ಅಥವಾ ನಮ್ಮ ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗವನ್ನು ಪರಿಶೀಲಿಸಿ!',
           textEn:
-            'Wonderful question! In Sri Madhvacharya’s tradition, Deva Pooja is the supreme spiritual path. Check our step-by-step 10-min or 30-min guides, or contact Pt. Venugopalachar Gudi directly!',
+            'Wonderful question! In Sri Madhvacharya’s tradition, Deva Pooja is the supreme spiritual path. Check our step-by-step 10-min or 30-min guides, or explore our Q&A section for authentic shastric answers!',
           action: { labelKn: '೧೦ ನಿಮಿಷ ಉಚಿತ ಪೂಜೆ', labelEn: '10-Min Free Pooja', mode: '10min' as PoojaMode },
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };

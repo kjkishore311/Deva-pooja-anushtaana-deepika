@@ -1,6 +1,6 @@
 import React from 'react';
 import { Language } from '../types';
-import { Phone, MessageCircle, HelpCircle, X, ShieldCheck, UserCheck, Sparkles } from 'lucide-react';
+import { Phone, MessageCircle, HelpCircle, X } from 'lucide-react';
 
 interface SupportModalProps {
   isOpen: boolean;
@@ -38,15 +38,15 @@ export const SupportModal: React.FC<SupportModalProps> = ({
             </h2>
             <p className="text-[11px] sm:text-xs text-[#fef3c7]/70 font-sans">
               {lang === 'kn'
-                ? 'ಆ್ಯಪ್ ನೆರವು ಹಾಗೂ ದೇವಪೂಜಾ ಶಾಸ್ತ್ರೀಯ ಸಂಶಯಗಳಿಗೆ ನೇರ ಸಂಪರ್ಕ'
-                : 'Direct support for app clarification and scholarly Deva Pooja guidance'}
+                ? 'ಆ್ಯಪ್ ನೆರವು ಹಾಗೂ ಸ್ಪಷ್ಟೀಕರಣಗಳಿಗೆ ನೇರ ಸಂಪರ್ಕ'
+                : 'Direct support for app clarification and usage guidance'}
             </p>
           </div>
         </div>
 
-        {/* Support Cards */}
+        {/* Support Card */}
         <div className="space-y-3.5 pt-1">
-          {/* Contact 1: App Support - Kishore */}
+          {/* App Support Contact - Kishore */}
           <div className="bg-[#140404]/90 rounded-2xl border border-[#ffd700]/20 p-3.5 sm:p-4 space-y-3 shadow-inner">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#ff9933] bg-[#ff9933]/15 px-2.5 py-0.5 rounded-full border border-[#ff9933]/30">
@@ -86,57 +86,6 @@ export const SupportModal: React.FC<SupportModalProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 py-2 px-3 rounded-xl bg-emerald-950/70 hover:bg-emerald-900/70 text-emerald-300 border border-emerald-500/30 text-xs font-sans font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 shrink-0"
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                <span>WhatsApp</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Contact 2: Deva Pooja Shastric Guidance - Pt. Venugopalachar Gudi */}
-          <div className="bg-gradient-to-b from-[#2d0d0d]/90 to-[#1c0606] rounded-2xl border-2 border-[#ffd700]/40 p-3.5 sm:p-4 space-y-3 shadow-[0_0_20px_rgba(255,153,51,0.15)] relative overflow-hidden">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-sans font-bold uppercase tracking-wider text-[#1a0606] bg-gradient-to-r from-[#ffd700] to-[#ff9933] px-2.5 py-0.5 rounded-full border border-[#ffd700] shadow-sm">
-                {lang === 'kn' ? 'ಸಂಪೂರ್ಣ ಆವೃತ್ತಿ ₹350+ ಪಾವತಿಗೆ' : 'For Complete Tier (₹350+)'}
-              </span>
-              <span className="text-[11px] text-[#ffd700] font-sans flex items-center gap-1">
-                <UserCheck className="w-3.5 h-3.5 text-[#ff9933]" />
-                <span>{lang === 'kn' ? 'ಶಾಸ್ತ್ರ ಸಮಾಧಾನ' : 'Pooja Scholar'}</span>
-              </span>
-            </div>
-
-            <div>
-              <div className="text-[11px] text-[#ff9933] font-sans font-semibold">
-                {lang === 'kn' ? 'ದೇವಪೂಜಾ ಸಂಬಂಧಿತ ಶಾಸ್ತ್ರೀಯ ಮಾರ್ಗದರ್ಶನ:' : 'Related to Deva Pooja:'}
-              </div>
-              <h3 className="font-serif font-bold text-base text-[#ffd700] mt-0.5">
-                Pt. Venugopalachar Gudi
-              </h3>
-              <p className="text-xs font-mono text-[#ffd700] font-bold tracking-wider">
-                +91 7811804262
-              </p>
-            </div>
-
-            <p className="text-xs text-[#fef3c7]/80 font-sans leading-relaxed">
-              {lang === 'kn'
-                ? 'ಸಂಪೂರ್ಣ ಆವೃತ್ತಿ (₹350 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಪಾವತಿ) ಪಡೆದ ಭಕ್ತರಿಗೆ ತಂತ್ರಸಾರೋಕ್ತ ದೇವಪೂಜಾ ಕ್ರಮ, ಸಾಲಿಗ್ರಾಮ ಪೂಜೆ, ನೈವೇದ್ಯ ಮಂಡಲ ಹಾಗೂ ಮುದ್ರಾ ವಿಧಿಗಳ ಸಂಶಯಗಳಿಗೆ ಪೂಜ್ಯ ಪಂಡಿತರಿಂದ ಶಾಸ್ತ್ರ ಸಮಾಧಾನ.'
-                : 'Scholarly Deva Pooja guidance for complete tier patrons (payment above ₹350) for Saligrama ritual rules, Naivedya division, mudras, and Madi Achara.'}
-            </p>
-
-            {/* Actions */}
-            <div className="flex items-center gap-2 pt-1 border-t border-[#ffd700]/15">
-              <a
-                href="tel:+917811804262"
-                className="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] hover:from-[#ffaa4d] hover:to-[#ffe066] text-[#1a0606] font-sans font-bold text-xs flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-md shrink-0"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#1a0606]" />
-                <span>{lang === 'kn' ? 'ಕರೆ ಮಾಡಿ (Call)' : 'Call Scholar'}</span>
-              </a>
-              <a
-                href="https://wa.me/917811804262?text=Namaskara%20Pandit%20Venugopalachar%20Gudi%20Sir%2C%20I%20have%20queries%20related%20to%20Deva%20Pooja%20Tantrasara%20Paddhati."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-2 px-3 rounded-xl bg-emerald-950/80 hover:bg-emerald-900/80 text-emerald-300 border border-emerald-500/40 text-xs font-sans font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 shrink-0"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
                 <span>WhatsApp</span>
