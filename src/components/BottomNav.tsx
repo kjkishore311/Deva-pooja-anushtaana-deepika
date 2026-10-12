@@ -14,7 +14,7 @@ import {
   Menu
 } from 'lucide-react';
 
-export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna';
+export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna' | 'sandhyavandane' | 'guru-stuti';
 
 interface BottomNavProps {
   activeTab: TabType;
@@ -32,15 +32,26 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   onOpenAnjaniputra,
 }) => {
   // Toggle state to hide or view the navigation icons on the left side
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const tabs = [
     {
+      id: 'guru-stuti' as TabType,
+      labelKn: 'ಮಧ್ವ ಗುರು ಸ್ತುತಿ',
+      labelEn: 'Guru Stuti',
+      icon: Scroll,
+    },
+    {
+      id: 'sandhyavandane' as TabType,
+      labelKn: 'ಸಂಧ್ಯಾವಂದನೆ',
+      labelEn: 'Sandhyavandane',
+      icon: Scroll,
+    },
+    {
       id: 'darshan' as TabType,
-      labelKn: 'ದರ್ಶನ',
-      labelEn: 'Darshan',
+      labelKn: 'ಮುಖಪುಟ',
+      labelEn: 'Main Page',
       icon: Sparkles,
-      badge: '4K',
     },
     {
       id: 'pooja' as TabType,
@@ -89,13 +100,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   return (
     <aside aria-label="Quick navigation" className="fixed left-2 sm:left-3 top-1/2 -translate-y-1/2 z-40 flex items-center select-none pointer-events-auto">
       {/* Left-Aligned Docked Navigation Panel */}
-      <div
-        className={`transition-all duration-300 ease-in-out flex items-center ${
-          isOpen
-            ? 'translate-x-0 opacity-100'
-            : '-translate-x-[110%] opacity-0 pointer-events-none absolute'
-        }`}
-      >
+      {isOpen && <div id="quick-navigation-options" className="flex items-center">
         <div className="bg-[#1a0505]/95 backdrop-blur-xl border border-[#ffd700]/30 rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-[0_10px_30px_rgba(0,0,0,0.85)] flex flex-col gap-1 max-h-[85vh] overflow-y-auto no-scrollbar">
           {/* Header with quick hide button */}
           <div className="flex items-center justify-between px-1.5 py-1 border-b border-[#ffd700]/15 mb-0.5">
@@ -121,7 +126,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               <button
                 key={tab.id}
                 id={`nav-tab-${tab.id}`}
-                onClick={() => onChangeTab(tab.id)}
+              onClick={() => { onChangeTab(tab.id); setIsOpen(false); }}
                 title={lang === 'kn' ? tab.labelKn : tab.labelEn}
                 className={`flex items-center gap-2 px-2 py-1.5 rounded-xl text-left transition-all relative group ${
                   isActive
@@ -143,11 +148,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   {lang === 'kn' ? tab.labelKn : tab.labelEn}
                 </span>
 
-                {tab.badge && (
-                  <span className="ml-auto text-[9px] bg-[#ffd700] text-[#1a0606] px-1 py-0.2 rounded font-bold">
-                    {tab.badge}
-                  </span>
-                )}
               </button>
             );
           })}
@@ -169,12 +169,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             </button>
           )}
 
-          {/* Anjaniputra Shortcut */}
+          {/* Vayu putra Shortcut */}
           {onOpenAnjaniputra && (
             <button
               id="nav-tab-anjaniputra-icon"
               onClick={onOpenAnjaniputra}
-              title={lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ ಚಾಟ್‌ಬಾಟ್' : 'Anjaniputra Bot'}
+              title={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್' : 'Vayu putra Bot'}
               className="flex items-center gap-2 px-2 py-1.5 rounded-xl text-left transition-all text-[#ffaa44] hover:bg-[#3d1111]/80"
             >
               <div className="p-1 rounded-lg bg-[#ff9933]/20 text-base leading-none">
@@ -186,13 +186,21 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             </button>
           )}
 
+              <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="h-7 w-7 rounded-lg object-cover ring-1 ring-[#ff9933]/50" />
+              <span className="text-xs font-sans font-bold whitespace-nowrap">
+                {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
+              </span>
+            </button>
+          )}
         </div>
-      </div>
+      </div>}
 
       {/* Floating Toggle Button to Hide or View the Left Icons */}
       {!isOpen && (
         <button
           id="btn-nav-expand-toggle"
+          aria-expanded={isOpen}
+          aria-controls="quick-navigation-options"
           onClick={() => setIsOpen(true)}
           className="p-2 sm:p-2.5 rounded-2xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] text-[#1a0606] font-bold shadow-[0_4px_16px_rgba(255,153,51,0.5)] border border-[#ffd700] flex items-center gap-1 active:scale-95 transition-all group"
           title={lang === 'kn' ? 'ಮೆನು ಐಕಾನ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ' : 'View Navigation Icons'}

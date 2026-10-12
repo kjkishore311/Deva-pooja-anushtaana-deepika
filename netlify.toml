@@ -1,0 +1,16 @@
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[plugins]]
+  package = "./netlify/plugins/sandhyavandane-media"
+
+[[redirects]]
+  from = "/rigveda-trikala-sandhyavandane"
+  to = "/#sandhyavandane"
+  status = 302
+
+[[redirects]]
+  from = "/madhwa-guru-stuti"
+  to = "/#guru-stuti"
+  status = 302

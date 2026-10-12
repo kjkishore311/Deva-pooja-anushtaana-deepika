@@ -24,6 +24,10 @@ import { MudraHandDiagram } from './components/MudraHandDiagram';
 import { PanchaMudraMobileStepper } from './components/PanchaMudraMobileStepper';
 import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraWidget';
 import { AnjaniputraChatbot } from './components/AnjaniputraChatbot';
+import { SandhyavandaneSection } from './components/SandhyavandaneSection';
+import { AnjaniputraLauncher } from './components/AnjaniputraLauncher';
+import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
+import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
 
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
@@ -42,7 +46,7 @@ export default function App() {
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [isAnjaniputraOpen, setIsAnjaniputraOpen] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<TabType>('darshan');
+  const [activeTab, setActiveTab] = useState<TabType>(() => window.location.hash === '#guru-stuti' ? 'guru-stuti' : /^#(sandhyavandane|confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash) ? 'sandhyavandane' : 'darshan');
   const [landingViewMode, setLandingViewMode] = useState<'video' | 'photo'>('video');
   const [isMudraModalOpen, setIsMudraModalOpen] = useState(false);
   const [selectedMudraId, setSelectedMudraId] = useState<string | undefined>(undefined);
@@ -50,6 +54,30 @@ export default function App() {
   const [isDarshanModalOpen, setIsDarshanModalOpen] = useState(false);
   
   const [isBgMusicPlaying, setIsBgMusicPlaying] = useState(false);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#sandhyavandane') setActiveTab('sandhyavandane');
+      if (window.location.hash === '#guru-stuti') setActiveTab('guru-stuti');
+      if (!window.location.hash) setActiveTab((current) => ['sandhyavandane', 'guru-stuti'].includes(current) ? 'darshan' : current);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    const path = window.location.pathname + window.location.search;
+    const fragment = activeTab === 'sandhyavandane' ? '#sandhyavandane' : activeTab === 'guru-stuti' ? '#guru-stuti' : '';
+    if (fragment && !/^#(confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash)) {
+      window.history.replaceState(null, '', `${path}${fragment}`);
+    } else if (!fragment && ['#sandhyavandane', '#guru-stuti'].includes(window.location.hash)) {
+      window.history.replaceState(null, '', path);
+    }
+  }, [activeTab]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
 
   useEffect(() => {
     localStorage.setItem('pooja_app_lang', lang);
@@ -84,6 +112,11 @@ export default function App() {
     setIsMudraModalOpen(true);
   };
 
+  const handleOpenMainPage = () => {
+    setActiveTab('darshan');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen bg-[#1a0606] text-[#fef3c7] flex flex-col font-sans selection:bg-[#ff9933] selection:text-[#1a0606] pb-20 lg:pb-0">
       {/* Top Application Bar */}
@@ -92,7 +125,7 @@ export default function App() {
         onToggleLang={handleToggleLang}
         mode={mode}
         onSelectMode={handleSelectMode}
-        onOpenDarshan={() => setActiveTab('darshan')}
+        onOpenDarshan={handleOpenMainPage}
         isBgMusicPlaying={isBgMusicPlaying}
         onToggleBgMusic={() => setIsBgMusicPlaying(!isBgMusicPlaying)}
         activeTab={activeTab}
@@ -119,6 +152,8 @@ export default function App() {
               lang={lang}
               onStartPooja={() => handleSelectMode(mode)}
             />
+
+            <DevotionalHomeWidgets lang={lang} onSelect={setActiveTab} />
 
             {/* 1. Sequential Deity Video Darshan (6 YouTube Shorts in re-occurring sequence with audio & auto-pause on tab change) */}
             {landingViewMode === 'video' ? (
@@ -172,6 +207,13 @@ export default function App() {
           )}
 
           {activeTab === 'panchanga' && <Panchanga lang={lang} />}
+
+          {activeTab === 'guru-stuti' && <MadhwaGuruStuti lang={lang} onBack={() => setActiveTab('darshan')} />}
+
+          {activeTab === 'sandhyavandane' && <SandhyavandaneSection lang={lang} onBack={() => {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+            setActiveTab('darshan');
+          }} />}
 
           {activeTab === 'mudras' && (
             <div className="py-2">
@@ -249,7 +291,7 @@ export default function App() {
         lang={lang}
       />
 
-      {/* Interactive Jumping Hanuman Chatbot - Anjaniputra */}
+      {/* Interactive Jumping Hanuman Chatbot - Vayu putra */}
       <AnjaniputraChatbot
         isOpen={isAnjaniputraOpen}
         onClose={() => setIsAnjaniputraOpen(false)}
@@ -257,22 +299,7 @@ export default function App() {
         onNavigateToTab={(tab) => setActiveTab(tab as TabType)}
         onSelectMode={handleSelectMode}
       />
-
-      {/* Floating Interactive Jumping Hanuman Trigger Button */}
-      {!isAnjaniputraOpen && (
-        <button
-          id="btn-floating-anjaniputra-bot"
-          onClick={() => setIsAnjaniputraOpen(true)}
-          className="fixed bottom-24 lg:bottom-20 right-3 sm:right-6 z-40 bg-gradient-to-r from-[#ff9933] via-[#ffd700] to-[#ffaa4d] text-[#1a0606] px-3 sm:px-4 py-2 rounded-full shadow-[0_4px_20px_rgba(255,153,51,0.65)] border-2 border-[#ffd700] flex items-center gap-1.5 sm:gap-2 font-sans font-bold text-xs active:scale-95 transition-all group animate-bounce"
-          title={lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ - ಹನುಮಾನ್ ಸಹಾಯಕ' : 'Anjaniputra - Hanuman Guide Bot'}
-        >
-          <span className="text-lg leading-none inline-block group-hover:rotate-12 transition-transform">🐒</span>
-          <span className="tracking-wide">
-            {lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ' : 'Anjaniputra'}
-          </span>
-          <span className="w-2 h-2 rounded-full bg-emerald-600 animate-ping"></span>
-        </button>
-      )}
+      <AnjaniputraLauncher lang={lang} visible={!isAnjaniputraOpen} onOpen={() => setIsAnjaniputraOpen(true)} />
 
       {/* Mobile / Tablet Left-Aligned Navigation Bar */}
       <div className="lg:hidden">
@@ -312,6 +339,8 @@ function MudraGuideInline({
             ? 'ಕೈ ಬೆರಳುಗಳನ್ನು ಜೋಡಿಸುವ ನಿಖರ ಶೈಲಿ, ಆವಾಹನ ಹಾಗೂ ಆಯುಧ ಮುದ್ರೆಗಳ ರಚನೆ'
             : 'Visual finger positioning, invocation gestures, and shastric spiritual significance'}
         </p>
+        <a href="/images/mudras/tarkshyadi-original.jpg" target="_blank" rel="noopener noreferrer" className="inline-block pt-2 text-xs text-[#ffd700] underline underline-offset-4">{lang === 'kn' ? 'ಒದಗಿಸಿದ ಮೂಲ ಪಂಚಮುದ್ರಾ ಚಿತ್ರ ನೋಡಿ' : 'View the supplied original five-mudra reference'}</a>
+        <p className="text-xs leading-6 text-[#fef3c7]/60">{lang === 'kn' ? 'ತಾರ್ಕ್ಷ್ಯ, ಧೇನು, ಶಂಖ, ಗದಾ ಮತ್ತು ಚಕ್ರ ಚಿತ್ರಗಳನ್ನು ಒದಗಿಸಿದ ಚಿತ್ರದಿಂದ ಮಾತ್ರ ಕತ್ತರಿಸಲಾಗಿದೆ. ಇತರ ಮುದ್ರೆಗಳಿಗೆ ಚಿತ್ರ ಒದಗಿಸಲಾಗಿಲ್ಲ.' : 'Tarkshya, Dhenu, Shankha, Gada, and Chakra use only crops of the supplied image. No reference images were supplied for the other mudras.'}</p>
       </div>
 
       {/* 3 Mudra Exploration Category Tabs */}

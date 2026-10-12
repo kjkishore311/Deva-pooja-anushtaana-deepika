@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 import { Language, PoojaMode, QnAItem } from '../types';
 import { QNA_DATA } from '../data/qnaData';
+import { Language, PoojaMode } from '../types';
+import { useDraggablePanel } from '../hooks/useDraggablePanel';
 
 interface AnjaniputraChatbotProps {
   lang: Language;
@@ -81,11 +83,11 @@ const FAQ_KNOWLEDGE_BASE = [
     action: { labelKn: 'ನೈವೇದ್ಯ ಕ್ರಮ ತಿಳಿಯಿರಿ', labelEn: 'Learn Naivedya Steps', tab: 'pooja' }
   },
   {
-    keywords: ['pandit', 'acharya', 'venugopalachar', 'kishore', 'contact', 'ಫೋನ್', 'ಸಂಪರ್ಕ'],
+    keywords: ['support', 'help', 'kishore', 'contact', 'ಫೋನ್', 'ಸಂಪರ್ಕ'],
     answerKn:
-      'ಪೂಜ್ಯ ಸುಧಾ ಪಂಡಿತ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿ (ಗುಡಿ) ಮತ್ತು ಸಂಯೋಜಕ ಶ್ರೀ ಕಿಶೋರ್ ಅವರ ಸಂಪರ್ಕ: ದೂರವಾಣಿ / WhatsApp: +91 97415 69403. ಇಮೇಲ್: kjkishore311@gmail.com. ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ಹಾಗೂ ಧರ್ಮ ಸಂದೇಹಗಳಿಗಾಗಿ ಸಂಪರ್ಕಿಸಿ!',
+      'ಸಂಯೋಜಕ ಶ್ರೀ ಕಿಶೋರ್ ಅವರ ಸಂಪರ್ಕ: ದೂರವಾಣಿ / WhatsApp: +91 72594 58890. ಇಮೇಲ್: kjkishore311@gmail.com. ಆ್ಯಪ್ ಬಳಕೆ ಹಾಗೂ ಸ್ಪಷ್ಟೀಕರಣಗಳಿಗಾಗಿ ಸಂಪರ್ಕಿಸಿ!',
     answerEn:
-      'To consult Pt. Venugopalachar Gudi & coordinator Kishore: Phone / WhatsApp: +91 97415 69403. Email: kjkishore311@gmail.com. Reach out for authentic guidance on Madhwa rituals and Tantrasara pooja.',
+      'To reach coordinator Kishore: Phone / WhatsApp: +91 72594 58890. Email: kjkishore311@gmail.com. Reach out for app assistance and general clarifications.',
     action: { labelKn: 'ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗ', labelEn: 'Q&A Section', tab: 'qa' }
   },
   {
@@ -157,15 +159,16 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
       id: 'welcome',
       sender: 'bot',
       textKn:
-        'ಜೈ ಶ್ರೀರಾಮ್! 🙏 ನಾನು ಅಂಜನೀಪುತ್ರ - ನಿಮ್ಮ ದೇವಪೂಜಾ ದೈವಿಕ ಸಹಾಯಕ! ತಂತ್ರಸಾರ ಸಂಗ್ರಹ, ಸಾಲಿಗ್ರಾಮ ಪೂಜೆ, ಮುದ್ರೆಗಳು, ಸೂಕ್ತಗಳು ಅಥವಾ ೧೦ ನಿಮಿಷದ ಉಚಿತ ಪೂಜೆ ಬಗ್ಗೆ ಏನು ಬೇಕಾದರೂ ನನ್ನನ್ನು ಕೇಳಿ!',
+        'ಜೈ ಶ್ರೀರಾಮ್! 🙏 ನಾನು ವಾಯುಪುತ್ರ - ನಿಮ್ಮ ದೇವಪೂಜಾ ದೈವಿಕ ಸಹಾಯಕ! ತಂತ್ರಸಾರ ಸಂಗ್ರಹ, ಸಾಲಿಗ್ರಾಮ ಪೂಜೆ, ಮುದ್ರೆಗಳು, ಸೂಕ್ತಗಳು ಅಥವಾ ೧೦ ನಿಮಿಷದ ಉಚಿತ ಪೂಜೆ ಬಗ್ಗೆ ಏನು ಬೇಕಾದರೂ ನನ್ನನ್ನು ಕೇಳಿ!',
       textEn:
-        'Jai Sri Ram! 🙏 I am Anjaniputra - your divine Deva Pooja guide! Ask me anything about Tantrasara rituals, Saligrama rules, Mudras, Suktas, or the Free 10-Minute Pooja!',
+        'Jai Sri Ram! 🙏 I am Vayu putra - your divine Deva Pooja guide! Ask me anything about Tantrasara rituals, Saligrama rules, Mudras, Suktas, or the Free 10-Minute Pooja!',
       timestamp: 'Just now'
     }
   ]);
   const [inputVal, setInputVal] = useState('');
   const [isJumping, setIsJumping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const drag = useDraggablePanel(isOpen);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -231,6 +234,10 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
           textEn:
             'Sorry, I could not find a confident answer in my FAQ knowledge base. Please continue in the FAQ section to find the correct guidance.',
           action: { labelKn: 'FAQ ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ', labelEn: 'Open FAQ Section', tab: 'qna' },
+            'ಸುಂದರ ಪ್ರಶ್ನೆ! ಮಧ್ವ ಸಿದ್ಧಾಂತ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿಯಲ್ಲಿ ಶ್ರೀಹರಿಯ ಪೂಜೆಯು ಅತ್ಯುನ್ನತ ಸಾಧನ. ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗೆ ನಮ್ಮ ೧೦ ನಿಮಿಷ ಅಥವಾ ೩೦ ನಿಮಿಷದ ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ನೋಡಿ, ಅಥವಾ ನಮ್ಮ ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗವನ್ನು ಪರಿಶೀಲಿಸಿ!',
+          textEn:
+            'Wonderful question! In Sri Madhvacharya’s tradition, Deva Pooja is the supreme spiritual path. Check our step-by-step 10-min or 30-min guides, or explore our Q&A section for authentic shastric answers!',
+          action: { labelKn: '೧೦ ನಿಮಿಷ ಉಚಿತ ಪೂಜೆ', labelEn: '10-Min Free Pooja', mode: '10min' as PoojaMode },
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
       }
@@ -248,11 +255,11 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
-      <div className="relative w-full max-w-lg h-[640px] max-h-[92vh] bg-gradient-to-b from-[#2a0c0c] via-[#1a0505] to-[#120303] border-2 border-[#ffd700]/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] text-[#fef3c7] flex flex-col overflow-hidden">
+    <div ref={drag.panelRef} style={drag.style} role="dialog" aria-modal="false" aria-label={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಸಹಾಯಕ' : 'Vayu putra guide'} className="fixed z-50 w-[calc(100vw-24px)] max-w-lg">
+      <div className="relative w-full h-[640px] max-h-[calc(100dvh-24px)] bg-gradient-to-b from-[#2a0c0c] via-[#1a0505] to-[#120303] border-2 border-[#ffd700]/40 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.95)] text-[#fef3c7] flex flex-col overflow-hidden">
         
-        {/* Top Header: Anjaniputra Mascot Branding */}
-        <div className="bg-gradient-to-r from-[#3d1111] via-[#2d0909] to-[#3d1111] border-b border-[#ffd700]/30 px-4 py-3 flex items-center justify-between shadow-md">
+        {/* Top Header: Vayu putra Mascot Branding */}
+        <div {...drag.handlers} tabIndex={0} role="group" aria-label={lang === 'kn' ? 'ಶೀರ್ಷಿಕೆ ಎಳೆದು ಚಾಟ್ ಸರಿಸಿ ಅಥವಾ ಬಾಣದ ಕೀಲಿಗಳನ್ನು ಬಳಸಿ' : 'Drag this header to move the chat. Arrow keys move it; Home resets its position.'} className={`touch-none select-none bg-gradient-to-r from-[#3d1111] via-[#2d0909] to-[#3d1111] border-b border-[#ffd700]/30 px-4 py-3 flex items-center justify-between shadow-md focus-visible:outline-2 focus-visible:outline-[#ffd700] ${drag.isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}>
           <div className="flex items-center gap-3">
             {/* Playful Interactive Jumping Hanuman Icon */}
             <div 
@@ -262,22 +269,20 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
               }`}
               title={lang === 'kn' ? 'ಹಾರಲು ನನ್ನನ್ನು ಮುಟ್ಟಿ!' : 'Tap me to jump!'}
             >
-              <div className="w-full h-full bg-[#200505] rounded-[14px] flex items-center justify-center text-2xl select-none">
-                🐒
-              </div>
+              <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="w-full h-full rounded-[14px] object-cover select-none" />
             </div>
 
             <div>
               <div className="flex items-center gap-1.5">
                 <h3 className="font-serif font-bold text-base text-[#ffd700] tracking-wide">
-                  {lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ' : 'Anjaniputra'}
+                  {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
                 </h3>
                 <span className="text-[10px] bg-[#ff9933] text-[#1a0606] font-bold px-2 py-0.5 rounded-full uppercase">
                   {lang === 'kn' ? 'ದೈವಿಕ ಮಾರ್ಗದರ್ಶಿ' : 'Divine Guide'}
                 </span>
               </div>
               <p className="text-[11px] text-[#fef3c7]/75 font-sans">
-                {lang === 'kn' ? 'ದೇವಪೂಜೆ & ತಂತ್ರಸಾರ ಶಾಸ್ತ್ರ ಸಹಾಯಕ' : 'Deva Pooja & Tantrasara Helper'}
+                {lang === 'kn' ? 'ಸರಿಸಲು ಶೀರ್ಷಿಕೆ ಎಳೆಯಿರಿ' : 'Drag this header to move'}
               </p>
             </div>
           </div>
@@ -344,9 +349,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
                 className={`flex gap-2.5 items-end ${isBot ? 'justify-start' : 'justify-end'}`}
               >
                 {isBot && (
-                  <div className="w-8 h-8 rounded-full bg-[#ff9933] text-[#1a0606] flex items-center justify-center font-bold text-base shadow-sm shrink-0">
-                    🐒
-                  </div>
+                  <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="w-8 h-8 rounded-full object-cover ring-1 ring-[#ff9933] shadow-sm shrink-0" />
                 )}
 
                 <div
@@ -407,8 +410,8 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
             }}
             placeholder={
               lang === 'kn'
-                ? 'ಅಂಜನೀಪುತ್ರನಲ್ಲಿ ಪೂಜಾ ಸಂದೇಹ ಕೇಳಿ...'
-                : 'Ask Anjaniputra anything about Deva Pooja...'
+                ? 'ವಾಯುಪುತ್ರನಲ್ಲಿ ಪೂಜಾ ಸಂದೇಹ ಕೇಳಿ...'
+                : 'Ask Vayu putra anything about Deva Pooja...'
             }
             className="flex-1 bg-[#250808] border border-[#ffd700]/30 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-[#fef3c7] placeholder-[#fef3c7]/40 focus:outline-none focus:border-[#ffd700]"
           />

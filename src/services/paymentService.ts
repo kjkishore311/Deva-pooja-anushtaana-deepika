@@ -98,4 +98,15 @@ export class PaymentService {
       UPI_RECIPIENT_NAME
     )}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
   }
+
+  static generateSandhyavandaneUpiUrl(): string {
+    const parameters = new URLSearchParams({
+      pa: UPI_RECIPIENT_ID,
+      pn: UPI_RECIPIENT_NAME,
+      am: '100',
+      cu: 'INR',
+      tn: 'Rigveda Trikala Sandhyavandane Audio',
+    });
+    return `upi://pay?${parameters.toString()}`;
+  }
 }

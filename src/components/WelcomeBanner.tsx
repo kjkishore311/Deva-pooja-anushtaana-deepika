@@ -49,11 +49,11 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ lang, onStartPooja
         <p className="text-xs sm:text-sm text-[#fef3c7]/95 font-sans leading-relaxed">
           {lang === 'kn' ? (
             <>
-              ಶಾಸ್ತ್ರೋಕ್ತ <strong className="text-[#ffd700]">ತಂತ್ರಸಾರ ವಿಧಿ</strong>, ಪುರುಷ-ಶ್ರೀ ಸೂಕ್ತ, ಪುರೋಹಿತರ ವೇದ ಮಂತ್ರೋಚ್ಛಾರಣೆ ಹಾಗೂ ಗರ್ಭಗುಡಿಯ ಸಾಲಿಗ್ರಾಮ-ಮೂರ್ತಿಗಳ ದರ್ಶನದೊಂದಿಗೆ ಭಕ್ತಿಪೂರ್ವಕ ದೈನಂದಿನ ದೇವತಾರ್ಚನೆ.
+              ಶಾಸ್ತ್ರೋಕ್ತ <strong className="text-[#ffd700]">ತಂತ್ರಸಾರ ವಿಧಿ</strong>, ಪುರುಷ-ಶ್ರೀ ಸೂಕ್ತ, ಮಂತ್ರ ಪಠ್ಯ ಹಾಗೂ ಗರ್ಭಗುಡಿಯ ಸಾಲಿಗ್ರಾಮ-ಮೂರ್ತಿಗಳ ದರ್ಶನದೊಂದಿಗೆ ಭಕ್ತಿಪೂರ್ವಕ ದೈನಂದಿನ ದೇವತಾರ್ಚನೆ.
             </>
           ) : (
             <>
-              Perform authentic <strong className="text-[#ffd700]">Tantrasara Deva Pooja</strong> with Vedic Suktas, Male Priest chanting, and divine Saligrama darshan.
+              Perform authentic <strong className="text-[#ffd700]">Tantrasara Deva Pooja</strong> with Vedic Suktas, guided mantra text, and divine Saligrama darshan.
             </>
           )}
         </p>

@@ -226,8 +226,8 @@ export const TarkshyadiPanchaMudraWidget: React.FC<TarkshyadiPanchaMudraWidgetPr
       <div className="bg-[#140404] border border-[#ffd700]/25 rounded-2xl p-4 sm:p-5 space-y-4 shadow-inner">
         <div className="flex flex-col sm:flex-row items-center gap-4">
           {/* Anatomical Line Diagram */}
-          <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-2xl bg-gradient-to-b from-[#250a0a] to-[#0f0303] border-2 border-[#ffd700]/30 flex items-center justify-center p-2 shadow-2xl relative shrink-0">
-            <MudraHandDiagram id={current.id} className="w-full h-full" showLabels={true} />
+          <div className="w-52 h-56 sm:w-56 sm:h-60 max-w-full rounded-2xl bg-white border-2 border-[#ffd700]/30 flex items-center justify-center p-2 shadow-2xl relative shrink-0">
+            <MudraHandDiagram id={current.id} className="w-full h-full" showLabels={true} allowZoom />
             <div className="absolute top-2 right-2">
               <span className="text-[10px] font-bold bg-[#ff9933]/30 text-[#ffd700] px-2 py-0.5 rounded-full border border-[#ff9933]/50">
                 {current.numberKn}

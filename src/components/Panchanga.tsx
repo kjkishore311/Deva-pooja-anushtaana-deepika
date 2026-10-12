@@ -1,109 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { Calendar, ExternalLink, RefreshCw } from 'lucide-react';
 import { Language } from '../types';
-import { getTodayPanchanga, PanchangaDetails } from '../data/panchangaData';
-import { Calendar, Sun, Moon, Star } from 'lucide-react';
+import type { PanchangaCalendar } from '../data/panchangaData';
 
-interface PanchangaProps {
-  lang: Language;
-}
+export function Panchanga({ lang }: { lang: Language }) {
+  const [calendar, setCalendar] = useState<PanchangaCalendar | null>(null);
+  const [editionId, setEditionId] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [revision, setRevision] = useState(0);
+  const translate = (english: string, kannada: string) => lang === 'kn' ? kannada : english;
 
-export const Panchanga: React.FC<PanchangaProps> = ({ lang }) => {
-  const [panchanga, setPanchanga] = useState<PanchangaDetails | null>(null);
-
-  useEffect(() => {
-    // Simulate fetching data
-    const data = getTodayPanchanga();
-    setPanchanga(data);
+  const refresh = useCallback(async (signal?: AbortSignal) => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch('/api/um-panchanga', { cache: 'no-store', signal });
+      const body = await response.json();
+      if (!response.ok || !body.editions?.length) throw new Error('The official calendar could not be refreshed.');
+      if (signal?.aborted) return;
+      const next = body as PanchangaCalendar;
+      setCalendar(next);
+      setEditionId((current) => next.editions.some((edition) => edition.id === current) ? current : next.editions.find((edition) => edition.id === 'kannada')?.id || next.editions[0].id);
+      setRevision((current) => current + 1);
+    } catch {
+      if (!signal?.aborted) setError('The official calendar could not be refreshed.');
+    } finally {
+      if (!signal?.aborted) setLoading(false);
+    }
   }, []);
 
-  if (!panchanga) {
-    return (
-      <div className="flex items-center justify-center p-8">
-        <div className="animate-pulse text-[#ff9933]">Loading Panchanga...</div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const controller = new AbortController();
+    void refresh(controller.signal);
+    return () => controller.abort();
+  }, [refresh]);
 
-  const currentDate = new Date().toLocaleDateString(lang === 'kn' ? 'kn-IN' : 'en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  const selected = calendar?.editions.find((edition) => edition.id === editionId);
+  const today = new Date().toLocaleDateString(lang === 'kn' ? 'kn-IN' : 'en-IN', { timeZone: 'Asia/Kolkata', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-6 space-y-6 text-[#fef3c7] pb-24">
-      {/* Header section */}
-      <div className="bg-[#250a0a]/80 border border-[#ffd700]/15 rounded-3xl p-6 shadow-2xl backdrop-blur-md text-center">
-        <Calendar className="w-10 h-10 text-[#ff9933] mx-auto mb-3" />
-        <h2 className="font-serif font-bold text-2xl sm:text-3xl text-[#ff9933] mb-2">
-          {lang === 'kn' ? 'ಇಂದಿನ ಪಂಚಾಂಗ' : 'Today\'s Panchanga'}
-        </h2>
-        <p className="text-sm text-[#ffd700]/70 font-sans">{currentDate}</p>
-        <p className="text-xs mt-2 text-[#ffd700]/50">
-          {lang === 'kn' ? 'ಉತ್ತರಾದಿ ಮಠ ಪಂಚಾಂಗ - ೨೦೨೬' : 'Uttaradi Mutt Panchanga - 2026'}
-        </p>
-      </div>
-
-      {/* Grid of details */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Samvatsara & Masa */}
-        <div className="bg-[#1a0606] border border-[#ff9933]/20 rounded-2xl p-5 flex flex-col space-y-2 relative overflow-hidden group hover:border-[#ff9933]/50 transition-colors">
-          <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Sun className="w-24 h-24" />
-          </div>
-          <span className="text-xs text-[#ffd700]/60 uppercase tracking-widest font-sans font-bold">
-            {lang === 'kn' ? 'ಸಂವತ್ಸರ ಮತ್ತು ಮಾಸ' : 'Samvatsara & Masa'}
-          </span>
-          <div className="font-serif text-lg font-semibold text-[#fef3c7]">
-            {lang === 'kn' 
-              ? `${panchanga.samvatsaraKn} ಸಂವತ್ಸರ, ${panchanga.masaKn} ಮಾಸ` 
-              : `${panchanga.samvatsaraEn} Samvatsara, ${panchanga.masaEn} Masa`}
-          </div>
-          <div className="text-sm text-[#ff9933]/80">
-            {lang === 'kn' ? `${panchanga.ayanaKn}` : `${panchanga.ayanaEn}`}
-          </div>
+    <section className="mx-auto max-w-5xl space-y-6 px-4 py-6 sm:px-8 sm:py-10">
+      <header className="rounded-2xl border border-[#ffd700]/25 bg-[#250a0a] p-6 sm:p-8">
+        <p className="mb-3 flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#ffbb66]"><Calendar size={17} />{translate('Official published calendar', 'ಅಧಿಕೃತ ಪ್ರಕಟಿತ ಪಂಚಾಂಗ')}</p>
+        <div className="flex flex-wrap items-center justify-between gap-4"><h1 className="font-serif text-3xl text-[#ffd700]">{translate('Uttaradi Math Panchanga', 'ಉತ್ತರಾದಿ ಮಠ ಪಂಚಾಂಗ')}</h1><button disabled={loading} onClick={() => void refresh()} className="flex items-center gap-2 rounded-xl border border-[#ffd700]/35 px-4 py-3 text-sm font-bold hover:bg-[#ffd700]/10 disabled:opacity-50"><RefreshCw size={17} className={loading ? 'animate-spin' : ''} />{translate('Refresh calendar', 'ಪಂಚಾಂಗ ನವೀಕರಿಸಿ')}</button></div>
+        <p className="mt-4 text-sm text-[#fef3c7]/70">{today} · {translate('India time (IST)', 'ಭಾರತೀಯ ಸಮಯ')}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-[#fef3c7]/70">{translate('Read the calendar published by Uttaradi Math. Choose the language or regional edition appropriate for your location. This viewer does not substitute calculated or mock daily Tithi and Nakshatra values.', 'ಉತ್ತರಾದಿ ಮಠ ಪ್ರಕಟಿಸಿದ ಪಂಚಾಂಗವನ್ನು ಓದಿ. ನಿಮ್ಮ ಸ್ಥಳಕ್ಕೆ ಸೂಕ್ತವಾದ ಭಾಷೆ ಅಥವಾ ಪ್ರಾದೇಶಿಕ ಆವೃತ್ತಿಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ. ಇಲ್ಲಿ ಕಲ್ಪಿತ ಅಥವಾ ಸ್ವಯಂಚಾಲಿತ ದಿನನಿತ್ಯದ ತಿಥಿ-ನಕ್ಷತ್ರ ವಿವರಗಳನ್ನು ತೋರಿಸಲಾಗುವುದಿಲ್ಲ.')}</p>
+      </header>
+      {error && <div role="alert" className="rounded-xl border border-red-400/30 bg-red-950/30 p-4 text-sm text-red-200">{translate('Unable to refresh the official calendar. Retry, or open the official website below.', 'ಅಧಿಕೃತ ಪಂಚಾಂಗ ನವೀಕರಿಸಲಾಗಲಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ ಅಥವಾ ಕೆಳಗಿನ ಅಧಿಕೃತ ಜಾಲತಾಣ ತೆರೆಯಿರಿ.')}{calendar && <p className="mt-2">{translate('The previously retrieved edition remains visible.', 'ಹಿಂದೆ ಪಡೆದ ಆವೃತ್ತಿಯನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ.')}</p>}</div>}
+      {loading && !calendar && <div role="status" className="animate-pulse space-y-4 rounded-2xl border border-[#ffd700]/20 p-6"><p className="text-[#fef3c7]/70">{translate('Retrieving the latest published UM Panchanga…', 'ಅಧಿಕೃತ UM ಪಂಚಾಂಗ ಪಡೆಯಲಾಗುತ್ತಿದೆ…')}</p><div className="h-80 rounded-xl bg-[#ffd700]/5" /></div>}
+      {calendar && selected && <>
+        <div className="flex flex-wrap items-end justify-between gap-4 rounded-2xl border border-[#ffd700]/20 bg-[#250a0a] p-5">
+          <label className="block min-w-52 space-y-2 text-sm"><span className="text-[#ffbb66]">{translate('Published edition', 'ಪ್ರಕಟಿತ ಆವೃತ್ತಿ')} · {calendar.year}</span><select className="w-full rounded-xl border border-[#ffd700]/30 bg-[#140404] px-4 py-3 text-[#fef3c7]" value={editionId} onChange={(event) => setEditionId(event.target.value)}>{calendar.editions.map((edition) => <option key={edition.id} value={edition.id}>{edition.label}</option>)}</select></label>
+          <a href={selected.pdfUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-xl bg-[#ffd700] px-5 py-3 text-sm font-bold text-[#250a0a]"><ExternalLink size={16} />{translate('Open official PDF', 'ಅಧಿಕೃತ PDF ತೆರೆಯಿರಿ')}</a>
         </div>
-
-        {/* Tithi */}
-        <div className="bg-[#1a0606] border border-[#ff9933]/20 rounded-2xl p-5 flex flex-col space-y-2 relative overflow-hidden group hover:border-[#ff9933]/50 transition-colors">
-          <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Moon className="w-24 h-24" />
-          </div>
-          <span className="text-xs text-[#ffd700]/60 uppercase tracking-widest font-sans font-bold">
-            {lang === 'kn' ? 'ತಿಥಿ' : 'Tithi'}
-          </span>
-          <div className="font-serif text-xl font-semibold text-[#fef3c7]">
-            {lang === 'kn' ? panchanga.tithiKn : panchanga.tithiEn}
-          </div>
-        </div>
-
-        {/* Nakshatra */}
-        <div className="bg-[#1a0606] border border-[#ff9933]/20 rounded-2xl p-5 flex flex-col space-y-2 relative overflow-hidden group hover:border-[#ff9933]/50 transition-colors">
-          <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Star className="w-24 h-24" />
-          </div>
-          <span className="text-xs text-[#ffd700]/60 uppercase tracking-widest font-sans font-bold">
-            {lang === 'kn' ? 'ನಕ್ಷತ್ರ' : 'Nakshatra'}
-          </span>
-          <div className="font-serif text-xl font-semibold text-[#fef3c7]">
-            {lang === 'kn' ? panchanga.nakshatraKn : panchanga.nakshatraEn}
-          </div>
-        </div>
-
-        {/* Yoga */}
-        <div className="bg-[#1a0606] border border-[#ff9933]/20 rounded-2xl p-5 flex flex-col space-y-2 relative overflow-hidden group hover:border-[#ff9933]/50 transition-colors">
-          <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
-            <Sun className="w-24 h-24" />
-          </div>
-          <span className="text-xs text-[#ffd700]/60 uppercase tracking-widest font-sans font-bold">
-            {lang === 'kn' ? 'ಯೋಗ' : 'Yoga'}
-          </span>
-          <div className="font-serif text-xl font-semibold text-[#fef3c7]">
-            {lang === 'kn' ? panchanga.yogaKn : panchanga.yogaEn}
-          </div>
-        </div>
-      </div>
-    </div>
+        <div className="overflow-hidden rounded-2xl border border-[#ffd700]/20 bg-white"><iframe key={`${selected.id}-${revision}`} src={`${selected.pdfUrl}#toolbar=1&view=FitH`} title={`Uttaradi Math ${calendar.year} Panchanga — ${selected.label}`} className="h-[72dvh] min-h-96 w-full" /><p className="px-5 py-3 text-xs leading-6 text-[#4b2525]">{translate('If the PDF does not display on your device, use “Open official PDF” above.', 'ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ PDF ಕಾಣದಿದ್ದರೆ ಮೇಲಿನ “ಅಧಿಕೃತ PDF ತೆರೆಯಿರಿ” ಆಯ್ಕೆ ಬಳಸಿ.')}</p></div>
+        <p className="text-xs leading-6 text-[#fef3c7]/55">{translate('Source checked', 'ಮೂಲ ಪರಿಶೀಲಿಸಿದ ಸಮಯ')}: {new Date(calendar.retrievedAt).toLocaleString(lang === 'kn' ? 'kn-IN' : 'en-IN', { timeZone: 'Asia/Kolkata' })} IST</p>
+      </>}
+      <a href="https://uttaradimath.org/panchanga" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-[#ffd700] underline underline-offset-4">{translate('Uttaradi Math official Panchanga source', 'ಉತ್ತರಾದಿ ಮಠದ ಅಧಿಕೃತ ಪಂಚಾಂಗ ಜಾಲತಾಣ')}<ExternalLink size={14} /></a>
+    </section>
   );
-};
+}

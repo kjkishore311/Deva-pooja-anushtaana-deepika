@@ -34,8 +34,8 @@ export const PoojaLauncherCard: React.FC<PoojaLauncherCardProps> = ({
       mode: '30min' as PoojaMode,
       titleKn: '೩೦ ನಿಮಿಷ (ದೈನಂದಿನ ಪೂಜೆ)',
       titleEn: '30-Min Daily Pooja',
-      descKn: 'ಶೋಡಶೋಪಚಾರ, ಪುರೋಹಿತ ಮಂತ್ರ ಧ್ವನಿ, ಶಂಖ ತೀರ್ಥ ಹಾಗೂ ನೈವೇದ್ಯ',
-      descEn: 'Full 16-step shodashopachara with Male Hindu Priest Chanting',
+      descKn: 'ಶೋಡಶೋಪಚಾರ, ಮಂತ್ರ ಪಠ್ಯ, ಶಂಖ ತೀರ್ಥ ಹಾಗೂ ನೈವೇದ್ಯ',
+      descEn: 'Full 16-step shodashopachara with guided mantra text',
       icon: Flame,
       priceLabelKn: is30Unlocked ? 'ಅನ್‌ಲಾಕ್ ಆಗಿದೆ' : '₹150+ ಸೇವಾ ದಕ್ಷಿಣೆ',
       priceLabelEn: is30Unlocked ? 'Unlocked' : '₹150+ Seva Dakshina',
@@ -147,4 +147,3 @@ export const PoojaLauncherCard: React.FC<PoojaLauncherCardProps> = ({
     </div>
   );
 };
-
