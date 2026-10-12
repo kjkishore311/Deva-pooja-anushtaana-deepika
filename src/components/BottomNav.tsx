@@ -49,10 +49,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     },
     {
       id: 'darshan' as TabType,
-      labelKn: 'ದರ್ಶನ',
-      labelEn: 'Darshan',
+      labelKn: 'ಮುಖಪುಟ',
+      labelEn: 'Main Page',
       icon: Sparkles,
-      badge: '4K',
     },
     {
       id: 'pooja' as TabType,
@@ -149,11 +148,6 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                   {lang === 'kn' ? tab.labelKn : tab.labelEn}
                 </span>
 
-                {tab.badge && (
-                  <span className="ml-auto text-[9px] bg-[#ffd700] text-[#1a0606] px-1 py-0.2 rounded font-bold">
-                    {tab.badge}
-                  </span>
-                )}
               </button>
             );
           })}

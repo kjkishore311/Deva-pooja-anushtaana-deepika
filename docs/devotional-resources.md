@@ -1,5 +1,15 @@
 # Devotional resources and navigation
 
+## Home widgets and setup photographs
+
+The main page has three compact square photo widgets linking to Trikala Sandhyavandana, Madhwa Guru Stuti, and Deva Pooja. The Sandhyavandana image was rendered directly from the first page of the supplied PDF; the guru widget uses the existing official Sri Madhwacharya reference image, and the pooja widget uses an existing supplied sanctum photograph. No devotional imagery was generated. The duration choices and existing paid-download approval flow were retained.
+
+The main title is a keyboard-accessible home button. The home option is labeled **Main Page** in the header and both navigation menus; internal tab identifiers were retained for compatibility.
+
+All 19 newly supplied JPEGs were moved into `public/images/setup`. Photos of Shaligrama and deities, the bell, conch, Somasutra vessel, and sandalwood grinding stone are attached to their corresponding setup items. Other supplied materials and diagrams are individually labeled in the additional setup references. Each photograph opens its original file without changing the checklist selection. The Dhenu Mudra upload is handwritten finger-pairing information, not a gesture photograph, and does not replace the previously supplied five hand-signal crops.
+
+The clarification selections requested approved Shankha–Chakra artwork and authorized pundit recordings, but no such files or source links accompanied those selections. The conch and Sudarshana Shaligrama setup photographs were not misrepresented as approved monastic emblems. No real pundit recordings were fabricated or substituted. Existing generated speech was retained and labeled honestly, with a pending-recordings notice; guru recordings remain pending. To complete the remaining requests, supply the approved emblem artwork and authorized audio with its shloka-to-file mapping.
+
 ## Movable Anjaniputra
 
 The floating launcher and the chat window can both be moved with a mouse or touch. Drag the launcher itself or the chat header. Focus either drag control and use the arrow keys to reposition it; Shift increases the step and Home restores its starting position. Positions are retained while the app remains open, including when closing and reopening the chat, but are not saved across reloads. Panels are kept within the viewport and adjusted when the screen size changes. The chat no longer blocks the rest of the page with a full-screen overlay.

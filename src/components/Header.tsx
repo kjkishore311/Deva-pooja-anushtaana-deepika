@@ -54,20 +54,21 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Center-Aligned App Name Block */}
       <div className="max-w-6xl mx-auto px-3 pt-2.5 pb-1.5 text-center">
-        <div 
-          className="inline-flex items-center justify-center gap-2 sm:gap-3 cursor-pointer select-none transition-transform hover:scale-[1.01]"
-          onClick={onOpenDarshan}
-          title={lang === 'kn' ? 'ಮುಖಪುಟ ದರ್ಶನ' : 'Home Darshan'}
-        >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ff9933] flex items-center justify-center shadow-[0_0_15px_rgba(255,153,51,0.5)] text-[#1a0606] font-serif font-bold text-base sm:text-xl shrink-0">
-            <span className="leading-none">ॐ</span>
-          </div>
-          <div className="text-center">
-            <h1 className="font-serif font-bold tracking-wider text-base sm:text-2xl text-[#ffd700] uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+        <h1>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center gap-2 sm:gap-3 cursor-pointer select-none transition-transform hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd700]"
+            onClick={onOpenDarshan}
+            title={lang === 'kn' ? 'ಮುಖಪುಟ' : 'Main Page'}
+          >
+            <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ff9933] flex items-center justify-center shadow-[0_0_15px_rgba(255,153,51,0.5)] text-[#1a0606] font-serif font-bold text-base sm:text-xl shrink-0">
+              <span className="leading-none">ॐ</span>
+            </span>
+            <span className="text-center font-serif font-bold tracking-wider text-base sm:text-2xl text-[#ffd700] uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               {lang === 'kn' ? 'ದೇವಪೂಜಾ ಅನುಷ್ಠಾನ' : 'Deva Pooja Anushthana'}
-            </h1>
-          </div>
-        </div>
+            </span>
+          </button>
+        </h1>
         <p className="text-[10px] sm:text-xs text-[#ffd700]/75 font-serif tracking-widest uppercase mt-0.5">
           {lang === 'kn'
             ? '॥ ಶ್ರೀ ಉತ್ತರಾದಿ ಮಠ • ತಂತ್ರಸಾರ ಸಂಗ್ರಹ ಪದ್ಧತಿ ॥'
@@ -82,7 +83,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="btn-darshan-cinematic-header"
             onClick={onOpenDarshan}
-            title={lang === 'kn' ? 'ದಿವ್ಯ ದರ್ಶನ' : 'Divine Darshan'}
+            title={lang === 'kn' ? 'ಮುಖಪುಟ' : 'Main Page'}
             className={`px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full font-bold text-xs flex items-center gap-1 sm:gap-1.5 border transition-all active:scale-95 shrink-0 ${
               activeTab === 'darshan'
                 ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] shadow-[0_0_12px_rgba(255,153,51,0.4)]'
@@ -90,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-[#ff9933] shrink-0 animate-spin" />
-            <span className="font-serif">{lang === 'kn' ? 'ದರ್ಶನ' : 'Darshan'}</span>
+            <span className="font-serif">{lang === 'kn' ? 'ಮುಖಪುಟ' : 'Main Page'}</span>
           </button>
         )}
 

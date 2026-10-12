@@ -42,10 +42,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
     },
     {
       id: 'darshan' as TabType,
-      labelKn: 'ದರ್ಶನ',
-      labelEn: 'Darshan',
+      labelKn: 'ಮುಖಪುಟ',
+      labelEn: 'Main Page',
       icon: Sparkles,
-      badge: '4K',
     },
     {
       id: 'pooja' as TabType,
@@ -116,11 +115,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <span className="font-sans font-medium text-sm flex-1 text-left">
                 {lang === 'kn' ? tab.labelKn : tab.labelEn}
               </span>
-              {tab.badge && (
-                <span className="text-[9px] bg-[#ff9933] text-[#1a0606] px-1.5 py-0.5 rounded-full font-bold font-sans">
-                  {tab.badge}
-                </span>
-              )}
             </button>
           );
         })}

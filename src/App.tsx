@@ -24,9 +24,10 @@ import { MudraHandDiagram } from './components/MudraHandDiagram';
 import { PanchaMudraMobileStepper } from './components/PanchaMudraMobileStepper';
 import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraWidget';
 import { AnjaniputraChatbot } from './components/AnjaniputraChatbot';
-import { SandhyavandaneHomeCard, SandhyavandaneSection } from './components/SandhyavandaneSection';
+import { SandhyavandaneSection } from './components/SandhyavandaneSection';
 import { AnjaniputraLauncher } from './components/AnjaniputraLauncher';
-import { MadhwaGuruHomeCard, MadhwaGuruStuti } from './components/MadhwaGuruStuti';
+import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
+import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
 
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
@@ -75,6 +76,10 @@ export default function App() {
   }, [activeTab]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
+
+  useEffect(() => {
     localStorage.setItem('pooja_app_lang', lang);
   }, [lang]);
 
@@ -107,6 +112,11 @@ export default function App() {
     setIsMudraModalOpen(true);
   };
 
+  const handleOpenMainPage = () => {
+    setActiveTab('darshan');
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen bg-[#1a0606] text-[#fef3c7] flex flex-col font-sans selection:bg-[#ff9933] selection:text-[#1a0606] pb-20 lg:pb-0">
       {/* Top Application Bar */}
@@ -115,7 +125,7 @@ export default function App() {
         onToggleLang={handleToggleLang}
         mode={mode}
         onSelectMode={handleSelectMode}
-        onOpenDarshan={() => setActiveTab('darshan')}
+        onOpenDarshan={handleOpenMainPage}
         isBgMusicPlaying={isBgMusicPlaying}
         onToggleBgMusic={() => setIsBgMusicPlaying(!isBgMusicPlaying)}
         activeTab={activeTab}
@@ -143,8 +153,7 @@ export default function App() {
               onStartPooja={() => handleSelectMode(mode)}
             />
 
-            <SandhyavandaneHomeCard lang={lang} onOpen={() => setActiveTab('sandhyavandane')} />
-            <MadhwaGuruHomeCard lang={lang} onOpen={() => setActiveTab('guru-stuti')} />
+            <DevotionalHomeWidgets lang={lang} onSelect={setActiveTab} />
 
             {/* 1. Sequential Deity Video Darshan (6 YouTube Shorts in re-occurring sequence with audio & auto-pause on tab change) */}
             {landingViewMode === 'video' ? (

@@ -264,7 +264,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                   ? 'ಈ ೩೦ ನಿಮಿಷದ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹150 ಅಥವಾ ₹200 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಇಷ್ಟಾನುಸಾರ ಮೊತ್ತವನ್ನು ಸೇವಾ ದಕ್ಷಿಣೆಯಾಗಿ ಪಾವತಿಸಿ ಸುಧಾ ಪಂಡಿತ ಪೂಜ್ಯ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿಯವರ ೨ ಲೈವ್ ವೀಡಿಯೋಗಳು & ಪ್ರತಿಯೊಂದು ಹಂತದ ಗುರುವಾಣಿ ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.'
                   : `ಈ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹${minPrice} ಸೇವಾ ದಕ್ಷಿಣೆಯನ್ನು ಯಾವುದೇ ಆನ್‌ಲೈನ್ ಪಾವತಿ (Google Pay, UPI, ಕಾರ್ಡ್ ಅಥವಾ ನೆಟ್‌ಬ್ಯಾಂಕಿಂಗ್) ಮೂಲಕ ಪಾವತಿಸಿ.`
                 : mode === '30min'
-                ? 'To unlock this 30-min tier, please submit a dakshina of ₹150 or any amount > ₹200 to access the 2 Master Live Videos & step-by-step priest voice guidance by Sudha Pandita Sri Venugopalacharya Joshi.'
+                ? 'To unlock this 30-min tier, please submit a dakshina of ₹150 or any amount > ₹200 to access the 2 Master Live Videos and step-by-step pooja guidance. Approved pundit audio for the shlokas is awaiting upload.'
                 : `To unlock this tier, please submit a dakshina of at least ₹${minPrice} via any online payment method (Google Pay, UPI, Card, or Net Banking).`}
             </p>
           </div>
@@ -280,8 +280,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             </div>
             <p className="text-[11px] text-[#fef3c7]/60 pt-1 border-t border-[#ffd700]/10">
               {lang === 'kn'
-                ? 'ಪುರೋಹಿತ ಮಂತ್ರ ಧ್ವನಿ, ಶೋಡಶೋಪಚಾರ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿ ಪೂರ್ಣ ಲಭ್ಯವಾಗುತ್ತದೆ.'
-                : 'Includes authentic Male Hindu Priest recitation and all Shastric steps.'}
+                ? 'ಶೋಡಶೋಪಚಾರ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿ ಲಭ್ಯವಾಗುತ್ತದೆ. ಅನುಮೋದಿತ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣಗಳು ಇನ್ನೂ ಲಭ್ಯವಿಲ್ಲ.'
+                : 'Includes the guided pooja steps. Approved pundit recordings are awaiting upload.'}
             </p>
           </div>
 
@@ -658,7 +658,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                   ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] animate-pulse shadow-[0_0_12px_rgba(255,153,51,0.4)]'
                   : 'bg-[#250a0a] hover:bg-[#3d1111] text-[#ffd700] border-[#ffd700]/30'
               }`}
-              title={lang === 'kn' ? 'ಪೂಜ್ಯ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿಯವರ ಧ್ವನಿಯಲ್ಲಿ ವಾಚನ ಆಲಿಸಿ' : 'Listen to Priest Voice Narration'}
+              title={lang === 'kn' ? 'ಕೃತಕ ಧ್ವನಿಯಲ್ಲಿ ಮಾರ್ಗದರ್ಶನ ಆಲಿಸಿ' : 'Listen to generated speech guidance (not a pundit recording)'}
             >
               {isNarratingStep ? (
                 <>
@@ -669,11 +669,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                 <>
                   <Volume2 className="w-3.5 h-3.5 text-[#ff9933] shrink-0" />
                   <span className="truncate max-w-[180px] sm:max-w-none">
-                    {lang === 'kn'
-                      ? mode === '30min'
-                        ? 'ಪೂಜ್ಯ ಜೋಶಿಯವರ ಗುರುವಾಣಿ'
-                        : 'ಪುರೋಹಿತ ಮಾರ್ಗದರ್ಶನ'
-                      : 'Priest Voice'}
+                    {lang === 'kn' ? 'ಕೃತಕ ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ' : 'Generated Speech Guidance'}
                   </span>
                 </>
               )}
@@ -736,6 +732,11 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
         {/* Authentic Mantras Section */}
         {currentStep.mantras.length > 0 && (
           <div className="space-y-4">
+            <p role="note" className="rounded-xl border border-[#ffd700]/20 bg-[#250a0a] px-4 py-3 text-xs leading-relaxed text-[#fef3c7]/80">
+              {lang === 'kn'
+                ? 'ಅನುಮೋದಿತ ಪಂಡಿತರ ಶ್ಲೋಕ ಪಠಣದ ಧ್ವನಿಮುದ್ರಣಗಳು ಇನ್ನೂ ಲಭ್ಯವಿಲ್ಲ. ಈಗಿನ ಧ್ವನಿ ಕೃತಕವಾಗಿ ರಚಿಸಲ್ಪಟ್ಟದ್ದು; ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣವಲ್ಲ.'
+                : 'Approved pundit recordings have not been supplied yet. Current speech is generated (with a browser-voice fallback), not a recording of a pundit chanting these shlokas.'}
+            </p>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <h3 className="font-serif font-bold text-base text-[#ff9933] flex items-center gap-2">
@@ -743,7 +744,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                 </h3>
                 <span className="text-[10px] font-sans font-bold bg-[#ff9933]/20 text-[#ff9933] px-2.5 py-0.5 rounded-full border border-[#ff9933]/40 flex items-center gap-1 shadow-sm">
                   <Sparkles className="w-3 h-3 text-[#ffd700]" />
-                  <span>{lang === 'kn' ? 'ಪುರೋಹಿತ ಧ್ವನಿ' : 'Male Priest Voice'}</span>
+                  <span>{lang === 'kn' ? 'ಕೃತಕ ಧ್ವನಿ' : 'Generated Speech'}</span>
                 </span>
               </div>
 
@@ -849,7 +850,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                         {isCurrentlyBuffering ? (
                           <>
                             <span className="w-3.5 h-3.5 border-2 border-[#ffd700] border-t-transparent rounded-full animate-spin" />
-                            <span>{lang === 'kn' ? 'ಧ್ವನಿ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...' : 'Preparing Priest Voice...'}</span>
+                            <span>{lang === 'kn' ? 'ಧ್ವನಿ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...' : 'Preparing Generated Speech...'}</span>
                           </>
                         ) : isCurrentlyPlaying ? (
                           <>
@@ -861,8 +862,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                             <Play className="w-4 h-4 fill-current" />
                             <span>
                               {lang === 'kn'
-                                ? 'ಪುರೋಹಿತರ ಮಾನವ ಧ್ವನಿ (ನಿಧಾನ ಪಠಣ)'
-                                : 'Human Priest Voice (Slow Recitation)'}
+                                ? 'ಕೃತಕ ಧ್ವನಿ (ನಿಧಾನ ಪಠಣ)'
+                                : 'Generated Speech (Slow Recitation)'}
                             </span>
                           </>
                         )}
@@ -939,8 +940,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                         <div>
                           <span className="font-bold text-[#ffd700]">
                             {lang === 'kn'
-                              ? 'ಪುರೋಹಿತರ ನಿಧಾನ ವೇದ ಮಂತ್ರೋಚ್ಛಾರಣೆ ನಡೆಯುತ್ತಿದೆ'
-                              : 'Human Vedic Priest Chanting in Progress'}
+                              ? 'ಕೃತಕ ಧ್ವನಿಯಲ್ಲಿ ಪಠಣ ನಡೆಯುತ್ತಿದೆ'
+                              : 'Generated Speech Playback in Progress'}
                           </span>
                           <span className="text-[11px] text-[#fef3c7]/70 ml-2 font-sans">
                             ({lang === 'kn' ? `ಆವರ್ತನೆ: ${currentChantLoop}/${repeatTarget}` : `Cycle ${currentChantLoop} of ${repeatTarget}`})
