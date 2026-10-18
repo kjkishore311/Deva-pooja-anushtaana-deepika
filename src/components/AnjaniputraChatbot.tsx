@@ -14,6 +14,8 @@ import {
   ArrowRight,
   RotateCcw
 } from 'lucide-react';
+import { Language, PoojaMode, QnAItem } from '../types';
+import { QNA_DATA } from '../data/qnaData';
 import { Language, PoojaMode } from '../types';
 import { useDraggablePanel } from '../hooks/useDraggablePanel';
 
@@ -98,6 +100,53 @@ const FAQ_KNOWLEDGE_BASE = [
   }
 ];
 
+const FAQ_STOP_WORDS = new Set([
+  'a', 'an', 'and', 'are', 'can', 'do', 'does', 'for', 'how', 'i', 'in', 'is', 'it', 'of',
+  'on', 'the', 'to', 'what', 'when', 'where', 'which', 'why', 'with', 'we', 'during', 'should',
+  'ಪೂಜೆ', 'ಪೂಜೆಯಲ್ಲಿ', 'ಹೇಗೆ', 'ಏನು', 'ಯಾವ', 'ಮಾಡಬೇಕು', 'ಮಾಡಬಹುದೇ', 'ಇದು', 'ಮತ್ತು', 'ಗೆ',
+]);
+
+const normalizeFaqText = (value: string) =>
+  value
+    .toLocaleLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
+
+const getFaqTokens = (value: string) =>
+  normalizeFaqText(value)
+    .split(/\s+/)
+    .filter((token) => token.length > 1 && !FAQ_STOP_WORDS.has(token));
+
+const findBestFaqMatch = (query: string): QnAItem | undefined => {
+  const normalizedQuery = normalizeFaqText(query);
+  const queryTokens = getFaqTokens(query);
+
+  if (!normalizedQuery || queryTokens.length === 0) return undefined;
+
+  const scoredFaqs = QNA_DATA.map((faq) => {
+    const questionText = normalizeFaqText(`${faq.questionKn} ${faq.questionEn}`);
+    const ruleText = normalizeFaqText(`${faq.keyRuleKn} ${faq.keyRuleEn}`);
+    const answerText = normalizeFaqText(`${faq.answerKn} ${faq.answerEn}`);
+    const tags = new Set(faq.tags.flatMap(getFaqTokens));
+    let score = 0;
+
+    if (questionText.includes(normalizedQuery) || normalizedQuery.includes(questionText)) {
+      score += 20;
+    }
+
+    queryTokens.forEach((token) => {
+      if (tags.has(token)) score += 8;
+      if (questionText.includes(token)) score += 5;
+      if (ruleText.includes(token)) score += 3;
+      if (answerText.includes(token)) score += 1;
+    });
+
+    return { faq, score };
+  }).sort((first, second) => second.score - first.score);
+
+  return scoredFaqs[0]?.score >= 5 ? scoredFaqs[0].faq : undefined;
+};
+
 export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
   lang,
   isOpen,
@@ -151,13 +200,23 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
     // Process Bot Answer
     setTimeout(() => {
       const lower = textToSend.toLowerCase();
-      let matched = FAQ_KNOWLEDGE_BASE.find((item) =>
+      const faqMatch = findBestFaqMatch(textToSend);
+      const matched = FAQ_KNOWLEDGE_BASE.find((item) =>
         item.keywords.some((kw) => lower.includes(kw.toLowerCase()))
       );
 
       let botReply: ChatMessage;
 
-      if (matched) {
+      if (faqMatch) {
+        botReply = {
+          id: `bot-${Date.now()}`,
+          sender: 'bot',
+          textKn: `${faqMatch.answerKn}\n\nಮುಖ್ಯ ನಿಯಮ: ${faqMatch.keyRuleKn}`,
+          textEn: `${faqMatch.answerEn}\n\nKey rule: ${faqMatch.keyRuleEn}`,
+          action: { labelKn: 'ಎಲ್ಲ FAQಗಳನ್ನು ನೋಡಿ', labelEn: 'Browse All FAQs', tab: 'qna' },
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+      } else if (matched) {
         botReply = {
           id: `bot-${Date.now()}`,
           sender: 'bot',
@@ -171,6 +230,10 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
           id: `bot-${Date.now()}`,
           sender: 'bot',
           textKn:
+            'ಕ್ಷಮಿಸಿ, ಈ ಪ್ರಶ್ನೆಗೆ ನನ್ನ FAQ ಜ್ಞಾನಕೋಶದಲ್ಲಿ ಖಚಿತ ಉತ್ತರ ಸಿಗಲಿಲ್ಲ. ಸರಿಯಾದ ಉತ್ತರವನ್ನು ಹುಡುಕಲು ನಿಮ್ಮನ್ನು FAQ ವಿಭಾಗಕ್ಕೆ ಕರೆದೊಯ್ಯುತ್ತೇನೆ.',
+          textEn:
+            'Sorry, I could not find a confident answer in my FAQ knowledge base. Please continue in the FAQ section to find the correct guidance.',
+          action: { labelKn: 'FAQ ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ', labelEn: 'Open FAQ Section', tab: 'qna' },
             'ಸುಂದರ ಪ್ರಶ್ನೆ! ಮಧ್ವ ಸಿದ್ಧಾಂತ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿಯಲ್ಲಿ ಶ್ರೀಹರಿಯ ಪೂಜೆಯು ಅತ್ಯುನ್ನತ ಸಾಧನ. ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗೆ ನಮ್ಮ ೧೦ ನಿಮಿಷ ಅಥವಾ ೩೦ ನಿಮಿಷದ ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ನೋಡಿ, ಅಥವಾ ನಮ್ಮ ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗವನ್ನು ಪರಿಶೀಲಿಸಿ!',
           textEn:
             'Wonderful question! In Sri Madhvacharya’s tradition, Deva Pooja is the supreme spiritual path. Check our step-by-step 10-min or 30-min guides, or explore our Q&A section for authentic shastric answers!',

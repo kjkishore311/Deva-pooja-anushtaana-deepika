@@ -1,5 +1,43 @@
 import { SamagriItem } from '../types';
 
+export type PreparationMode = '10min' | '30min' | 'full';
+
+export interface PoojaPreparationGroup {
+  mode: PreparationMode;
+  titleKn: string;
+  titleEn: string;
+  descriptionKn: string;
+  descriptionEn: string;
+  itemIds: string[];
+}
+
+export const POOJA_PREPARATION_GROUPS: PoojaPreparationGroup[] = [
+  {
+    mode: '10min',
+    titleKn: '೧೦ ನಿಮಿಷ ಪೂಜೆಗೆ ಬೇಕಾದ ಉಪಕರಣಗಳು',
+    titleEn: 'Utensils for 10mins',
+    descriptionKn: 'ಸಂಕ್ಷಿಪ್ತ ಪೂಜೆಗೆ ಬೇಕಾದ ಕನಿಷ್ಠ ಉಪಕರಣಗಳು ಮತ್ತು ಸಾಮಗ್ರಿಗಳು.',
+    descriptionEn: 'Bare-minimum utensils and offerings for the short daily pooja.',
+    itemIds: ['saligrama_idols', 'ghanta', 'achamana_patra', 'deepa_samagri', 'tulasi_dala', 'gandha_akshata', 'naivedya_bhoga', 'madi_vastra'],
+  },
+  {
+    mode: '30min',
+    titleKn: '೩೦ ನಿಮಿಷ ಪೂಜೆಗೆ ಬೇಕಾದ ಉಪಕರಣಗಳು',
+    titleEn: 'Utensils for 30min',
+    descriptionKn: 'ದೈನಂದಿನ ೩೦ ನಿಮಿಷ ಪೂಜೆಗೆ ಕನಿಷ್ಠ ಸಾಮಗ್ರಿಗಳ ಜೊತೆಗೆ ಶಂಖ, ಪಾತ್ರೆಗಳು ಮತ್ತು ಪುಷ್ಪಗಳು.',
+    descriptionEn: 'Daily essentials plus the recommended conch, ritual cups and flowers.',
+    itemIds: ['saligrama_idols', 'ghanta', 'achamana_patra', 'shankha', 'patras_uddharani', 'deepa_samagri', 'tulasi_dala', 'gandha_akshata', 'fresh_flowers', 'naivedya_bhoga', 'madi_vastra'],
+  },
+  {
+    mode: 'full',
+    titleKn: 'ಸಂಪೂರ್ಣ ಪೂಜೆಗೆ ಬೇಕಾದ ಉಪಕರಣಗಳು',
+    titleEn: 'Utensils for Complete version',
+    descriptionKn: 'ಸಂಪೂರ್ಣ ತಂತ್ರಸಾರ ಪೂಜೆಗೆ ಬೇಕಾದ ಎಲ್ಲ ಉಪಕರಣಗಳು, ಸಾಮಗ್ರಿಗಳು ಮತ್ತು ಪಂಚಾಮೃತ.',
+    descriptionEn: 'The complete preparation set, including every recommended item and Panchamruta.',
+    itemIds: ['saligrama_idols', 'ghanta', 'achamana_patra', 'shankha', 'patras_uddharani', 'somasutra_paatre', 'kalasha_set', 'serving_vessels', 'gandha_stone', 'deity_vastra', 'pooja_seats', 'arati_set', 'deepa_samagri', 'tulasi_dala', 'gandha_akshata', 'fresh_flowers', 'panchamruta', 'naivedya_bhoga', 'madi_vastra'],
+  },
+];
+
 export const SAMAGRI_DATA: SamagriItem[] = [
   {
     id: 'saligrama_idols',
@@ -28,6 +66,17 @@ export const SAMAGRI_DATA: SamagriItem[] = [
     zeroAnxietyRuleEn: 'Mentally invoke the bell sound and proceed with ritual.'
   },
   {
+    id: 'achamana_patra',
+    nameKn: 'ಆಚಮನ ಪಂಚಪಾತ್ರೆ & ಉದ್ಧರಣೆ',
+    nameEn: 'Achamana Cup & Spoon',
+    category: 'vessels',
+    tier: 'daily_minimum',
+    descriptionKn: 'ಆಚಮನ ಮತ್ತು ಶುದ್ಧೀಕರಣಕ್ಕಾಗಿ ಒಂದು ಶುದ್ಧ ಪಂಚಪಾತ್ರೆ ಹಾಗೂ ಉದ್ಧರಣೆ.',
+    descriptionEn: 'One clean Panchapatra cup and spoon for Achamana and purification water.',
+    substituteKn: 'ಶುದ್ಧವಾದ ಸಣ್ಣ ಲೋಟ ಮತ್ತು ಚಮಚವನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಇಟ್ಟು ಬಳಸಬಹುದು.',
+    substituteEn: 'A clean small cup and spoon reserved only for pooja may be used.'
+  },
+  {
     id: 'shankha',
     nameKn: 'ಪೂಜಾ ಶಂಖ & ಪೀಠ',
     nameEn: 'Pooja Shankha (Conch & Stand)',
@@ -52,6 +101,83 @@ export const SAMAGRI_DATA: SamagriItem[] = [
     substituteEn: 'A single Panchapatra with spoon is fully valid by simply refreshing water.',
     zeroAnxietyRuleKn: 'ಆರು ಪಾತ್ರೆಗಳಿರಲೇಬೇಕೆಂಬ ಒತ್ತಡ ಬೇಡ, 1 ಪಾತ್ರೆಯಲ್ಲಿ ಶ್ರದ್ಧೆಯಿಂದ ಮಾಡಬಹುದು.',
     zeroAnxietyRuleEn: 'Do not worry about having all 6 cups; 1 clean vessel with spoon suffices.'
+  },
+  {
+    id: 'somasutra_paatre',
+    nameKn: 'ಸೋಮಸೂತ್ರ ಪಾತ್ರೆ',
+    nameEn: 'Somasutra Abhisheka Vessel',
+    category: 'vessels',
+    tier: 'full_paddhati',
+    descriptionKn: 'ಅಭಿಷೇಕದ ನೀರನ್ನು ಶುದ್ಧವಾಗಿ ಸಂಗ್ರಹಿಸಿ ಹೊರಹರಿಸಲು ಬಳಸುವ ಸೋಮಸೂತ್ರ ಪಾತ್ರೆ.',
+    descriptionEn: 'A dedicated vessel used to collect and direct the sacred Abhisheka water.',
+    substituteKn: 'ಅಭಿಷೇಕಕ್ಕೆ ಮಾತ್ರ ಮೀಸಲಾದ ಆಳವಾದ ಶುದ್ಧ ತಟ್ಟೆ ಅಥವಾ ಪಾತ್ರೆ ಬಳಸಬಹುದು.',
+    substituteEn: 'Use a clean deep plate or bowl reserved only for Abhisheka.'
+  },
+  {
+    id: 'kalasha_set',
+    nameKn: 'ಕಲಶಗಳ ಸಮೂಹ (೩ ಸಣ್ಣ, ೧ ದೊಡ್ಡ)',
+    nameEn: 'Kalasha Set (3 Small, 1 Large)',
+    category: 'vessels',
+    tier: 'full_paddhati',
+    descriptionKn: 'ಪೂಜೆ, ಅಭಿಷೇಕ ಮತ್ತು ತೀರ್ಥಕ್ಕಾಗಿ ಮೂರು ಸಣ್ಣ ಹಾಗೂ ಒಂದು ದೊಡ್ಡ ಕಲಶ.',
+    descriptionEn: 'Three small Kalashas and one large Kalasha for pooja, Abhisheka and Teertha.',
+    substituteKn: 'ಲಭ್ಯವಿರುವ ಶುದ್ಧ ತಾಮ್ರ ಅಥವಾ ಹಿತ್ತಾಳೆಯ ಪಾತ್ರೆಗಳನ್ನು ಪ್ರತ್ಯೇಕ ಉದ್ದೇಶಗಳಿಗೆ ಬಳಸಿ.',
+    substituteEn: 'Clean copper or brass vessels may be assigned separately to each purpose.'
+  },
+  {
+    id: 'serving_vessels',
+    nameKn: 'ತೀರ್ಥ ಲೋಟ, ತಟ್ಟೆ & ಬುಟ್ಟಿ',
+    nameEn: 'Teertha Cups, Plates & Basket',
+    category: 'vessels',
+    tier: 'full_paddhati',
+    descriptionKn: 'ನಿರ್ಮಾಲ್ಯ, ದೇವರ ತೀರ್ಥ, ವಾಯುದೇವರ ತೀರ್ಥ ಮತ್ತು ಶಂಖೋದಕಕ್ಕೆ ಪ್ರತ್ಯೇಕ ಲೋಟಗಳು; ತಟ್ಟೆಗಳು ಮತ್ತು ಒಂದು ಬುಟ್ಟಿ.',
+    descriptionEn: 'Separate cups for Nirmalya, Devara Teertha, Vayudevara Teertha and Shankhodaka, with plates and a basket.',
+    substituteKn: 'ಪ್ರತಿ ಉಪಯೋಗಕ್ಕೆ ಗುರುತು ಮಾಡಿದ ಶುದ್ಧ ಸಣ್ಣ ಪಾತ್ರೆಗಳನ್ನು ಬಳಸಬಹುದು.',
+    substituteEn: 'Clearly assigned clean household bowls may be used for each sacred purpose.'
+  },
+  {
+    id: 'gandha_stone',
+    nameKn: 'ಸಾಣಿಕಲ್ಲು / ಗಂಧ ಕೊರಡು',
+    nameEn: 'Sandalwood Grinding Stone',
+    category: 'vessels',
+    tier: 'full_paddhati',
+    descriptionKn: 'ಪೂಜೆಗೆ ಶುದ್ಧ ಶ್ರೀಗಂಧ ತೇಯಲು ಮೀಸಲಾದ ಸಾಣಿಕಲ್ಲು ಅಥವಾ ಗಂಧ ಕೊರಡು.',
+    descriptionEn: 'A dedicated stone or block for preparing fresh sandalwood paste.',
+    substituteKn: 'ತಯಾರಾದ ಶುದ್ಧ ಶ್ರೀಗಂಧದ ಲೇಪವನ್ನು ಬಳಸಬಹುದು.',
+    substituteEn: 'Ready-made pure sandalwood paste may be used.'
+  },
+  {
+    id: 'deity_vastra',
+    nameKn: 'ದೇವರ ಶುಭ್ರ ವಸ್ತ್ರಗಳು (೩–೫)',
+    nameEn: 'Clean Deity Cloths (3–5)',
+    category: 'madi_cloth',
+    tier: 'full_paddhati',
+    descriptionKn: 'ಅಭಿಷೇಕದ ನಂತರ ದೇವತಾ ಪ್ರತಿಮೆಗಳನ್ನು ಒರೆಸಿ ಅಲಂಕರಿಸಲು ಪ್ರತ್ಯೇಕ ಶುಭ್ರ ವಸ್ತ್ರಗಳು.',
+    descriptionEn: 'Separate clean cloths for drying and adorning the deities after Abhisheka.',
+    substituteKn: 'ಮೃದುವಾದ, ಹೊಸದಾಗಿ ಒಗೆದ ಹತ್ತಿ ಬಟ್ಟೆಗಳನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಇಡಿ.',
+    substituteEn: 'Keep freshly washed soft cotton cloths reserved for the deities.'
+  },
+  {
+    id: 'pooja_seats',
+    nameKn: 'ಚಿಕ್ಕ ಮಣೆ & ಪೂಜಾ ಆಸನ',
+    nameEn: 'Small Peetha & Pooja Asana',
+    category: 'pratima_peetha',
+    tier: 'full_paddhati',
+    descriptionKn: 'ದೇವತಾ ಸ್ಥಾಪನೆಗೆ ಚಿಕ್ಕ ಮಣೆ ಮತ್ತು ಪೂಜಕನಿಗೆ ಶುದ್ಧ ಆಸನ.',
+    descriptionEn: 'A small raised Peetha for the deities and a clean Asana for the worshipper.',
+    substituteKn: 'ಶುದ್ಧ ಮರದ ಫಲಕ ಮತ್ತು ಮಡಿಸಿದ ಶುಭ್ರ ವಸ್ತ್ರ ಬಳಸಬಹುದು.',
+    substituteEn: 'A clean wooden board and folded cloth may be used.'
+  },
+  {
+    id: 'arati_set',
+    nameKn: 'ಮಂಗಳಾರತಿ, ಹಲಗಾರತಿ & ಧೂಪಾರತಿ',
+    nameEn: 'Mangalarati, Halagarati & Dhooparati Set',
+    category: 'vessels',
+    tier: 'full_paddhati',
+    descriptionKn: 'ಮಂಗಳಾರತಿ ಬತ್ತಿ, ಹಲಗಾರತಿ ಮತ್ತು ಧೂಪಾರತಿ ನಡೆಸಲು ಪ್ರತ್ಯೇಕ ಆರತಿ ಉಪಕರಣಗಳು.',
+    descriptionEn: 'Dedicated holders for Mangalarati wick, Halagarati and Dhooparati offerings.',
+    substituteKn: 'ಶುದ್ಧವಾದ ಒಂದು ಆರತಿ ತಟ್ಟೆಯನ್ನು ಕ್ರಮವಾಗಿ ಬಳಸಬಹುದು.',
+    substituteEn: 'One clean Arati plate may be used sequentially when separate holders are unavailable.'
   },
   {
     id: 'deepa_samagri',

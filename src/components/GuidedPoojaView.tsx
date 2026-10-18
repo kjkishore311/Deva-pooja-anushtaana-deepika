@@ -13,6 +13,7 @@ import {
 } from './CompleteVersionRitualVisuals';
 import { TarkshyadiPanchaMudraWidget } from './TarkshyadiPanchaMudraWidget';
 import { SuktaAbhishekaPlayer } from './SuktaAbhishekaPlayer';
+import { PaidRecordingAccess } from './PaidRecordingAccess';
 import {
   Play,
   Pause,
@@ -519,6 +520,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
           )}
         </div>
       )}
+
+      <PaidRecordingAccess lang={lang} mode={mode} isUnlocked={isUnlocked} />
 
       {/* Vedic Sukta Abhisheka Player: Automatically plays for Step 8 (30min & full) & Step 5 (10min) */}
       {isSuktaAbhishekaStep && (

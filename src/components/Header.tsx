@@ -167,6 +167,11 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="h-5 w-5 rounded-full object-cover ring-1 ring-[#1a0606]/40 group-hover:scale-125 transition-transform" />
             <span className="font-sans font-bold">
+              {lang === 'kn' ? 'ಅಂಜನೀಪುತ್ರ' : 'Anjaniputra'}
+            </span>
+          </button>
+        )}
+
               {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
             </span>
           </button>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SAMAGRI_DATA } from '../data/inventoryData';
+import { POOJA_PREPARATION_GROUPS, PreparationMode, SAMAGRI_DATA } from '../data/inventoryData';
 import { Language, SamagriItem } from '../types';
 import { AccessoryGraphic } from './AccessoryGraphic';
 import { additionalSetupPhotos, setupPhotosByItem } from '../data/setupPhotos';
@@ -14,6 +14,8 @@ import {
   HelpCircle,
   ShoppingBag,
   CheckCircle2,
+  Clock3,
+  Crown,
 } from 'lucide-react';
 
 interface MaterialsCheckerProps {
@@ -21,7 +23,7 @@ interface MaterialsCheckerProps {
 }
 
 export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
-  const [selectedTier, setSelectedTier] = useState<'all' | 'daily_minimum' | 'recommended' | 'full_paddhati'>('all');
+  const [selectedMode, setSelectedMode] = useState<PreparationMode>('10min');
   const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({
     saligrama_idols: true,
     ghanta: true,
@@ -33,9 +35,10 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
   });
   const [copiedNotification, setCopiedNotification] = useState(false);
 
-  const filteredItems = SAMAGRI_DATA.filter(
-    (item) => selectedTier === 'all' || item.tier === selectedTier
-  );
+  const selectedGroup = POOJA_PREPARATION_GROUPS.find((group) => group.mode === selectedMode)!;
+  const filteredItems = selectedGroup.itemIds
+    .map((itemId) => SAMAGRI_DATA.find((item) => item.id === itemId))
+    .filter((item): item is SamagriItem => Boolean(item));
 
   const toggleCheck = (id: string) => {
     setCheckedIds((prev) => ({
@@ -44,7 +47,7 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
     }));
   };
 
-  const missingItems = SAMAGRI_DATA.filter((item) => !checkedIds[item.id]);
+  const missingItems = filteredItems.filter((item) => !checkedIds[item.id]);
 
   const handleCopyMissing = () => {
     if (missingItems.length === 0) return;
@@ -105,48 +108,68 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
         </div>
       </div>
 
-      {/* Tier Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-        <button
-          onClick={() => setSelectedTier('all')}
-          className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all border ${
-            selectedTier === 'all'
-              ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] font-bold shadow-[0_0_12px_rgba(255,153,51,0.35)]'
-              : 'bg-[#3d1111]/70 hover:bg-[#3d1111] text-[#fef3c7]/80 border-[#ffd700]/10'
-          }`}
-        >
-          {lang === 'kn' ? 'ಎಲ್ಲ ಸಾಮಗ್ರಿಗಳು' : 'All Items'} ({SAMAGRI_DATA.length})
-        </button>
-        <button
-          onClick={() => setSelectedTier('daily_minimum')}
-          className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all border ${
-            selectedTier === 'daily_minimum'
-              ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] font-bold shadow-[0_0_12px_rgba(255,153,51,0.35)]'
-              : 'bg-[#3d1111]/70 hover:bg-[#3d1111] text-[#fef3c7]/80 border-[#ffd700]/10'
-          }`}
-        >
-          {lang === 'kn' ? '೧. ದೈನಂದಿನ ಕನಿಷ್ಠ' : '1. Daily Minimum'}
-        </button>
-        <button
-          onClick={() => setSelectedTier('recommended')}
-          className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all border ${
-            selectedTier === 'recommended'
-              ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] font-bold shadow-[0_0_12px_rgba(255,153,51,0.35)]'
-              : 'bg-[#3d1111]/70 hover:bg-[#3d1111] text-[#fef3c7]/80 border-[#ffd700]/10'
-          }`}
-        >
-          {lang === 'kn' ? '೨. ಶಿಫಾರಸು ಪದ್ಧತಿ' : '2. Recommended'}
-        </button>
-        <button
-          onClick={() => setSelectedTier('full_paddhati')}
-          className={`px-3 sm:px-4 py-1.5 rounded-full text-xs font-sans font-semibold transition-all border ${
-            selectedTier === 'full_paddhati'
-              ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] font-bold shadow-[0_0_12px_rgba(255,153,51,0.35)]'
-              : 'bg-[#3d1111]/70 hover:bg-[#3d1111] text-[#fef3c7]/80 border-[#ffd700]/10'
-          }`}
-        >
-          {lang === 'kn' ? '೩. ಸಂಪೂರ್ಣ ತಂತ್ರಸಾರ' : '3. Full Setup'}
-        </button>
+      {/* Separate preparation sections for each pooja duration */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        {POOJA_PREPARATION_GROUPS.map((group, index) => {
+          const isSelected = selectedMode === group.mode;
+          const GroupIcon = group.mode === 'full' ? Crown : Clock3;
+
+          return (
+            <button
+              key={group.mode}
+              type="button"
+              onClick={() => setSelectedMode(group.mode)}
+              className={`relative overflow-hidden rounded-2xl border p-4 text-left transition-all active:scale-[0.98] ${
+                isSelected
+                  ? 'bg-gradient-to-br from-[#5a1710] to-[#250a0a] border-[#ffd700]/70 shadow-[0_12px_35px_rgba(255,153,51,0.18)]'
+                  : 'bg-[#250a0a]/70 border-[#ffd700]/15 hover:border-[#ffd700]/35'
+              }`}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="space-y-1.5">
+                  <span className="text-[10px] uppercase tracking-[0.18em] text-[#ffd700]/60 font-bold">
+                    {lang === 'kn' ? `ವಿಭಾಗ ${index + 1}` : `Section ${index + 1}`}
+                  </span>
+                  <h3 className="font-serif text-base font-bold text-[#ffb45c]">
+                    {lang === 'kn' ? group.titleKn : group.titleEn}
+                  </h3>
+                  <p className="text-[11px] leading-relaxed text-[#fef3c7]/70">
+                    {lang === 'kn' ? group.descriptionKn : group.descriptionEn}
+                  </p>
+                </div>
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
+                  isSelected ? 'bg-[#ffd700] text-[#3d1111]' : 'bg-[#ff9933]/15 text-[#ff9933]'
+                }`}>
+                  <GroupIcon className="w-4 h-4" />
+                </div>
+              </div>
+              <div className="mt-3 flex items-center justify-between text-[10px] font-bold">
+                <span className="text-[#fef3c7]/60">
+                  {group.itemIds.length} {lang === 'kn' ? 'ವಸ್ತುಗಳು' : 'items'}
+                </span>
+                <span className={isSelected ? 'text-[#ffd700]' : 'text-[#ff9933]/70'}>
+                  {isSelected
+                    ? (lang === 'kn' ? 'ಪಟ್ಟಿ ತೆರೆದಿದೆ' : 'List open')
+                    : (lang === 'kn' ? 'ಪಟ್ಟಿ ನೋಡಿ' : 'View list')}
+                </span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="flex items-center justify-between gap-3 border-y border-[#ffd700]/15 py-3">
+        <div>
+          <h3 className="font-serif font-bold text-[#ffd700]">
+            {lang === 'kn' ? selectedGroup.titleKn : selectedGroup.titleEn}
+          </h3>
+          <p className="text-[11px] text-[#fef3c7]/60">
+            {lang === 'kn' ? 'ನಿಮ್ಮ ಬಳಿ ಇರುವ ವಸ್ತುಗಳನ್ನು ಗುರುತಿಸಿ.' : 'Tap each item to mark what you already have.'}
+          </p>
+        </div>
+        <span className="shrink-0 rounded-full bg-[#ff9933]/15 border border-[#ff9933]/25 px-3 py-1 text-[10px] font-bold text-[#ffb45c]">
+          {filteredItems.length} {lang === 'kn' ? 'ಅಗತ್ಯ ವಸ್ತುಗಳು' : 'required'}
+        </span>
       </div>
 
       {/* Samagri Item Cards Grid with Authentic Accessory Images */}
@@ -191,7 +214,11 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
                   </div>
 
                   <span className="inline-block text-[9px] font-bold uppercase tracking-wider bg-[#ff9933]/20 text-[#ff9933] border border-[#ff9933]/30 px-2 py-0.5 rounded font-sans">
-                    {item.tier.replace('_', ' ')}
+                    {selectedMode === '10min'
+                      ? (lang === 'kn' ? '೧೦ ನಿಮಿಷ' : '10 minute')
+                      : selectedMode === '30min'
+                        ? (lang === 'kn' ? '೩೦ ನಿಮಿಷ' : '30 minute')
+                        : (lang === 'kn' ? 'ಸಂಪೂರ್ಣ' : 'complete')}
                   </span>
 
                   <p className="text-[11px] sm:text-xs text-[#fef3c7]/80 leading-relaxed font-sans line-clamp-2">
