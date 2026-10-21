@@ -21,3 +21,11 @@ export interface SandhyavandaneAccess {
   isAdmin: boolean;
   queue?: SandhyavandanePayment[];
 }
+
+export const krishnaYajurvedaSandhyavandane = {
+  title: 'Nitya Sandhya Vandanam – Krishna Yajurvediya',
+  reciter: 'Brahmasri Shankaramanchi Ramakrishna Sastry',
+  audioUrl: 'https://d3k8k22xkys7w.cloudfront.net/070-nitya.sandhya.vandanam-brahmasri.shankaramanchi.ramakrishna.sastry..mp3',
+  sourceUrl: 'https://vignanam.org/media/devanagari/nitya-sandhya-vandanam-krishna-yajurvediya.html',
+  size: '53.5 MB',
+} as const;

@@ -1,6 +1,10 @@
 # Sandhyavandane downloads
 
-The homepage links to **Rigveda Trikala Sandhyavandane**. Both the Rigveda guide and Naama Mudra Dharane PDF can be downloaded without payment or an account. The two Aachamana M4A recordings are sold together for a single ₹100 payment to the site's existing UPI recipient.
+The homepage links to the **Sandhyavandana** section, which has two tracks: **a. Trikala Rigveda** and **b. Krishna Yajurveda**.
+
+The Krishna Yajurveda track plays the free Nitya Sandhya Vandanam recording by Brahmasri Shankaramanchi Ramakrishna Sastry, streamed from its original source at vignanam.org (credited on the page). It needs no account or payment.
+
+In the Rigveda track, Both the Rigveda guide and Naama Mudra Dharane PDF can be downloaded without payment or an account. The two Aachamana M4A recordings are sold together for a single ₹100 payment to the site's existing UPI recipient.
 
 ## Approve a payment
 

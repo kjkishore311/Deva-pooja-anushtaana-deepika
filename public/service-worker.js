@@ -32,7 +32,9 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  const pathname = new URL(event.request.url).pathname;
+  const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
+  const pathname = url.pathname;
   if (pathname.startsWith('/api/') || pathname.startsWith('/.netlify/')) return;
   // Navigation request fallback or network first
   if (event.request.mode === 'navigate') {
