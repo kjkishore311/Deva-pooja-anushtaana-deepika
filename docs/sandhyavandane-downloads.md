@@ -4,6 +4,8 @@ The homepage links to the **Sandhyavandana** section, which has two tracks: **a.
 
 The Krishna Yajurveda track plays the free Nitya Sandhya Vandanam recording by Brahmasri Shankaramanchi Ramakrishna Sastry, streamed from its original source at vignanam.org (credited on the page). It needs no account or payment.
 
+The same track lists all 46 steps of the procedure in five scripts: Kannada, Sanskrit (Devanagari), English transliteration (IAST), Telugu and Tamil. Readers pick a script, and it defaults to Kannada or English to match the site language. Each script also has a free PDF in `public/downloads/sandhyavandane/krishna-yajurveda-sandhyavandana-<script>.pdf`. The step text comes from Vaidika Vignanam and is stored as one JSON file per script in `public/data/krishna-yajurveda-sandhyavandana`, so it loads only when the section is opened. The PDFs were generated from those same files with Noto fonts, so the text and Vedic accent marks match the web version.
+
 In the Rigveda track, Both the Rigveda guide and Naama Mudra Dharane PDF can be downloaded without payment or an account. The two Aachamana M4A recordings are sold together for a single ₹100 payment to the site's existing UPI recipient.
 
 ## Approve a payment

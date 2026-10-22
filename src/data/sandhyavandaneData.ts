@@ -29,3 +29,18 @@ export const krishnaYajurvedaSandhyavandane = {
   sourceUrl: 'https://vignanam.org/media/devanagari/nitya-sandhya-vandanam-krishna-yajurvediya.html',
   size: '53.5 MB',
 } as const;
+
+export const krishnaYajurvedaScripts = [
+  { id: 'kannada', nameEn: 'Kannada', nameKn: 'ಕನ್ನಡ', native: 'ಕನ್ನಡ', pdfSize: '202 KB' },
+  { id: 'devanagari', nameEn: 'Sanskrit (Devanagari)', nameKn: 'ಸಂಸ್ಕೃತ (ದೇವನಾಗರಿ)', native: 'संस्कृतम्', pdfSize: '141 KB' },
+  { id: 'english', nameEn: 'English transliteration', nameKn: 'ಇಂಗ್ಲಿಷ್ ಲಿಪ್ಯಂತರ', native: 'English', pdfSize: '89 KB' },
+  { id: 'telugu', nameEn: 'Telugu', nameKn: 'ತೆಲುಗು', native: 'తెలుగు', pdfSize: '218 KB' },
+  { id: 'tamil', nameEn: 'Tamil', nameKn: 'ತಮಿಳು', native: 'தமிழ்', pdfSize: '138 KB' },
+] as const;
+
+export type KrishnaYajurvedaScript = typeof krishnaYajurvedaScripts[number]['id'];
+
+export interface KrishnaYajurvedaText {
+  title: string;
+  steps: { title: string; note: string; lines: string[] }[];
+}

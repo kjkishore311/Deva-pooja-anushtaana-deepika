@@ -3,6 +3,7 @@ import { acceptInvite, getUser, handleAuthCallback, login, logout, requestPasswo
 import { QRCodeSVG } from 'qrcode.react';
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Clock, Copy, Download, ExternalLink, Headphones, LockKeyhole, RefreshCw, ShieldCheck } from 'lucide-react';
 import { Language } from '../types';
+import { KrishnaYajurvedaSteps } from './KrishnaYajurvedaSteps';
 import { PaymentService, UPI_RECIPIENT_ID, UPI_RECIPIENT_NAME } from '../services/paymentService';
 import { SANDHYAVANDANE_PRICE, krishnaYajurvedaSandhyavandane, sandhyavandaneAudio, type SandhyavandaneAccess } from '../data/sandhyavandaneData';
 
@@ -30,7 +31,7 @@ export function SandhyavandaneHomeCard({ lang, onOpen }: { lang: Language; onOpe
         <div>
           <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#ffbb66]"><BookOpen size={16} /> {lang === 'kn' ? 'ಸಂಧ್ಯಾವಂದನೆ ಮಾರ್ಗದರ್ಶಿ' : 'Daily Sandhyavandane resources'}</p>
           <h2 className="font-serif text-2xl text-[#ffd700] sm:text-3xl">{lang === 'kn' ? 'ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಮತ್ತು ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ' : 'Rigveda Trikala & Krishna Yajurveda Sandhyavandana'}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-[#fef3c7]/75">{lang === 'kn' ? 'ಋಗ್ವೇದ: ಸಂಧ್ಯಾವಂದನೆ ಮತ್ತು ನಾಮ ಮುದ್ರಾ ಧಾರಣೆ PDF ಉಚಿತ, ಆಚಮನದ ಎರಡು ಧ್ವನಿ ಪಾಠಗಳು ₹100ಕ್ಕೆ. ಕೃಷ್ಣ ಯಜುರ್ವೇದ: ಸಂಪೂರ್ಣ ಪಠಣ ಧ್ವನಿ ಉಚಿತ.' : 'Rigveda: two free PDF guides plus two Aachamana audio lessons for ₹100. Krishna Yajurveda: free full recitation audio.'}</p>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-[#fef3c7]/75">{lang === 'kn' ? 'ಋಗ್ವೇದ: ಸಂಧ್ಯಾವಂದನೆ ಮತ್ತು ನಾಮ ಮುದ್ರಾ ಧಾರಣೆ PDF ಉಚಿತ, ಆಚಮನದ ಎರಡು ಧ್ವನಿ ಪಾಠಗಳು ₹100ಕ್ಕೆ. ಕೃಷ್ಣ ಯಜುರ್ವೇದ: ಐದು ಲಿಪಿಗಳಲ್ಲಿ ಹಂತಗಳು, PDF ಮತ್ತು ಸಂಪೂರ್ಣ ಪಠಣ ಧ್ವನಿ ಉಚಿತ.' : 'Rigveda: two free PDF guides plus two Aachamana audio lessons for ₹100. Krishna Yajurveda: free steps in five scripts, PDFs and full recitation audio.'}</p>
         </div>
         <a href="#sandhyavandane" onClick={onOpen} className={buttonClass}>{lang === 'kn' ? 'ಮಾರ್ಗದರ್ಶಿ ತೆರೆಯಿರಿ' : 'Explore resources'}<ArrowRight size={17} /></a>
       </div>
@@ -169,7 +170,7 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
       <div role="tablist" aria-label={translate('Sandhyavandana tradition', 'ಸಂಧ್ಯಾವಂದನೆ ಶಾಖೆ')} className="grid gap-3 sm:grid-cols-2">
         {([
           { id: 'rigveda', label: translate('a. Trikala Rigveda Sandhyavandana', 'ಅ. ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ'), detail: translate('PDF guides · Aachamana audio', 'PDF ಮಾರ್ಗದರ್ಶಿಗಳು · ಆಚಮನ ಧ್ವನಿ') },
-          { id: 'yajurveda', label: translate('b. Krishna Yajurveda Sandhyavandana', 'ಆ. ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ'), detail: translate('Full recitation audio · Free', 'ಸಂಪೂರ್ಣ ಪಠಣ ಧ್ವನಿ · ಉಚಿತ') },
+          { id: 'yajurveda', label: translate('b. Krishna Yajurveda Sandhyavandana', 'ಆ. ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ'), detail: translate('Steps in 5 scripts · Free PDF & audio', '5 ಲಿಪಿಗಳಲ್ಲಿ ಹಂತಗಳು · ಉಚಿತ PDF ಮತ್ತು ಧ್ವನಿ') },
         ] as const).map((option) => (
           <button key={option.id} type="button" role="tab" id={`veda-tab-${option.id}`} aria-selected={veda === option.id} aria-controls={`veda-panel-${option.id}`} onClick={() => setVeda(option.id)} className={`rounded-2xl border p-5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd700] ${veda === option.id ? 'border-[#ffd700] bg-[#ffd700]/10' : 'border-[#ffd700]/20 bg-[#250a0a] hover:border-[#ffd700]/50'}`}>
             <span className="block font-serif text-lg text-[#ffd700]">{option.label}</span>
@@ -181,7 +182,7 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
       {veda === 'yajurveda' && <section id="veda-panel-yajurveda" role="tabpanel" aria-labelledby="veda-tab-yajurveda" className="overflow-hidden rounded-2xl border border-[#ffd700]/30 bg-[#250a0a]">
         <div className="p-6 sm:p-8">
           <h2 className="flex items-center gap-2 font-serif text-2xl text-[#ffd700]"><Headphones size={23} />{translate('Krishna Yajurveda Sandhyavandana', 'ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ')}</h2>
-          <p className="mt-3 text-sm leading-7 text-[#fef3c7]/75">{translate('Listen to the complete Nitya Sandhya Vandanam in the Krishna Yajurvediya tradition. No payment or account is needed.', 'ಕೃಷ್ಣ ಯಜುರ್ವೇದೀಯ ಸಂಪ್ರದಾಯದ ಸಂಪೂರ್ಣ ನಿತ್ಯ ಸಂಧ್ಯಾವಂದನೆಯನ್ನು ಆಲಿಸಿ. ಪಾವತಿ ಅಥವಾ ಖಾತೆ ಅಗತ್ಯವಿಲ್ಲ.')}</p>
+          <p className="mt-3 text-sm leading-7 text-[#fef3c7]/75">{translate('Listen to the complete Nitya Sandhya Vandanam in the Krishna Yajurvediya tradition, follow the steps in Kannada, Sanskrit, English, Telugu or Tamil, and download the free PDF. No payment or account is needed.', 'ಕೃಷ್ಣ ಯಜುರ್ವೇದೀಯ ಸಂಪ್ರದಾಯದ ಸಂಪೂರ್ಣ ನಿತ್ಯ ಸಂಧ್ಯಾವಂದನೆಯನ್ನು ಆಲಿಸಿ, ಕನ್ನಡ, ಸಂಸ್ಕೃತ, ಇಂಗ್ಲಿಷ್, ತೆಲುಗು ಅಥವಾ ತಮಿಳಿನಲ್ಲಿ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ ಮತ್ತು ಉಚಿತ PDF ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ. ಪಾವತಿ ಅಥವಾ ಖಾತೆ ಅಗತ್ಯವಿಲ್ಲ.')}</p>
         </div>
         <div className="space-y-4 border-t border-[#ffd700]/15 px-6 py-6 sm:px-8">
           <div><h3 className="font-semibold">{krishnaYajurvedaSandhyavandane.title}</h3><p className="mt-1 text-xs text-[#fef3c7]/55">{krishnaYajurvedaSandhyavandane.reciter} · MP3 · {krishnaYajurvedaSandhyavandane.size}</p></div>
@@ -192,6 +193,7 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
           </div>
           <p className="text-xs leading-6 text-[#fef3c7]/55">{translate('Audio courtesy of vignanam.org; streamed from its original source.', 'ಧ್ವನಿ ಕೃಪೆ: vignanam.org; ಮೂಲದಿಂದ ನೇರವಾಗಿ ಪ್ರಸಾರ.')}</p>
         </div>
+        <KrishnaYajurvedaSteps lang={lang} />
       </section>}
 
       {veda === 'rigveda' && <div id="veda-panel-rigveda" role="tabpanel" aria-labelledby="veda-tab-rigveda" className="space-y-8">
