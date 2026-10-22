@@ -12,7 +12,7 @@ The clarification selections requested approved Shankha–Chakra artwork and aut
 
 ## Vayu putra chatbot
 
-The chatbot formerly called Anjaniputra is labeled **Vayu putra** (ವಾಯುಪುತ್ರ) everywhere it appears. Its launcher, header and menu shortcuts and chat avatar use a crop of the public-domain *Bhakta Hanuman* print (Ravi Varma Press, c. 1930) from https://commons.wikimedia.org/wiki/File:Bhaktha_Hanuman.jpg; the full image is kept at `public/images/vayuputra/bhakta-hanuman.jpg`. Internal component names and element IDs still use "Anjaniputra" for compatibility.
+The chatbot formerly called Anjaniputra is labeled **Vayu putra** (ವಾಯುಪುತ್ರ) everywhere it appears. Its launcher, header and menu shortcuts and chat avatar use a crop of Raja Ravi Varma's public-domain *Hanuman Lifts Hill* (Hanuman carrying the Sanjeevini mountain) from https://commons.wikimedia.org/wiki/File:HANUMAN_LIFTS_HILL.jpg, saved as `public/images/vayuputra/hanuman-sanjeevini-avatar.jpg`. The earlier *Bhakta Hanuman* print (Ravi Varma Press, c. 1930, https://commons.wikimedia.org/wiki/File:Bhaktha_Hanuman.jpg) is kept at `public/images/vayuputra/bhakta-hanuman.jpg`. Internal component names and element IDs still use "Anjaniputra" for compatibility.
 
 ## Movable Vayu putra
 
@@ -45,3 +45,13 @@ The homepage, desktop menu, and mobile menu link to the new **MADHWA GURU STUTI*
 Sources were checked on October 12, 2026. Forty-one Sanskrit verses were obtained from the official individual-guru pages, including Sri Vidyanidhi Tirtha's verse. Kannada and English/Roman versions were mechanically transliterated from the source Sanskrit using Sanscript; they are not English meaning translations or newly composed verses. The official Sri Satyatma Tirtha page did not provide a verse, and the clarification response did not include the requested approved text. That entry therefore explicitly awaits its approved verse rather than inventing or borrowing another guru's stuti.
 
 Guru recitations are being supplied in batches and are stored in `public/audio/guru-stuti`. The first batch covers 15 gurus: shlokas 1–3 (Sri Madhwacharya, Sri Padmanabha Tirtha, Sri Narahari Tirtha) and 4–5 (Sri Madhava Tirtha, Sri Akshobhya Tirtha) share their combined recordings, as do Sri Satyasankalpa Tirtha and Sri Satyasanthushta Theertha. Individual recordings were added for Sri Jayateertha, Sri Vagisha Tirtha, Sri Satyavrata, Sri Satyavijaya, Sri Satyapriya, Sri Satyabodha, Sri Satyaparakrama and Sri Satyajnana Tirtha (the file supplied as "Satyagnyaana – 1"). Combined recordings note which other gurus they include. The leading numbers in the supplied file names were treated as album track numbers; "1-3" and "4-5" were mapped to the first five gurus in lineage order. For later batches, copy each file into that folder and set the entry's `audioUrl` in `src/data/madhwaGuruData.ts`; gurus without audio keep the pending notice. When the approved Sri Satyatma Tirtha verse is supplied, populate that entry's three `stuti` fields and record its actual provenance.
+
+## Top-of-page darshan band
+
+The golden Hanuman (left) and Garuda (right) figures that flank the band at the top of every page are taken from the Sri Uttaradi Math website header (https://uttaradimath.org) and kept in `public/images/uttaradi-math`. They follow the Math's own arrangement, with both figures facing the centre.
+
+## Step utensils and mudra pictures
+
+During the guided pooja, a "Keep ready" panel sits beside each step on large screens and above it on phones. It shows small pictures of the utensils and items that step needs, followed by that step's mudras. The step-to-item mapping is in `src/data/stepUtensils.ts`. Real setup photos are used where they exist, and the rest are AI-generated product-style illustrations in `public/images/utensils`. Tapping an item opens the Samagri checklist, and tapping a mudra opens its finger guide.
+
+The seven Avahanadi mudras (Avahani to Prasada) are now part of step 5, shown before the conch is purified. They follow the Tantrasara order of Avahana before the Shankha and Kalasha sanctification. Their pictures, and those for Meru and Chandra, are AI-generated illustrations drawn from each mudra's written description (`public/images/mudras`). They should be checked against a guru's demonstration, and they can be replaced with real photos at the same file names.

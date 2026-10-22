@@ -344,7 +344,7 @@ function MudraGuideInline({
             : 'Visual finger positioning, invocation gestures, and shastric spiritual significance'}
         </p>
         <a href="/images/mudras/tarkshyadi-original.jpg" target="_blank" rel="noopener noreferrer" className="inline-block pt-2 text-xs text-[#ffd700] underline underline-offset-4">{lang === 'kn' ? 'ಒದಗಿಸಿದ ಮೂಲ ಪಂಚಮುದ್ರಾ ಚಿತ್ರ ನೋಡಿ' : 'View the supplied original five-mudra reference'}</a>
-        <p className="text-xs leading-6 text-[#fef3c7]/60">{lang === 'kn' ? 'ತಾರ್ಕ್ಷ್ಯ, ಧೇನು, ಶಂಖ, ಗದಾ ಮತ್ತು ಚಕ್ರ ಚಿತ್ರಗಳನ್ನು ಒದಗಿಸಿದ ಚಿತ್ರದಿಂದ ಮಾತ್ರ ಕತ್ತರಿಸಲಾಗಿದೆ. ಇತರ ಮುದ್ರೆಗಳಿಗೆ ಚಿತ್ರ ಒದಗಿಸಲಾಗಿಲ್ಲ.' : 'Tarkshya, Dhenu, Shankha, Gada, and Chakra use only crops of the supplied image. No reference images were supplied for the other mudras.'}</p>
+        <p className="text-xs leading-6 text-[#fef3c7]/60">{lang === 'kn' ? 'ತಾರ್ಕ್ಷ್ಯ, ಧೇನು, ಶಂಖ, ಗದಾ ಮತ್ತು ಚಕ್ರ ಚಿತ್ರಗಳನ್ನು ಒದಗಿಸಿದ ಚಿತ್ರದಿಂದ ಕತ್ತರಿಸಲಾಗಿದೆ. ಆವಾಹನಾದಿ ಏಳು ಮುದ್ರೆಗಳು, ಮೇರು ಮತ್ತು ಚಂದ್ರ ಮುದ್ರೆಗಳ ಚಿತ್ರಗಳು ಲಿಖಿತ ವಿವರಣೆಯ ಆಧಾರದ ಮೇಲೆ ರಚಿಸಿದ ಚಿತ್ರಣಗಳು — ಗುರುಗಳಿಂದ ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.' : 'Tarkshya, Dhenu, Shankha, Gada and Chakra are crops of the supplied image. The seven Avahanadi mudras, Meru and Chandra are illustrations drawn from their written descriptions — confirm the hand positions with your guru.'}</p>
       </div>
 
       {/* 3 Mudra Exploration Category Tabs */}

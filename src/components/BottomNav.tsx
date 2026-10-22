@@ -177,7 +177,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               title={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್' : 'Vayu putra Bot'}
               className="flex items-center gap-2 px-2 py-1.5 rounded-xl text-left transition-all text-[#ffaa44] hover:bg-[#3d1111]/80"
             >
-              <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="h-7 w-7 rounded-lg object-cover ring-1 ring-[#ff9933]/50" />
+              <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="h-7 w-7 rounded-lg object-cover ring-1 ring-[#ff9933]/50" />
               <span className="text-xs font-sans font-bold whitespace-nowrap">
                 {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
               </span>

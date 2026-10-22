@@ -25,7 +25,8 @@ class HumanAudioChanter {
   private currentPlaybackRate: number = 0.85; // Natural, slow, measured priest cadence
   private repeatRemaining: number = 0;
   private activeOptions: ChantOptions | null = null;
-  private memoryCache = new Map<string, string>(); // mantraId/text -> base64 data url
+  private memoryCache = new Map<string, string>(); // mantraId -> object URL of the priest recording
+  private requestToken = 0; // bumped on stop() so a recording that finishes preparing later is not played
   private progressInterval: any = null;
 
   // Web Audio Context for Sanctum Tanpura drone & Bells
@@ -70,8 +71,10 @@ class HumanAudioChanter {
     this.isAudioBuffering = true;
     this.isAudioPlaying = false;
 
+    const token = this.requestToken;
     try {
       const dataUrl = await this.getAudioDataUrl(text, options);
+      if (token !== this.requestToken) return;
 
       this.isAudioBuffering = false;
 
@@ -119,6 +122,7 @@ class HumanAudioChanter {
 
       await audio.play();
     } catch (err: any) {
+      if (token !== this.requestToken) return;
       console.warn('Human voice generation failed or offline, attempting fallback:', err);
       this.isAudioBuffering = false;
       this.fallbackRecitation(text, options);
@@ -126,39 +130,31 @@ class HumanAudioChanter {
   }
 
   /**
-   * Retrieve audio Data URL (either from client cache or from /api/chant endpoint)
+   * Retrieve the priest recording for a pooja mantra from /api/chant. The first request for a mantra starts
+   * generating it on the server, so this waits and checks again until the recording is saved.
    */
   private async getAudioDataUrl(text: string, options: ChantOptions): Promise<string> {
-    const cacheKey = `${options.mantraId || text.slice(0, 40)}_${options.speed || 'slow'}`;
+    const id = options.mantraId;
+    if (!id) throw new Error('Only pooja mantras have priest recordings');
+    if (this.memoryCache.has(id)) return this.memoryCache.get(id)!;
 
-    if (this.memoryCache.has(cacheKey)) {
-      return this.memoryCache.get(cacheKey)!;
+    const token = this.requestToken;
+    const deadline = Date.now() + 150000;
+    while (Date.now() < deadline) {
+      const response = await fetch(`/api/chant?id=${encodeURIComponent(id)}`);
+      if (response.ok) {
+        const url = URL.createObjectURL(await response.blob());
+        this.memoryCache.set(id, url);
+        return url;
+      }
+      if (response.status !== 202) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.error || `Failed with status ${response.status}`);
+      }
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      if (token !== this.requestToken) throw new Error('Recitation was stopped');
     }
-
-    const response = await fetch('/api/chant', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text,
-        mantraId: options.mantraId,
-        voiceName: 'Fenrir', // Deep, resonant Vedic male baritone
-        speed: options.speed || 'slow',
-      }),
-    });
-
-    if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.error || `Failed with status ${response.status}`);
-    }
-
-    const data = await response.json();
-    if (!data.audioBase64) {
-      throw new Error('No audio returned from server');
-    }
-
-    const dataUrl = `data:audio/wav;base64,${data.audioBase64}`;
-    this.memoryCache.set(cacheKey, dataUrl);
-    return dataUrl;
+    throw new Error('The priest recording is taking too long to prepare');
   }
 
   /**
@@ -173,19 +169,26 @@ class HumanAudioChanter {
     window.speechSynthesis.cancel();
 
     // Split text with spaces and pauses at dandas to prevent robotic garble
+    // Short pause after every word so each one is heard clearly; longer pauses at dandas
     const spacedText = text
+      .replace(/[\u0951\u0952\u1CDA]/g, '')
       .replace(/॥/g, ' . ')
       .replace(/।/g, ' , ')
-      .replace(/(\w{6,})/g, '$1 ')
+      .split(/\s+/)
+      .filter(Boolean)
+      .join(', ')
+      .replace(/, ([.,])/g, ' $1')
       .trim();
 
     const utterance = new SpeechSynthesisUtterance(spacedText);
-    utterance.rate = 0.72; // Slow, dignified priest pace
+    utterance.rate = 0.65; // Slow, dignified priest pace
     utterance.pitch = 0.82; // Deep male vocal tone
 
     // Try finding an Indian English or Hindi/Kannada voice
     const voices = window.speechSynthesis.getVoices();
+    const maleIndianNames = /madhur|hemant|prabhat|gagan|ravi|kiran|male/i;
     const priestVoice =
+      voices.find((v) => /^(kn|sa|hi)/i.test(v.lang) && maleIndianNames.test(v.name)) ||
       voices.find((v) => v.lang.includes('kn') || v.lang.includes('sa')) ||
       voices.find((v) => v.lang.includes('hi') && v.name.toLowerCase().includes('male')) ||
       voices.find((v) => v.lang.includes('IN') && !v.name.toLowerCase().includes('female')) ||
@@ -218,7 +221,7 @@ class HumanAudioChanter {
    * Pre-cache standard pooja mantras in the background for zero-latency playback
    */
   public prefetchMantra(mantraId: string, text: string) {
-    if (this.memoryCache.has(`${mantraId}_slow`)) return;
+    if (this.memoryCache.has(mantraId)) return;
     this.getAudioDataUrl(text, { mantraId, speed: 'slow' }).catch(() => {
       // Background prefetch is best-effort
     });
@@ -256,6 +259,7 @@ class HumanAudioChanter {
    * Stop any playing audio
    */
   public stop(): void {
+    this.requestToken++;
     if (this.currentAudio) {
       this.currentAudio.pause();
       this.currentAudio.currentTime = 0;
