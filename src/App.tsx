@@ -25,6 +25,7 @@ import { PanchaMudraMobileStepper } from './components/PanchaMudraMobileStepper'
 import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraWidget';
 import { AnjaniputraChatbot } from './components/AnjaniputraChatbot';
 import { SandhyavandaneSection } from './components/SandhyavandaneSection';
+import { SacredDarshanBand } from './components/SacredDarshanBand';
 import { AnjaniputraLauncher } from './components/AnjaniputraLauncher';
 import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
 import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
@@ -119,6 +120,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#1a0606] text-[#fef3c7] flex flex-col font-sans selection:bg-[#ff9933] selection:text-[#1a0606] pb-20 lg:pb-0">
+      {/* Darshan band: Garuda, Gurus, Moola Rama, Narasimha and Hanuman above the sacred masthead */}
+      <SacredDarshanBand lang={lang} />
+
       {/* Top Application Bar */}
       <Header
         lang={lang}

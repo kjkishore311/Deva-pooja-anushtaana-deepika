@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#250a0a]/95 text-[#fef3c7] border-b border-[#ffd700]/15 shadow-[0_4px_20px_rgba(0,0,0,0.6)] backdrop-blur-md">
-      {/* Sacred Masthead: Hari Sarvottama • Vayu Jeevottama & Shree Uttaradi Matha */}
+      {/* Sacred Masthead: Hari Sarvottama • Vayu Jeevottama & Srimad Uttaradi Matha Sampradaya */}
       <SacredMasthead lang={lang} />
 
       {/* Center-Aligned App Name Block */}
@@ -65,14 +65,22 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="leading-none">ॐ</span>
             </span>
             <span className="text-center font-serif font-bold tracking-wider text-base sm:text-2xl text-[#ffd700] uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              {lang === 'kn' ? 'ದೇವಪೂಜಾ ಅನುಷ್ಠಾನ' : 'Deva Pooja Anushthana'}
+              {lang === 'kn' ? 'ದೇವಪೂಜಾ ಅನುಷ್ಠಾನ' : 'Deva Puja Anushtana'}
             </span>
           </button>
         </h1>
+        {/* Multilingual tagline: For Beginners */}
+        <p className="mt-0.5 flex flex-wrap items-center justify-center gap-x-2 font-serif text-xs sm:text-sm font-semibold text-[#ffbb66]">
+          <span lang="kn">ಆರಂಭಿಕರಿಗಾಗಿ</span>
+          <span aria-hidden="true" className="text-[#ffd700]/40">•</span>
+          <span lang="sa">प्रारम्भिकाणां कृते</span>
+          <span aria-hidden="true" className="text-[#ffd700]/40">•</span>
+          <span lang="en">For Beginners</span>
+        </p>
         <p className="text-[10px] sm:text-xs text-[#ffd700]/75 font-serif tracking-widest uppercase mt-0.5">
           {lang === 'kn'
-            ? '॥ ಶ್ರೀ ಉತ್ತರಾದಿ ಮಠ • ತಂತ್ರಸಾರ ಸಂಗ್ರಹ ಪದ್ಧತಿ ॥'
-            : '|| Sri Uttaradi Matha • Tantrasara Sangraha Tradition ||'}
+            ? '॥ ಶ್ರೀಮದ್ ಉತ್ತರಾದಿ ಮಠ ಸಂಪ್ರದಾಯ • ತಂತ್ರಸಾರ ಸಂಗ್ರಹ ಪದ್ಧತಿ ॥'
+            : '|| Srimad Uttaradi Matha Sampradaya • Tantrasara Sangraha Tradition ||'}
         </p>
       </div>
 
