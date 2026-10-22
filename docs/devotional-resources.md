@@ -12,7 +12,7 @@ The clarification selections requested approved Shankha–Chakra artwork and aut
 
 ## Vayu putra chatbot
 
-The chatbot formerly called Anjaniputra is labeled **Vayu putra** (ವಾಯುಪುತ್ರ) everywhere it appears. Its launcher, header and menu shortcuts and chat avatar use a crop of the public-domain *Bhakta Hanuman* print (Ravi Varma Press, c. 1930) from https://commons.wikimedia.org/wiki/File:Bhaktha_Hanuman.jpg; the full image is kept at `public/images/vayuputra/bhakta-hanuman.jpg`. Internal component names and element IDs still use "Anjaniputra" for compatibility.
+The chatbot formerly called Anjaniputra is labeled **Vayu putra** (ವಾಯುಪುತ್ರ) everywhere it appears. Its launcher, header and menu shortcuts and chat avatar use a crop of Raja Ravi Varma's public-domain *Hanuman Lifts Hill* (Hanuman carrying the Sanjeevini mountain) from https://commons.wikimedia.org/wiki/File:HANUMAN_LIFTS_HILL.jpg, saved as `public/images/vayuputra/hanuman-sanjeevini-avatar.jpg`. The earlier *Bhakta Hanuman* print (Ravi Varma Press, c. 1930, https://commons.wikimedia.org/wiki/File:Bhaktha_Hanuman.jpg) is kept at `public/images/vayuputra/bhakta-hanuman.jpg`. Internal component names and element IDs still use "Anjaniputra" for compatibility.
 
 ## Movable Vayu putra
 
@@ -49,3 +49,12 @@ Guru recitations are being supplied in batches and are stored in `public/audio/g
 ## Rigveda Upakarma & Yagnopaveeta Dharana downloads
 
 The landing page has a **Rigveda – Upakarma – Yagnopaveeta Dharana** section with free PDF downloads (no account or payment). The files are in `public/downloads/upakarma`; to add or replace a PDF, put it there and update the list in `src/components/UpakarmaDownloadsSection.tsx`.
+## Top-of-page darshan band
+
+The golden Hanuman (left) and Garuda (right) figures that flank the band at the top of every page are taken from the Sri Uttaradi Math website header (https://uttaradimath.org) and kept in `public/images/uttaradi-math`. They follow the Math's own arrangement, with both figures facing the centre.
+
+## Step utensils and mudra pictures
+
+During the guided pooja, a "Keep ready" panel sits beside each step on large screens and above it on phones. It shows small pictures of the utensils and items that step needs, followed by that step's mudras. The step-to-item mapping is in `src/data/stepUtensils.ts`. Real setup photos are used where they exist, and the rest are AI-generated product-style illustrations in `public/images/utensils`. Tapping an item opens the Samagri checklist, and tapping a mudra opens its finger guide.
+
+The seven Avahanadi mudras (Avahani to Prasada) are now part of step 5, shown before the conch is purified. They follow the Tantrasara order of Avahana before the Shankha and Kalasha sanctification. Their pictures, and those for Meru and Chandra, are AI-generated illustrations drawn from each mudra's written description (`public/images/mudras`). They should be checked against a guru's demonstration, and they can be replaced with real photos at the same file names.

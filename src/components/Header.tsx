@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-[#250a0a]/95 text-[#fef3c7] border-b border-[#ffd700]/15 shadow-[0_4px_20px_rgba(0,0,0,0.6)] backdrop-blur-md">
-      {/* Sacred Masthead: Hari Sarvottama • Vayu Jeevottama & Shree Uttaradi Matha */}
+      {/* Sacred Masthead: Hari Sarvottama • Vayu Jeevottama & Srimad Uttaradi Matha Sampradaya */}
       <SacredMasthead lang={lang} />
 
       {/* Center-Aligned App Name Block */}
@@ -65,14 +65,22 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="leading-none">ॐ</span>
             </span>
             <span className="text-center font-serif font-bold tracking-wider text-base sm:text-2xl text-[#ffd700] uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              {lang === 'kn' ? 'ದೇವಪೂಜಾ ಅನುಷ್ಠಾನ' : 'Deva Pooja Anushthana'}
+              {lang === 'kn' ? 'ದೇವಪೂಜಾ ಅನುಷ್ಠಾನ' : 'Deva Puja Anushtana'}
             </span>
           </button>
         </h1>
+        {/* Multilingual tagline: For Beginners */}
+        <p className="mt-0.5 flex flex-wrap items-center justify-center gap-x-2 font-serif text-xs sm:text-sm font-semibold text-[#ffbb66]">
+          <span lang="kn">ಆರಂಭಿಕರಿಗಾಗಿ</span>
+          <span aria-hidden="true" className="text-[#ffd700]/40">•</span>
+          <span lang="sa">प्रारम्भिकाणां कृते</span>
+          <span aria-hidden="true" className="text-[#ffd700]/40">•</span>
+          <span lang="en">For Beginners</span>
+        </p>
         <p className="text-[10px] sm:text-xs text-[#ffd700]/75 font-serif tracking-widest uppercase mt-0.5">
           {lang === 'kn'
-            ? '॥ ಶ್ರೀ ಉತ್ತರಾದಿ ಮಠ • ತಂತ್ರಸಾರ ಸಂಗ್ರಹ ಪದ್ಧತಿ ॥'
-            : '|| Sri Uttaradi Matha • Tantrasara Sangraha Tradition ||'}
+            ? '॥ ಶ್ರೀಮದ್ ಉತ್ತರಾದಿ ಮಠ ಸಂಪ್ರದಾಯ • ತಂತ್ರಸಾರ ಸಂಗ್ರಹ ಪದ್ಧತಿ ॥'
+            : '|| Srimad Uttaradi Matha Sampradaya • Tantrasara Sangraha Tradition ||'}
         </p>
       </div>
 
@@ -165,7 +173,7 @@ export const Header: React.FC<HeaderProps> = ({
             className="px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ff9933] to-[#ffd700] hover:from-[#ffaa44] hover:to-[#ffe055] text-[#1a0606] font-bold text-xs flex items-center gap-1.5 border border-[#ffd700] shadow-[0_0_12px_rgba(255,153,51,0.4)] active:scale-95 transition-all group shrink-0"
             title={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್ ಮಾರ್ಗದರ್ಶಿ' : 'Vayu putra Guide Chatbot'}
           >
-            <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="h-5 w-5 rounded-full object-cover ring-1 ring-[#1a0606]/40 group-hover:scale-125 transition-transform" />
+            <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="h-5 w-5 rounded-full object-cover ring-1 ring-[#1a0606]/40 group-hover:scale-125 transition-transform" />
             <span className="font-sans font-bold">
               {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
             </span>

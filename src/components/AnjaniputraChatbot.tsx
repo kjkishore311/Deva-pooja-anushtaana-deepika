@@ -264,7 +264,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
               }`}
               title={lang === 'kn' ? 'ಹಾರಲು ನನ್ನನ್ನು ಮುಟ್ಟಿ!' : 'Tap me to jump!'}
             >
-              <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="w-full h-full rounded-[14px] object-cover select-none" />
+              <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="w-full h-full rounded-[14px] object-cover select-none" />
             </div>
 
             <div>
@@ -344,7 +344,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
                 className={`flex gap-2.5 items-end ${isBot ? 'justify-start' : 'justify-end'}`}
               >
                 {isBot && (
-                  <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="w-8 h-8 rounded-full object-cover ring-1 ring-[#ff9933] shadow-sm shrink-0" />
+                  <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="w-8 h-8 rounded-full object-cover ring-1 ring-[#ff9933] shadow-sm shrink-0" />
                 )}
 
                 <div

@@ -127,7 +127,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               onClick={onOpenAnjaniputra}
               className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-gradient-to-r from-[#2d0e0e] to-[#1f0606] hover:from-[#3d1414] hover:to-[#2a0909] border border-[#ff9933]/40 text-[#ffd700] transition-all group shadow-sm active:scale-95"
             >
-              <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="h-8 w-8 rounded-full object-cover ring-1 ring-[#ff9933]/60 group-hover:scale-110 transition-transform" />
+              <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="h-8 w-8 rounded-full object-cover ring-1 ring-[#ff9933]/60 group-hover:scale-110 transition-transform" />
               <div className="text-left flex-1">
                 <div className="text-xs font-bold text-[#ff9933] font-sans">
                   {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}

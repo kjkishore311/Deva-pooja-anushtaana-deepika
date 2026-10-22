@@ -14,6 +14,7 @@ import {
 import { TarkshyadiPanchaMudraWidget } from './TarkshyadiPanchaMudraWidget';
 import { SuktaAbhishekaPlayer } from './SuktaAbhishekaPlayer';
 import { PaidRecordingAccess } from './PaidRecordingAccess';
+import { StepRequirementsWidget } from './StepRequirementsWidget';
 import {
   Play,
   Pause,
@@ -151,7 +152,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
 
     setIsNarratingStep(true);
     await humanAudioChanter.chant(fullText, {
-      mantraId: `guidance_${currentStep.id}`,
+      mantraId: `guidance_${currentStep.id}_${lang}`,
       speed: 'slow',
       playbackRate: 0.85,
       onStart: () => setIsNarratingStep(true),
@@ -305,7 +306,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
     currentStep.id === 'step_shuddhabhisheka';
 
   return (
-    <div className="max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5 text-[#fef3c7]">
+    <div className="max-w-4xl lg:max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5 text-[#fef3c7]">
       {/* Top Interactive Progress & Step Indicator */}
       <div className="bg-[#250a0a]/80 border border-[#ffd700]/15 rounded-2xl p-4 shadow-xl backdrop-blur-md">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
@@ -532,8 +533,12 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
         />
       )}
 
-      {/* Main Step Execution Card */}
-      <div className="bg-[#250a0a]/60 border border-[#ffd700]/15 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6 relative overflow-hidden backdrop-blur-md">
+      {/* Main Step Execution Card, with the utensils and mudras for this step alongside */}
+      <div className="space-y-5 lg:grid lg:grid-cols-[minmax(0,1fr)_240px] lg:items-start lg:gap-5 lg:space-y-0">
+      <div className="lg:order-2 lg:sticky lg:top-48">
+        <StepRequirementsWidget step={currentStep} lang={lang} onOpenMudra={onOpenMudra} onOpenSamagri={onOpenSamagri} />
+      </div>
+      <div className="lg:order-1 bg-[#250a0a]/60 border border-[#ffd700]/15 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-6 relative overflow-hidden backdrop-blur-md">
         {/* Subtle decorative background watermark */}
         <div className="absolute -top-12 -right-12 text-[#ff9933]/5 font-serif text-9xl select-none pointer-events-none">
           ॐ
@@ -661,7 +666,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                   ? 'bg-[#ff9933] text-[#1a0606] border-[#ffd700] animate-pulse shadow-[0_0_12px_rgba(255,153,51,0.4)]'
                   : 'bg-[#250a0a] hover:bg-[#3d1111] text-[#ffd700] border-[#ffd700]/30'
               }`}
-              title={lang === 'kn' ? 'ಕೃತಕ ಧ್ವನಿಯಲ್ಲಿ ಮಾರ್ಗದರ್ಶನ ಆಲಿಸಿ' : 'Listen to generated speech guidance (not a pundit recording)'}
+              title={lang === 'kn' ? 'AI ಅರ್ಚಕರ ಧ್ವನಿಯಲ್ಲಿ ಮಾರ್ಗದರ್ಶನ ಆಲಿಸಿ (ನಿಜವಾದ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣವಲ್ಲ)' : 'Listen to guidance in an AI-generated priest voice (not a pundit recording)'}
             >
               {isNarratingStep ? (
                 <>
@@ -672,7 +677,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                 <>
                   <Volume2 className="w-3.5 h-3.5 text-[#ff9933] shrink-0" />
                   <span className="truncate max-w-[180px] sm:max-w-none">
-                    {lang === 'kn' ? 'ಕೃತಕ ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ' : 'Generated Speech Guidance'}
+                    {lang === 'kn' ? 'AI ಅರ್ಚಕರ ಮಾರ್ಗದರ್ಶನ' : 'AI Priest Guidance'}
                   </span>
                 </>
               )}
@@ -840,8 +845,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                     <div className="flex flex-wrap items-center gap-2">
                       {/* Human Priest Voice Button */}
                       <button
-                        disabled={isCurrentlyBuffering}
                         onClick={() => handlePlayMantra(mantra)}
+                        title={lang === 'kn' ? 'AI ಮೂಲಕ ರಚಿಸಿದ ಮಾಧ್ವ ಅರ್ಚಕರ ಧ್ವನಿ — ಪ್ರತಿ ಪದವನ್ನು ಸ್ಪಷ್ಟವಾಗಿ, ನಿಧಾನವಾಗಿ ಪಠಿಸುತ್ತದೆ' : 'AI-generated Madhwa priest voice — chants slowly, pronouncing each word clearly'}
                         className={`px-4 py-2 rounded-full text-xs font-bold font-sans flex items-center gap-2 transition-all active:scale-95 shadow-md ${
                           isCurrentlyPlaying
                             ? 'bg-[#ff9933] text-[#1a0606] shadow-[0_0_20px_rgba(255,153,51,0.6)]'
@@ -853,7 +858,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                         {isCurrentlyBuffering ? (
                           <>
                             <span className="w-3.5 h-3.5 border-2 border-[#ffd700] border-t-transparent rounded-full animate-spin" />
-                            <span>{lang === 'kn' ? 'ಧ್ವನಿ ಸಿದ್ಧವಾಗುತ್ತಿದೆ...' : 'Preparing Generated Speech...'}</span>
+                            <span>{lang === 'kn' ? 'ಅರ್ಚಕರ ಧ್ವನಿ ಸಿದ್ಧವಾಗುತ್ತಿದೆ… (ಮೊದಲ ಬಾರಿ ಒಂದು ನಿಮಿಷ ಬೇಕಾಗಬಹುದು)' : 'Preparing priest voice… (first time may take a minute)'}</span>
                           </>
                         ) : isCurrentlyPlaying ? (
                           <>
@@ -865,8 +870,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                             <Play className="w-4 h-4 fill-current" />
                             <span>
                               {lang === 'kn'
-                                ? 'ಕೃತಕ ಧ್ವನಿ (ನಿಧಾನ ಪಠಣ)'
-                                : 'Generated Speech (Slow Recitation)'}
+                                ? 'AI ಅರ್ಚಕರ ಧ್ವನಿ (ಪದ-ಪದ ನಿಧಾನ ಪಠಣ)'
+                                : 'AI Priest Voice (slow, word by word)'}
                             </span>
                           </>
                         )}
@@ -1010,6 +1015,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             <ChevronRight className="w-4 h-4 shrink-0" />
           </button>
         </div>
+      </div>
       </div>
 
       {/* 10-Minute Free Mode Mobile Floating Quick Controller */}
