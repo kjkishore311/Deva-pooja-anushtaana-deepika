@@ -177,13 +177,15 @@ export const POOJA_STEPS: PoojaStep[] = [
     durationEstimateMinutes: 3,
     requiredMaterialsKn: ['ಶಂಖ', 'ಉದ್ಧರಣೆ', 'ತುಳಸಿ ದಳ', 'ಶುದ್ಧೋದಕ'],
     requiredMaterialsEn: ['Shankha (Conch)', 'Spoon', 'Tulasi leaves', 'Pure water'],
-    mudras: ['shankha', 'tarkshya'],
+    mudras: ['avahani', 'sthapani', 'sannidhayini', 'sannirodhini', 'sammukhi', 'avagunthana', 'prasada', 'shankha', 'tarkshya'],
     instructionsKn: [
+      'ಮೊದಲು ಶ್ರೀಹರಿಯನ್ನು ಧ್ಯಾನಿಸಿ ಆವಾಹನಾದಿ ಏಳು ಮುದ್ರೆಗಳನ್ನು (ಆವಾಹನೀ, ಸ್ಥಾಪನೀ, ಸಾನ್ನಿಧ್ಯ, ಸನ್ನಿರೋಧ, ಸಮ್ಮುಖ, ಅವಗುಂಠನ, ಪ್ರಸಾದ) ಕ್ರಮವಾಗಿ ತೋರಿಸಿ.',
       'ಶಂಖಕ್ಕೆ "ಹಿರಣ್ಯವರ್ಣಾಂ ಹರಿಣೀಂ..." ಮಂತ್ರದಿಂದ ಅಭಿಷೇಕ ಮಾಡಿ ಜಲವನ್ನು ವಿಸರ್ಜಿಸಿ ವಸ್ತ್ರದಿಂದ ಒರೆಸಿಡಿ.',
       'ಮುಖ್ಯಪ್ರಾಣ ದೇವರಿಗೆ "ಬಲಿತ್ಥಾ ತದ್ವಪುಷೇ..." ಮತ್ತು "ಮಾತರ್ಮೇ ಮಾತರಿಶ್ವನ್..." ಶ್ಲೋಕ ಹೇಳುತ್ತಾ ಅಭಿಷೇಕ ಮಾಡಿ.',
       'ಗರುಡ-ಶೇಷ ದೇವರಿಗೆ "ಗರುಡಾಯ ನಮಃ, ಶೇಷಾಯ ನಮಃ" ಎಂದು ಅಭಿಷೇಕ ಮಾಡಿ.'
     ],
     instructionsEn: [
+      'First meditate on Sri Hari and show the seven Avahanadi mudras in order: Avahani, Sthapani, Sannidhayini, Sannirodhini, Sammukhi, Avagunthana and Prasada.',
       'Purify the conch with water chanting the Sri Sukta opening verse, wipe dry.',
       'Perform Abhisheka to Mukhyaprana vigraha with Balittha Sukta and "Matarme Matarishvan" prayer.',
       'Perform Abhisheka to Garuda and Sesha devaru with their respective mantras.'

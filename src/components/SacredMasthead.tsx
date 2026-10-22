@@ -19,9 +19,9 @@ export const SacredMasthead: React.FC<SacredMastheadProps> = ({ lang }) => {
   ];
 
   const mathaLines = {
-    kn: '॥ ಶ್ರೀಮದ್ ಉತ್ತರಾದಿ ಮಠ ॥',
-    sa: '॥ श्रीमदुत्तरादिमठः ॥',
-    en: 'Shree Uttaradi Matha',
+    kn: '॥ ಶ್ರೀಮದ್ ಉತ್ತರಾದಿ ಮಠ ಸಂಪ್ರದಾಯ ॥',
+    sa: '॥ श्रीमदुत्तरादिमठसम्प्रदायः ॥',
+    en: 'Srimad Uttaradi Matha Sampradaya',
   };
 
   return (
@@ -52,7 +52,7 @@ export const SacredMasthead: React.FC<SacredMastheadProps> = ({ lang }) => {
           </span>
         </div>
 
-        {/* Bottom Line: Shree Uttaradi Matha */}
+        {/* Bottom Line: Srimad Uttaradi Matha Sampradaya */}
         <div className="flex items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-serif font-bold tracking-wider text-[#ff9933]">
           <span className="text-[#ffd700]/80">🪔</span>
           <span>{mathaLines.kn}</span>

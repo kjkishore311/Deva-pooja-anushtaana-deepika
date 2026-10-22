@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { acceptInvite, getUser, handleAuthCallback, login, logout, requestPasswordRecovery, signup, updateUser, type User } from '@netlify/identity';
 import { QRCodeSVG } from 'qrcode.react';
-import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Clock, Copy, Download, Headphones, LockKeyhole, RefreshCw, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Clock, Copy, Download, ExternalLink, Headphones, LockKeyhole, RefreshCw, ShieldCheck } from 'lucide-react';
 import { Language } from '../types';
+import { KrishnaYajurvedaSteps } from './KrishnaYajurvedaSteps';
 import { PaymentService, UPI_RECIPIENT_ID, UPI_RECIPIENT_NAME } from '../services/paymentService';
-import { SANDHYAVANDANE_PRICE, sandhyavandaneAudio, type SandhyavandaneAccess } from '../data/sandhyavandaneData';
+import { SANDHYAVANDANE_PRICE, krishnaYajurvedaSandhyavandane, sandhyavandaneAudio, type SandhyavandaneAccess } from '../data/sandhyavandaneData';
 
 const buttonClass = 'inline-flex items-center justify-center gap-2 rounded-xl bg-[#ffd700] px-5 py-3 text-sm font-bold text-[#250a0a] transition-colors hover:bg-[#ffe77a] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd700]';
 const secondaryClass = 'inline-flex items-center justify-center gap-2 rounded-xl border border-[#ffd700]/30 px-4 py-2.5 text-sm text-[#fef3c7] hover:bg-[#ffd700]/10 disabled:opacity-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd700]';
@@ -29,8 +30,8 @@ export function SandhyavandaneHomeCard({ lang, onOpen }: { lang: Language; onOpe
       <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
         <div>
           <p className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#ffbb66]"><BookOpen size={16} /> {lang === 'kn' ? 'ಸಂಧ್ಯಾವಂದನೆ ಮಾರ್ಗದರ್ಶಿ' : 'Daily Sandhyavandane resources'}</p>
-          <h2 className="font-serif text-2xl text-[#ffd700] sm:text-3xl">{lang === 'kn' ? 'ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ' : 'Rigveda Trikala Sandhyavandane'}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-[#fef3c7]/75">{lang === 'kn' ? 'ಸಂಧ್ಯಾವಂದನೆ ಮತ್ತು ನಾಮ ಮುದ್ರಾ ಧಾರಣೆ PDF ಉಚಿತ. ಆಚಮನದ ಎರಡು ಧ್ವನಿ ಪಾಠಗಳು ₹100ಕ್ಕೆ — ಪಾವತಿ ಪರಿಶೀಲನೆಯ ನಂತರ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ.' : 'Two free PDF guides, plus two Aachamana audio lessons for ₹100. Download the recordings after your payment is reviewed.'}</p>
+          <h2 className="font-serif text-2xl text-[#ffd700] sm:text-3xl">{lang === 'kn' ? 'ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಮತ್ತು ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ' : 'Rigveda Trikala & Krishna Yajurveda Sandhyavandana'}</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-[#fef3c7]/75">{lang === 'kn' ? 'ಋಗ್ವೇದ: ಸಂಧ್ಯಾವಂದನೆ ಮತ್ತು ನಾಮ ಮುದ್ರಾ ಧಾರಣೆ PDF ಉಚಿತ, ಆಚಮನದ ಎರಡು ಧ್ವನಿ ಪಾಠಗಳು ₹100ಕ್ಕೆ. ಕೃಷ್ಣ ಯಜುರ್ವೇದ: ಐದು ಲಿಪಿಗಳಲ್ಲಿ ಹಂತಗಳು, PDF ಮತ್ತು ಸಂಪೂರ್ಣ ಪಠಣ ಧ್ವನಿ ಉಚಿತ.' : 'Rigveda: two free PDF guides plus two Aachamana audio lessons for ₹100. Krishna Yajurveda: free steps in five scripts, PDFs and full recitation audio.'}</p>
         </div>
         <a href="#sandhyavandane" onClick={onOpen} className={buttonClass}>{lang === 'kn' ? 'ಮಾರ್ಗದರ್ಶಿ ತೆರೆಯಿರಿ' : 'Explore resources'}<ArrowRight size={17} /></a>
       </div>
@@ -54,6 +55,7 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
   const [showPayment, setShowPayment] = useState(false);
   const [copied, setCopied] = useState(false);
   const [reviewNotes, setReviewNotes] = useState<Record<string, string>>({});
+  const [veda, setVeda] = useState<'rigveda' | 'yajurveda'>('rigveda');
   const initialized = useRef(false);
   const paymentSection = useRef<HTMLDivElement>(null);
 
@@ -161,10 +163,41 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
       <button onClick={onBack} className={secondaryClass}><ArrowLeft size={16} />{translate('Back to home', 'ಮುಖಪುಟಕ್ಕೆ ಮರಳಿ')}</button>
       <header className="border-b border-[#ffd700]/20 pb-8">
         <p className="mb-3 text-xs uppercase tracking-[0.2em] text-[#ffbb66]">{translate('Study · Listen · Practise', 'ಅಧ್ಯಯನ · ಶ್ರವಣ · ಅಭ್ಯಾಸ')}</p>
-        <h1 className="font-serif text-3xl leading-tight text-[#ffd700] sm:text-4xl">{translate('Rigveda Trikala Sandhyavandane', 'ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ')}</h1>
-        <p className="mt-4 max-w-2xl leading-7 text-[#fef3c7]/75">{translate('Keep the guides for daily reference and learn Aachamana with the two accompanying audio lessons.', 'ದೈನಂದಿನ ಅಭ್ಯಾಸಕ್ಕಾಗಿ ಮಾರ್ಗದರ್ಶಿಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ. ಎರಡು ಧ್ವನಿ ಪಾಠಗಳೊಂದಿಗೆ ಆಚಮನವನ್ನು ಕಲಿಯಿರಿ.')}</p>
+        <h1 className="font-serif text-3xl leading-tight text-[#ffd700] sm:text-4xl">{translate('Sandhyavandana', 'ಸಂಧ್ಯಾವಂದನೆ')}</h1>
+        <p className="mt-4 max-w-2xl leading-7 text-[#fef3c7]/75">{translate('Choose your Veda shakha to open its guides and recordings for daily practice.', 'ದೈನಂದಿನ ಅಭ್ಯಾಸಕ್ಕಾಗಿ ನಿಮ್ಮ ವೇದ ಶಾಖೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮಾರ್ಗದರ್ಶಿಗಳು ಮತ್ತು ಧ್ವನಿ ಪಾಠಗಳನ್ನು ತೆರೆಯಿರಿ.')}</p>
       </header>
 
+      <div role="tablist" aria-label={translate('Sandhyavandana tradition', 'ಸಂಧ್ಯಾವಂದನೆ ಶಾಖೆ')} className="grid gap-3 sm:grid-cols-2">
+        {([
+          { id: 'rigveda', label: translate('a. Trikala Rigveda Sandhyavandana', 'ಅ. ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ'), detail: translate('PDF guides · Aachamana audio', 'PDF ಮಾರ್ಗದರ್ಶಿಗಳು · ಆಚಮನ ಧ್ವನಿ') },
+          { id: 'yajurveda', label: translate('b. Krishna Yajurveda Sandhyavandana', 'ಆ. ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ'), detail: translate('Steps in 5 scripts · Free PDF & audio', '5 ಲಿಪಿಗಳಲ್ಲಿ ಹಂತಗಳು · ಉಚಿತ PDF ಮತ್ತು ಧ್ವನಿ') },
+        ] as const).map((option) => (
+          <button key={option.id} type="button" role="tab" id={`veda-tab-${option.id}`} aria-selected={veda === option.id} aria-controls={`veda-panel-${option.id}`} onClick={() => setVeda(option.id)} className={`rounded-2xl border p-5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd700] ${veda === option.id ? 'border-[#ffd700] bg-[#ffd700]/10' : 'border-[#ffd700]/20 bg-[#250a0a] hover:border-[#ffd700]/50'}`}>
+            <span className="block font-serif text-lg text-[#ffd700]">{option.label}</span>
+            <span className="mt-1 block text-xs text-[#fef3c7]/60">{option.detail}</span>
+          </button>
+        ))}
+      </div>
+
+      {veda === 'yajurveda' && <section id="veda-panel-yajurveda" role="tabpanel" aria-labelledby="veda-tab-yajurveda" className="overflow-hidden rounded-2xl border border-[#ffd700]/30 bg-[#250a0a]">
+        <div className="p-6 sm:p-8">
+          <h2 className="flex items-center gap-2 font-serif text-2xl text-[#ffd700]"><Headphones size={23} />{translate('Krishna Yajurveda Sandhyavandana', 'ಕೃಷ್ಣ ಯಜುರ್ವೇದ ಸಂಧ್ಯಾವಂದನೆ')}</h2>
+          <p className="mt-3 text-sm leading-7 text-[#fef3c7]/75">{translate('Listen to the complete Nitya Sandhya Vandanam in the Krishna Yajurvediya tradition, follow the steps in Kannada, Sanskrit, English, Telugu or Tamil, and download the free PDF. No payment or account is needed.', 'ಕೃಷ್ಣ ಯಜುರ್ವೇದೀಯ ಸಂಪ್ರದಾಯದ ಸಂಪೂರ್ಣ ನಿತ್ಯ ಸಂಧ್ಯಾವಂದನೆಯನ್ನು ಆಲಿಸಿ, ಕನ್ನಡ, ಸಂಸ್ಕೃತ, ಇಂಗ್ಲಿಷ್, ತೆಲುಗು ಅಥವಾ ತಮಿಳಿನಲ್ಲಿ ಹಂತಗಳನ್ನು ಅನುಸರಿಸಿ ಮತ್ತು ಉಚಿತ PDF ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ. ಪಾವತಿ ಅಥವಾ ಖಾತೆ ಅಗತ್ಯವಿಲ್ಲ.')}</p>
+        </div>
+        <div className="space-y-4 border-t border-[#ffd700]/15 px-6 py-6 sm:px-8">
+          <div><h3 className="font-semibold">{krishnaYajurvedaSandhyavandane.title}</h3><p className="mt-1 text-xs text-[#fef3c7]/55">{krishnaYajurvedaSandhyavandane.reciter} · MP3 · {krishnaYajurvedaSandhyavandane.size}</p></div>
+          <audio controls preload="none" src={krishnaYajurvedaSandhyavandane.audioUrl} className="w-full">{translate('Your browser does not support audio playback.', 'ನಿಮ್ಮ ಬ್ರೌಸರ್ ಧ್ವನಿ ಪ್ಲೇಬ್ಯಾಕ್ ಬೆಂಬಲಿಸುವುದಿಲ್ಲ.')}</audio>
+          <div className="flex flex-wrap gap-3">
+            <a href={krishnaYajurvedaSandhyavandane.audioUrl} target="_blank" rel="noopener noreferrer" className={secondaryClass}><Download size={16} />{translate('Open MP3', 'MP3 ತೆರೆಯಿರಿ')}</a>
+            <a href={krishnaYajurvedaSandhyavandane.sourceUrl} target="_blank" rel="noopener noreferrer" className={secondaryClass}><ExternalLink size={16} />{translate('Text & source on Vignanam', 'ವಿಜ್ಞಾನಂನಲ್ಲಿ ಪಠ್ಯ ಮತ್ತು ಮೂಲ')}</a>
+          </div>
+          <p className="text-xs leading-6 text-[#fef3c7]/55">{translate('Audio courtesy of vignanam.org; streamed from its original source.', 'ಧ್ವನಿ ಕೃಪೆ: vignanam.org; ಮೂಲದಿಂದ ನೇರವಾಗಿ ಪ್ರಸಾರ.')}</p>
+        </div>
+        <KrishnaYajurvedaSteps lang={lang} />
+      </section>}
+
+      {veda === 'rigveda' && <div id="veda-panel-rigveda" role="tabpanel" aria-labelledby="veda-tab-rigveda" className="space-y-8">
+      <h2 className="font-serif text-2xl text-[#ffd700] sm:text-3xl">{translate('Rigveda Trikala Sandhyavandane', 'ಋಗ್ವೇದ ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ')}</h2>
       <section aria-labelledby="sandhyavandane-pdfs">
         <div className="mb-4 flex items-center justify-between gap-3"><h2 id="sandhyavandane-pdfs" className="flex items-center gap-2 font-serif text-2xl"><BookOpen size={22} />{translate('Free PDF library', 'ಉಚಿತ PDF ಮಾರ್ಗದರ್ಶಿಗಳು')}</h2><span className="rounded-full border border-emerald-400/30 px-3 py-1 text-xs text-emerald-300">{translate('No payment or account', 'ಪಾವತಿ ಅಥವಾ ಖಾತೆ ಅಗತ್ಯವಿಲ್ಲ')}</span></div>
         <div className="divide-y divide-[#ffd700]/15 rounded-2xl border border-[#ffd700]/20 bg-[#250a0a] px-5 sm:px-7">
@@ -227,6 +260,7 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
           </div>}
         </section>}
       </div>
+      </div>}
 
       {access?.isAdmin && <section className="rounded-2xl border border-[#ff9933]/40 bg-[#250a0a] p-6 sm:p-8" aria-labelledby="payment-review-heading">
         <div className="flex flex-wrap items-center justify-between gap-3"><h2 id="payment-review-heading" className="flex items-center gap-2 font-serif text-2xl text-[#ffd700]"><ShieldCheck size={22} />{translate('Payment approval queue', 'ಪಾವತಿ ಅನುಮೋದನೆ ವಿನಂತಿಗಳು')}</h2><button className={secondaryClass} disabled={busy} onClick={() => void runAction(refreshAccess)}><RefreshCw size={16} />{translate('Refresh', 'ಪರಿಶೀಲಿಸಿ')}</button></div>

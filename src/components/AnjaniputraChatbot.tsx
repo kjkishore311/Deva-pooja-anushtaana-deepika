@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import { Language, PoojaMode, QnAItem } from '../types';
 import { QNA_DATA } from '../data/qnaData';
-import { Language, PoojaMode } from '../types';
 import { useDraggablePanel } from '../hooks/useDraggablePanel';
 
 interface AnjaniputraChatbotProps {
@@ -234,10 +233,6 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
           textEn:
             'Sorry, I could not find a confident answer in my FAQ knowledge base. Please continue in the FAQ section to find the correct guidance.',
           action: { labelKn: 'FAQ ವಿಭಾಗಕ್ಕೆ ಹೋಗಿ', labelEn: 'Open FAQ Section', tab: 'qna' },
-            'ಸುಂದರ ಪ್ರಶ್ನೆ! ಮಧ್ವ ಸಿದ್ಧಾಂತ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿಯಲ್ಲಿ ಶ್ರೀಹರಿಯ ಪೂಜೆಯು ಅತ್ಯುನ್ನತ ಸಾಧನ. ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗೆ ನಮ್ಮ ೧೦ ನಿಮಿಷ ಅಥವಾ ೩೦ ನಿಮಿಷದ ಪೂಜಾ ಮಾರ್ಗದರ್ಶನ ನೋಡಿ, ಅಥವಾ ನಮ್ಮ ಪ್ರಶ್ನೋತ್ತರ ವಿಭಾಗವನ್ನು ಪರಿಶೀಲಿಸಿ!',
-          textEn:
-            'Wonderful question! In Sri Madhvacharya’s tradition, Deva Pooja is the supreme spiritual path. Check our step-by-step 10-min or 30-min guides, or explore our Q&A section for authentic shastric answers!',
-          action: { labelKn: '೧೦ ನಿಮಿಷ ಉಚಿತ ಪೂಜೆ', labelEn: '10-Min Free Pooja', mode: '10min' as PoojaMode },
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         };
       }
@@ -269,7 +264,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
               }`}
               title={lang === 'kn' ? 'ಹಾರಲು ನನ್ನನ್ನು ಮುಟ್ಟಿ!' : 'Tap me to jump!'}
             >
-              <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="w-full h-full rounded-[14px] object-cover select-none" />
+              <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="w-full h-full rounded-[14px] object-cover select-none" />
             </div>
 
             <div>
@@ -349,7 +344,7 @@ export const AnjaniputraChatbot: React.FC<AnjaniputraChatbotProps> = ({
                 className={`flex gap-2.5 items-end ${isBot ? 'justify-start' : 'justify-end'}`}
               >
                 {isBot && (
-                  <img src="/images/vayuputra/hanuman-avatar.jpg" alt="" draggable={false} className="w-8 h-8 rounded-full object-cover ring-1 ring-[#ff9933] shadow-sm shrink-0" />
+                  <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="w-8 h-8 rounded-full object-cover ring-1 ring-[#ff9933] shadow-sm shrink-0" />
                 )}
 
                 <div
