@@ -15,6 +15,8 @@ import { TarkshyadiPanchaMudraWidget } from './TarkshyadiPanchaMudraWidget';
 import { SuktaAbhishekaPlayer } from './SuktaAbhishekaPlayer';
 import { PaidRecordingAccess } from './PaidRecordingAccess';
 import { StepRequirementsWidget } from './StepRequirementsWidget';
+import { MantraRecordingPlayer } from './MantraRecordingPlayer';
+import { PracticalSessionsSection } from './PracticalSessionsSection';
 import {
   Play,
   Pause,
@@ -199,6 +201,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
       return;
     }
 
+    document.querySelectorAll<HTMLAudioElement>('audio[data-pooja-recording]').forEach((el) => el.pause());
+
     const textToChant =
       scriptType === 'kn'
         ? mantra.mantraKannada
@@ -266,7 +270,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                   ? 'ಈ ೩೦ ನಿಮಿಷದ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹150 ಅಥವಾ ₹200 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಇಷ್ಟಾನುಸಾರ ಮೊತ್ತವನ್ನು ಸೇವಾ ದಕ್ಷಿಣೆಯಾಗಿ ಪಾವತಿಸಿ ಸುಧಾ ಪಂಡಿತ ಪೂಜ್ಯ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿಯವರ ೨ ಲೈವ್ ವೀಡಿಯೋಗಳು & ಪ್ರತಿಯೊಂದು ಹಂತದ ಗುರುವಾಣಿ ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.'
                   : `ಈ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹${minPrice} ಸೇವಾ ದಕ್ಷಿಣೆಯನ್ನು ಯಾವುದೇ ಆನ್‌ಲೈನ್ ಪಾವತಿ (Google Pay, UPI, ಕಾರ್ಡ್ ಅಥವಾ ನೆಟ್‌ಬ್ಯಾಂಕಿಂಗ್) ಮೂಲಕ ಪಾವತಿಸಿ.`
                 : mode === '30min'
-                ? 'To unlock this 30-min tier, please submit a dakshina of ₹150 or any amount > ₹200 to access the 2 Master Live Videos and step-by-step pooja guidance. Approved pundit audio for the shlokas is awaiting upload.'
+                ? 'To unlock this 30-min tier, please submit a dakshina of ₹150 or any amount > ₹200 to access the 2 Master Live Videos and step-by-step pooja guidance. Includes pundit recordings for every shloka.'
                 : `To unlock this tier, please submit a dakshina of at least ₹${minPrice} via any online payment method (Google Pay, UPI, Card, or Net Banking).`}
             </p>
           </div>
@@ -282,8 +286,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             </div>
             <p className="text-[11px] text-[#fef3c7]/60 pt-1 border-t border-[#ffd700]/10">
               {lang === 'kn'
-                ? 'ಶೋಡಶೋಪಚಾರ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿ ಲಭ್ಯವಾಗುತ್ತದೆ. ಅನುಮೋದಿತ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣಗಳು ಇನ್ನೂ ಲಭ್ಯವಿಲ್ಲ.'
-                : 'Includes the guided pooja steps. Approved pundit recordings are awaiting upload.'}
+                ? 'ಶೋಡಶೋಪಚಾರ ಹಾಗೂ ತಂತ್ರಸಾರ ಪದ್ಧತಿ ಲಭ್ಯವಾಗುತ್ತದೆ. ಪ್ರತಿ ಶ್ಲೋಕಕ್ಕೂ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣ ಲಭ್ಯವಿದೆ.'
+                : 'Includes the guided pooja steps with pundit recordings for every shloka.'}
             </p>
           </div>
 
@@ -742,8 +746,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
           <div className="space-y-4">
             <p role="note" className="rounded-xl border border-[#ffd700]/20 bg-[#250a0a] px-4 py-3 text-xs leading-relaxed text-[#fef3c7]/80">
               {lang === 'kn'
-                ? 'ಅನುಮೋದಿತ ಪಂಡಿತರ ಶ್ಲೋಕ ಪಠಣದ ಧ್ವನಿಮುದ್ರಣಗಳು ಇನ್ನೂ ಲಭ್ಯವಿಲ್ಲ. ಈಗಿನ ಧ್ವನಿ ಕೃತಕವಾಗಿ ರಚಿಸಲ್ಪಟ್ಟದ್ದು; ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣವಲ್ಲ.'
-                : 'Approved pundit recordings have not been supplied yet. Current speech is generated (with a browser-voice fallback), not a recording of a pundit chanting these shlokas.'}
+                ? 'ಪ್ರತಿ ಶ್ಲೋಕಕ್ಕೂ ವಿದ್ವಾನ್ ಶ್ರೀರಾಮವಿಟ್ಠಲಾಚಾರ್ಯರ (ಜ್ಞಾನಗಮ್ಯ ಪ್ರಸಾರಣ) "ದೇವಪೂಜಾ ಪದ್ಧತಿ" ಧ್ವನಿಮುದ್ರಣ ಲಭ್ಯವಿದೆ. "AI ಅರ್ಚಕರ ಧ್ವನಿ" ಬಟನ್ ಕೃತಕವಾಗಿ ರಚಿಸಿದ ಧ್ವನಿಯನ್ನು ನುಡಿಸುತ್ತದೆ.'
+                : 'Each shloka has a recording from "Deva Pooja Paddhati" recited by Vid. Sriramavittala Achar (JnanaGamya Prasarana). The "AI Priest Voice" button plays generated speech instead.'}
             </p>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
@@ -752,7 +756,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                 </h3>
                 <span className="text-[10px] font-sans font-bold bg-[#ff9933]/20 text-[#ff9933] px-2.5 py-0.5 rounded-full border border-[#ff9933]/40 flex items-center gap-1 shadow-sm">
                   <Sparkles className="w-3 h-3 text-[#ffd700]" />
-                  <span>{lang === 'kn' ? 'ಕೃತಕ ಧ್ವನಿ' : 'Generated Speech'}</span>
+                  <span>{lang === 'kn' ? 'ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣ' : 'Pundit Recordings'}</span>
                 </span>
               </div>
 
@@ -839,6 +843,17 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                       {lang === 'kn' ? mantra.meaningKn : mantra.meaningEn}
                     </p>
                   </div>
+
+                  <MantraRecordingPlayer
+                    key={mantra.id}
+                    mantraId={mantra.id}
+                    lang={lang}
+                    onPlay={() => {
+                      setIsPlayingMantra(false);
+                      setIsBufferingAudio(false);
+                      setActiveMantraId(null);
+                    }}
+                  />
 
                   {/* Human Voice Mantra Audio Chanting Toolbar */}
                   <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2 border-t border-[#ffd700]/10">
@@ -1017,6 +1032,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
         </div>
       </div>
       </div>
+
+      <PracticalSessionsSection lang={lang} />
 
       {/* 10-Minute Free Mode Mobile Floating Quick Controller */}
       {mode === '10min' && (
