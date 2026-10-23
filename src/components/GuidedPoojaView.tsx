@@ -17,6 +17,7 @@ import { PaidRecordingAccess } from './PaidRecordingAccess';
 import { StepRequirementsWidget } from './StepRequirementsWidget';
 import { MantraRecordingPlayer } from './MantraRecordingPlayer';
 import { PracticalSessionsSection } from './PracticalSessionsSection';
+import { PoojaVideoLinks } from './PoojaVideoLinks';
 import {
   Play,
   Pause,
@@ -322,6 +323,9 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
 
   return (
     <div className="max-w-4xl lg:max-w-6xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-5 text-[#fef3c7]">
+      {/* Paid tiers: YouTube videos to watch while performing the pooja, opened in a new tab */}
+      <PoojaVideoLinks lang={lang} mode={mode} isUnlocked={isUnlocked} />
+
       {/* Top Interactive Progress & Step Indicator */}
       <div className="bg-[#250a0a]/80 border border-[#ffd700]/15 rounded-2xl p-4 shadow-xl backdrop-blur-md">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3">
