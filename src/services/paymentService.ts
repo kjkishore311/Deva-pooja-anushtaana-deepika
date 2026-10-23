@@ -9,6 +9,9 @@ export const TIER_PRICING: Record<PoojaMode, number> = {
   'full': 350,
 };
 
+// Contributions above this amount also unlock the Practical Sessions videos.
+export const PRACTICAL_SESSIONS_MIN_AMOUNT = 500;
+
 const STORAGE_KEY_TIERS = 'pooja_unlocked_tiers';
 const STORAGE_KEY_RECORDS = 'pooja_payment_records';
 
@@ -35,6 +38,10 @@ export class PaymentService {
     const unlocked = this.getUnlockedTiers();
     if (unlocked.includes('full')) return true; // Full unlocks everything
     return unlocked.includes(tier);
+  }
+
+  static hasPracticalSessionsAccess(): boolean {
+    return this.getPaymentRecords().some((record) => record.amount > PRACTICAL_SESSIONS_MIN_AMOUNT);
   }
 
   static unlockTier(

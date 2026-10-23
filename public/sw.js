@@ -35,7 +35,7 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
   const pathname = url.pathname;
-  if (pathname.startsWith('/api/') || pathname.startsWith('/.netlify/')) return;
+  if (pathname.startsWith('/api/') || pathname.startsWith('/.netlify/') || pathname.startsWith('/audio/')) return;
   // Navigation request fallback or network first
   if (event.request.mode === 'navigate') {
     event.respondWith(
