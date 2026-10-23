@@ -29,6 +29,7 @@ import { SacredDarshanBand } from './components/SacredDarshanBand';
 import { AnjaniputraLauncher } from './components/AnjaniputraLauncher';
 import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
 import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
+import { UpakarmaDownloadsSection } from './components/UpakarmaDownloadsSection';
 
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
@@ -191,6 +192,9 @@ export default function App() {
               onSelectMode={handleSelectMode}
               unlockedTiers={unlockedTiers}
             />
+
+            {/* 3. Rigveda Upakarma & Yagnopaveeta Dharana free PDFs */}
+            <UpakarmaDownloadsSection lang={lang} />
           </div>
 
           {activeTab === 'pooja' && (

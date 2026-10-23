@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { POOJA_PREPARATION_GROUPS, PreparationMode, SAMAGRI_DATA } from '../data/inventoryData';
 import { Language, SamagriItem } from '../types';
 import { AccessoryGraphic } from './AccessoryGraphic';
@@ -11,12 +11,25 @@ import {
   Share2,
   Copy,
   Layers,
-  HelpCircle,
-  ShoppingBag,
   CheckCircle2,
   Clock3,
   Crown,
+  ClipboardList,
+  Printer,
+  RotateCcw,
 } from 'lucide-react';
+
+const CHECKLIST_STORAGE_KEY = 'pooja-samagri-checklist';
+type ChecklistState = Record<PreparationMode, Record<string, boolean>>;
+
+const loadChecklist = (): ChecklistState => {
+  const empty: ChecklistState = { '10min': {}, '30min': {}, full: {} };
+  try {
+    return { ...empty, ...JSON.parse(localStorage.getItem(CHECKLIST_STORAGE_KEY) || '{}') };
+  } catch {
+    return empty;
+  }
+};
 
 interface MaterialsCheckerProps {
   lang: Language;
@@ -24,16 +37,19 @@ interface MaterialsCheckerProps {
 
 export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
   const [selectedMode, setSelectedMode] = useState<PreparationMode>('10min');
-  const [checkedIds, setCheckedIds] = useState<Record<string, boolean>>({
-    saligrama_idols: true,
-    ghanta: true,
-    deepa_samagri: true,
-    tulasi_dala: true,
-    gandha_akshata: true,
-    naivedya_bhoga: true,
-    madi_vastra: true,
-  });
+  // Each duration keeps its own ticks, saved on this device
+  const [checklist, setChecklist] = useState<ChecklistState>(loadChecklist);
   const [copiedNotification, setCopiedNotification] = useState(false);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(checklist));
+    } catch {
+      // Storage unavailable (private mode); ticks still work for this visit
+    }
+  }, [checklist]);
+
+  const checkedIds = checklist[selectedMode];
 
   const selectedGroup = POOJA_PREPARATION_GROUPS.find((group) => group.mode === selectedMode)!;
   const filteredItems = selectedGroup.itemIds
@@ -41,50 +57,52 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
     .filter((item): item is SamagriItem => Boolean(item));
 
   const toggleCheck = (id: string) => {
-    setCheckedIds((prev) => ({
+    setChecklist((prev) => ({
       ...prev,
-      [id]: !prev[id],
+      [selectedMode]: { ...prev[selectedMode], [id]: !prev[selectedMode][id] },
     }));
   };
 
+  const resetChecklist = () => {
+    setChecklist((prev) => ({ ...prev, [selectedMode]: {} }));
+  };
+
   const missingItems = filteredItems.filter((item) => !checkedIds[item.id]);
+  const readyCount = filteredItems.length - missingItems.length;
+  const groupTitle = lang === 'kn' ? selectedGroup.titleKn : selectedGroup.titleEn;
+  const itemName = (item: SamagriItem) => (lang === 'kn' ? item.nameKn : item.nameEn);
 
-  const handleCopyMissing = () => {
-    if (missingItems.length === 0) return;
+  const buildChecklistText = () => {
+    const lines = filteredItems.map(
+      (item, idx) => `${checkedIds[item.id] ? '✅' : '⬜'} ${idx + 1}. ${itemName(item)}`
+    );
+    const toArrange = missingItems.map(
+      (item) => `• ${itemName(item)} — ${lang === 'kn' ? item.substituteKn : item.substituteEn}`
+    );
+    return lang === 'kn'
+      ? `📋 *${groupTitle} – ಪೂಜಾ ಸಾಮಗ್ರಿ ಪರಿಶೀಲನಾ ಪಟ್ಟಿ* (${readyCount}/${filteredItems.length} ಸಿದ್ಧ)\n\n${lines.join('\n')}${
+          toArrange.length ? `\n\n*ಹೊಂದಿಸಬೇಕಾದವು / ಬದಲಿ:*\n${toArrange.join('\n')}` : '\n\n🙏 ಎಲ್ಲಾ ಸಾಮಗ್ರಿ ಸಿದ್ಧ.'
+        }\n\n_ದೇವಪೂಜಾ ಅನುಷ್ಠಾನ_`
+      : `📋 *${groupTitle} – Pooja Samagri Checklist* (${readyCount}/${filteredItems.length} ready)\n\n${lines.join('\n')}${
+          toArrange.length ? `\n\n*To arrange / substitute:*\n${toArrange.join('\n')}` : '\n\n🙏 All samagri ready.'
+        }\n\n_Deva Pooja Anushtana Companion_`;
+  };
 
-    const listText = missingItems
-      .map(
-        (it, idx) =>
-          `${idx + 1}. ${lang === 'kn' ? it.nameKn : it.nameEn} - (${
-            lang === 'kn' ? it.substituteKn : it.substituteEn
-          })`
-      )
-      .join('\n');
-
-    const fullMessage =
-      lang === 'kn'
-        ? `📋 *ದೇವಪೂಜಾ ಸಾಮಗ್ರಿ ಪಟ್ಟಿ (ಖರೀದಿಸಬೇಕಾದ / ಹೊಂದಿಸಬೇಕಾದ ವಸ್ತುಗಳು)*\n\n${listText}\n\n_ತಂತ್ರಸಾರೋಕ್ತ ಪೂಜಾ ಆ್ಯಪ್_`
-        : `📋 *Pooja Materials Checklist (Items Needed)*\n\n${listText}\n\n_Deva Pooja Anushtana Companion_`;
-
-    navigator.clipboard.writeText(fullMessage);
+  const handleCopyChecklist = () => {
+    navigator.clipboard.writeText(buildChecklistText());
     setCopiedNotification(true);
     setTimeout(() => setCopiedNotification(false), 3000);
   };
 
-  const handleShareWhatsApp = () => {
-    const listText = missingItems
-      .map(
-        (it, idx) =>
-          `${idx + 1}. ${lang === 'kn' ? it.nameKn : it.nameEn}`
-      )
-      .join('\n');
+  // Prints only the final checklist (see .printing-samagri in index.css)
+  const handlePrint = () => {
+    document.body.classList.add('printing-samagri');
+    window.addEventListener('afterprint', () => document.body.classList.remove('printing-samagri'), { once: true });
+    window.print();
+  };
 
-    const msg = encodeURIComponent(
-      lang === 'kn'
-        ? `📋 *ದೇವಪೂಜಾ ಸಾಮಗ್ರಿ ಪಟ್ಟಿ (ಖರೀದಿಸಬೇಕಾದ ವಸ್ತುಗಳು)*:\n\n${listText}\n\nದಯವಿಟ್ಟು ಪೂಜೆಗೆ ತಂದುಕೊಡಿ.`
-        : `📋 *Pooja Samagri Shopping List*:\n\n${listText}\n\nPlease help arrange these for pooja.`
-    );
-    window.open(`https://wa.me/?text=${msg}`, '_blank');
+  const handleShareWhatsApp = () => {
+    window.open(`https://wa.me/?text=${encodeURIComponent(buildChecklistText())}`, '_blank');
   };
 
   return (
@@ -262,38 +280,125 @@ export const MaterialsChecker: React.FC<MaterialsCheckerProps> = ({ lang }) => {
         </div>
       </section>
 
-      {/* Bottom Actions for Missing Items */}
-      {missingItems.length > 0 && (
-        <div className="bg-[#1a0505] border border-[#ffd700]/25 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
-          <div className="text-center sm:text-left">
-            <div className="text-xs font-bold text-[#ff9933] font-sans">
-              {lang === 'kn'
-                ? `ಲಭ್ಯವಿಲ್ಲದ ಸಾಮಗ್ರಿಗಳು: ${missingItems.length} ವಸ್ತುಗಳು`
-                : `Items to Arrange: ${missingItems.length} items`}
+      {/* Final checklist for the selected duration — always shown last */}
+      <section
+        id="samagri-final-checklist"
+        aria-labelledby="final-checklist-heading"
+        className="samagri-print-area rounded-2xl border-2 border-[#ffd700]/40 bg-[#1a0505] p-4 sm:p-5 space-y-4 shadow-lg"
+      >
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-[#ffd700] text-[#3d1111] flex items-center justify-center shrink-0">
+              <ClipboardList className="w-5 h-5" />
             </div>
-            <p className="text-[11px] text-[#fef3c7]/75 font-sans">
-              {lang === 'kn' ? 'ಪೂಜೆಗಾಗಿ ಬೇಕಾದ ವಸ್ತುಗಳ ಪಟ್ಟಿಯನ್ನು ಕಾಪಿ ಮಾಡಿ ಅಥವಾ ಹಂಚಿಕೊಳ್ಳಿ' : 'Copy or share shopping list for easy arrangement'}
-            </p>
+            <div>
+              <h3 id="final-checklist-heading" className="font-serif font-bold text-lg text-[#ffd700]">
+                {lang === 'kn' ? `ಅಂತಿಮ ಪರಿಶೀಲನಾ ಪಟ್ಟಿ – ${groupTitle}` : `Final Checklist – ${groupTitle}`}
+              </h3>
+              <p className="text-[11px] text-[#fef3c7]/70">
+                {lang === 'kn'
+                  ? 'ಪೂಜೆ ಆರಂಭಿಸುವ ಮೊದಲು ಪ್ರತಿಯೊಂದನ್ನೂ ಗುರುತಿಸಿ.'
+                  : 'Tick off every item before you begin the pooja.'}
+              </p>
+            </div>
           </div>
-
-          <div className="flex items-center gap-2 w-full sm:w-auto">
-            <button
-              onClick={handleCopyMissing}
-              className="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl bg-[#250a0a] hover:bg-[#3d1111] text-[#ffd700] border border-[#ffd700]/25 text-xs font-semibold font-sans flex items-center justify-center gap-1.5 active:scale-95 transition-all"
-            >
-              <Copy className="w-3.5 h-3.5" />
-              <span>{copiedNotification ? (lang === 'kn' ? 'ಕಾಪಿ ಮಾಡಲಾಗಿದೆ!' : 'Copied!') : (lang === 'kn' ? 'ಪಟ್ಟಿಯನ್ನು ಕಾಪಿ ಮಾಡಿ' : 'Copy List')}</span>
-            </button>
-            <button
-              onClick={handleShareWhatsApp}
-              className="flex-1 sm:flex-none px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] text-[#1a0606] text-xs font-bold font-sans flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md"
-            >
-              <Share2 className="w-3.5 h-3.5" />
-              <span>{lang === 'kn' ? 'ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ' : 'Share via WhatsApp'}</span>
-            </button>
-          </div>
+          <span className="rounded-full bg-[#ff9933]/15 border border-[#ff9933]/30 px-3 py-1 text-xs font-bold text-[#ffb45c]">
+            {readyCount}/{filteredItems.length} {lang === 'kn' ? 'ಸಿದ್ಧ' : 'ready'}
+          </span>
         </div>
-      )}
+
+        <div
+          className="h-2 w-full overflow-hidden rounded-full bg-[#ffd700]/10"
+          role="progressbar"
+          aria-valuemin={0}
+          aria-valuemax={filteredItems.length}
+          aria-valuenow={readyCount}
+          aria-label={lang === 'kn' ? 'ಸಿದ್ಧತೆಯ ಪ್ರಗತಿ' : 'Preparation progress'}
+        >
+          <div
+            className="h-full bg-gradient-to-r from-[#ff9933] to-[#ffd700] transition-all"
+            style={{ width: `${filteredItems.length ? (readyCount / filteredItems.length) * 100 : 0}%` }}
+          />
+        </div>
+
+        <ol className="divide-y divide-[#ffd700]/10 rounded-xl border border-[#ffd700]/15 bg-[#250a0a]/60">
+          {filteredItems.map((item, idx) => {
+            const isHave = Boolean(checkedIds[item.id]);
+            return (
+              <li key={item.id}>
+                <label className="flex cursor-pointer items-start gap-3 px-3 py-2.5 hover:bg-[#ffd700]/5">
+                  <input
+                    type="checkbox"
+                    checked={isHave}
+                    onChange={() => toggleCheck(item.id)}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[#ff9933]"
+                  />
+                  <span className="min-w-0 flex-1">
+                    <span className={`block text-sm ${isHave ? 'text-[#fef3c7]/60 line-through' : 'text-[#ffeedd] font-semibold'}`}>
+                      {idx + 1}. {itemName(item)}
+                    </span>
+                    {!isHave && item.substituteKn && (
+                      <span className="block text-[11px] text-[#ffb45c]/80">
+                        {lang === 'kn' ? 'ಬದಲಿ: ' : 'Substitute: '}
+                        {lang === 'kn' ? item.substituteKn : item.substituteEn}
+                      </span>
+                    )}
+                  </span>
+                </label>
+              </li>
+            );
+          })}
+        </ol>
+
+        {missingItems.length === 0 ? (
+          <p className="flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-3 py-2 text-sm font-semibold text-emerald-300">
+            <CheckCircle2 className="w-4 h-4" />
+            {lang === 'kn' ? 'ಎಲ್ಲಾ ಸಾಮಗ್ರಿ ಸಿದ್ಧವಾಗಿದೆ. ಪೂಜೆ ಆರಂಭಿಸಿ!' : 'All samagri is ready. You can begin the pooja!'}
+          </p>
+        ) : (
+          <p className="text-xs font-bold text-[#ff9933]">
+            {lang === 'kn'
+              ? `ಹೊಂದಿಸಬೇಕಾದ ಸಾಮಗ್ರಿಗಳು: ${missingItems.length}`
+              : `Items still to arrange: ${missingItems.length}`}
+          </p>
+        )}
+
+        <div className="samagri-print-hide flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={handleCopyChecklist}
+            className="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-[#250a0a] hover:bg-[#3d1111] text-[#ffd700] border border-[#ffd700]/25 text-xs font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+          >
+            <Copy className="w-3.5 h-3.5" />
+            <span>{copiedNotification ? (lang === 'kn' ? 'ಕಾಪಿ ಮಾಡಲಾಗಿದೆ!' : 'Copied!') : (lang === 'kn' ? 'ಪಟ್ಟಿ ಕಾಪಿ ಮಾಡಿ' : 'Copy checklist')}</span>
+          </button>
+          <button
+            type="button"
+            onClick={handlePrint}
+            className="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-[#250a0a] hover:bg-[#3d1111] text-[#ffd700] border border-[#ffd700]/25 text-xs font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+          >
+            <Printer className="w-3.5 h-3.5" />
+            <span>{lang === 'kn' ? 'ಮುದ್ರಿಸಿ' : 'Print'}</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleShareWhatsApp}
+            className="flex-1 sm:flex-none px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] text-[#1a0606] text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            <span>{lang === 'kn' ? 'ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ' : 'Share via WhatsApp'}</span>
+          </button>
+          <button
+            type="button"
+            onClick={resetChecklist}
+            disabled={readyCount === 0}
+            className="px-3.5 py-2 rounded-xl text-[#fef3c7]/70 hover:text-[#ffd700] text-xs font-semibold flex items-center justify-center gap-1.5 disabled:opacity-40"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>{lang === 'kn' ? 'ಮರುಹೊಂದಿಸಿ' : 'Reset'}</span>
+          </button>
+        </div>
+      </section>
     </div>
   );
 };

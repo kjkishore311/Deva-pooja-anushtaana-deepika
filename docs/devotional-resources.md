@@ -46,6 +46,9 @@ Sources were checked on October 12, 2026. Forty-one Sanskrit verses were obtaine
 
 Guru recitations are being supplied in batches and are stored in `public/audio/guru-stuti`. The first batch covers 15 gurus: shlokas 1–3 (Sri Madhwacharya, Sri Padmanabha Tirtha, Sri Narahari Tirtha) and 4–5 (Sri Madhava Tirtha, Sri Akshobhya Tirtha) share their combined recordings, as do Sri Satyasankalpa Tirtha and Sri Satyasanthushta Theertha. Individual recordings were added for Sri Jayateertha, Sri Vagisha Tirtha, Sri Satyavrata, Sri Satyavijaya, Sri Satyapriya, Sri Satyabodha, Sri Satyaparakrama and Sri Satyajnana Tirtha (the file supplied as "Satyagnyaana – 1"). Combined recordings note which other gurus they include. The leading numbers in the supplied file names were treated as album track numbers; "1-3" and "4-5" were mapped to the first five gurus in lineage order. For later batches, copy each file into that folder and set the entry's `audioUrl` in `src/data/madhwaGuruData.ts`; gurus without audio keep the pending notice. When the approved Sri Satyatma Tirtha verse is supplied, populate that entry's three `stuti` fields and record its actual provenance.
 
+## Rigveda Upakarma & Yagnopaveeta Dharana downloads
+
+The landing page has a **Rigveda – Upakarma – Yagnopaveeta Dharana** section with free PDF downloads (no account or payment). The files are in `public/downloads/upakarma`; to add or replace a PDF, put it there and update the list in `src/components/UpakarmaDownloadsSection.tsx`.
 ## Top-of-page darshan band
 
 The golden Hanuman (left) and Garuda (right) figures that flank the band at the top of every page are taken from the Sri Uttaradi Math website header (https://uttaradimath.org) and kept in `public/images/uttaradi-math`. They follow the Math's own arrangement, with both figures facing the centre.

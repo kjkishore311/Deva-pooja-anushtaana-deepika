@@ -42,3 +42,26 @@
   box-shadow: 0 0 20px rgba(255, 153, 51, 0.25);
 }
 
+
+@media print {
+  body.printing-samagri * {
+    visibility: hidden;
+  }
+  body.printing-samagri .samagri-print-area,
+  body.printing-samagri .samagri-print-area * {
+    visibility: visible;
+    color: #000 !important;
+    background: #fff !important;
+    border-color: #999 !important;
+  }
+  body.printing-samagri .samagri-print-area {
+    position: absolute;
+    inset: 0 0 auto 0;
+  }
+  body.printing-samagri main {
+    overflow: visible;
+  }
+  body.printing-samagri .samagri-print-hide {
+    display: none;
+  }
+}
