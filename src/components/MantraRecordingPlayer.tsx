@@ -8,11 +8,12 @@ interface MantraRecordingPlayerProps {
   mantraId: string;
   lang: Language;
   onPlay?: () => void;
+  showVideoLink?: boolean;
 }
 
 const SPEEDS = [0.75, 0.85, 1];
 
-export const MantraRecordingPlayer: React.FC<MantraRecordingPlayerProps> = ({ mantraId, lang, onPlay }) => {
+export const MantraRecordingPlayer: React.FC<MantraRecordingPlayerProps> = ({ mantraId, lang, onPlay, showVideoLink = false }) => {
   const clips = getMantraRecordings(mantraId);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [clipIndex, setClipIndex] = useState(0);
@@ -41,15 +42,17 @@ export const MantraRecordingPlayer: React.FC<MantraRecordingPlayerProps> = ({ ma
           <Headphones className="w-4 h-4" />
           {lang === 'kn' ? 'ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣ ಕೇಳಿ' : 'Listen to the Pundit Recording'}
         </span>
-        <a
-          href={clip.youtubeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 text-[11px] font-sans font-semibold text-[#fef3c7]/70 hover:text-[#ff9933] transition-colors"
-        >
-          <Youtube className="w-3.5 h-3.5 text-red-400" />
-          {lang === 'kn' ? 'ಈ ಭಾಗವನ್ನು YouTube ನಲ್ಲಿ ನೋಡಿ' : 'Watch this part on YouTube'}
-        </a>
+        {showVideoLink && (
+          <a
+            href={clip.youtubeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-[11px] font-sans font-semibold text-[#fef3c7]/70 hover:text-[#ff9933] transition-colors"
+          >
+            <Youtube className="w-3.5 h-3.5 text-red-400" />
+            {lang === 'kn' ? 'ಈ ಭಾಗವನ್ನು YouTube ನಲ್ಲಿ ನೋಡಿ' : 'Watch this part on YouTube'}
+          </a>
+        )}
       </div>
 
       {clips.length > 1 && (

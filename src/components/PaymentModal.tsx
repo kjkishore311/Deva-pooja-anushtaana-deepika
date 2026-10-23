@@ -6,6 +6,7 @@ import {
   UPI_RECIPIENT_ID,
   UPI_RECIPIENT_NAME,
   TIER_PRICING,
+  PRACTICAL_SESSIONS_MIN_AMOUNT,
   PaymentService,
 } from '../services/paymentService';
 import {
@@ -22,6 +23,7 @@ import {
   Receipt,
   Download,
   ArrowLeft,
+  Youtube,
 } from 'lucide-react';
 
 interface PaymentModalProps {
@@ -30,6 +32,7 @@ interface PaymentModalProps {
   lang: Language;
   onClose: () => void;
   onSuccess: (tier: PoojaMode) => void;
+  initialAmount?: number;
 }
 
 export const PaymentModal: React.FC<PaymentModalProps> = ({
@@ -38,11 +41,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   lang,
   onClose,
   onSuccess,
+  initialAmount,
 }) => {
   if (!isOpen) return null;
 
   const minPrice = TIER_PRICING[tier] || 150;
-  const [amount, setAmount] = useState<number>(minPrice);
+  const [amount, setAmount] = useState<number>(Math.max(minPrice, initialAmount ?? minPrice));
+  const practicalUnlockAmount = PRACTICAL_SESSIONS_MIN_AMOUNT + 1;
+  const unlocksPracticalSessions = amount > PRACTICAL_SESSIONS_MIN_AMOUNT;
   const [activeTab, setActiveTab] = useState<'upi' | 'card' | 'netbanking'>('upi');
   const [copied, setCopied] = useState(false);
   const [txnRef, setTxnRef] = useState('');
@@ -81,7 +87,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   const quickAmounts =
     tier === '30min'
       ? [150, 201, 250, 300, 501]
-      : [350, 500, 750, 1000];
+      : [350, 501, 750, 1000];
 
   const upiUrl = PaymentService.generateUpiUrl(tier, amount);
 
@@ -236,6 +242,17 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                 </p>
               </div>
 
+              {successRecord.amount > PRACTICAL_SESSIONS_MIN_AMOUNT && (
+                <div className="max-w-md mx-auto flex items-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-3 text-left text-xs text-emerald-200">
+                  <Youtube className="w-5 h-5 shrink-0 text-red-400" />
+                  <span>
+                    {lang === 'kn'
+                      ? 'ವಿಶೇಷ ಸೌಲಭ್ಯ ಅನ್‌ಲಾಕ್ ಆಗಿದೆ: ಪ್ರಾಯೋಗಿಕ ತರಗತಿಗಳ ವೀಡಿಯೊಗಳು ಪೂಜಾ ಹಂತಗಳ ಕೊನೆಯಲ್ಲಿ ಲಭ್ಯ.'
+                      : 'Special feature unlocked: the Practical Sessions videos are now available at the end of the pooja steps.'}
+                  </span>
+                </div>
+              )}
+
               {/* Receipt Card */}
               <div className="bg-[#140404] border border-[#ffd700]/30 rounded-2xl p-4 text-left font-sans space-y-2.5 max-w-md mx-auto text-xs">
                 <div className="flex items-center justify-between border-b border-[#ffd700]/15 pb-2 text-[#ff9933] font-bold">
@@ -308,6 +325,38 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                   </div>
                 </div>
               </div>
+
+              {/* Promo: contributions above the threshold also unlock the Practical Sessions videos */}
+              <button
+                type="button"
+                onClick={() => setAmount(Math.max(amount, practicalUnlockAmount))}
+                className={`w-full flex items-start gap-3 rounded-2xl border p-3.5 text-left transition-all ${
+                  unlocksPracticalSessions
+                    ? 'border-emerald-400/50 bg-emerald-500/10'
+                    : 'border-dashed border-[#ffd700]/50 bg-[#ffd700]/5 hover:bg-[#ffd700]/10'
+                }`}
+              >
+                <Youtube className="w-6 h-6 shrink-0 text-red-400 mt-0.5" />
+                <span className="space-y-0.5">
+                  <span className="block text-xs font-bold font-sans text-[#ffd700]">
+                    {unlocksPracticalSessions
+                      ? (lang === 'kn' ? '✓ ಪ್ರಾಯೋಗಿಕ ತರಗತಿಗಳು ಸೇರಿವೆ' : '✓ Practical Sessions included')
+                      : (lang === 'kn'
+                          ? `ವಿಶೇಷ ಕೊಡುಗೆ: ₹${PRACTICAL_SESSIONS_MIN_AMOUNT} ಕ್ಕಿಂತ ಹೆಚ್ಚು ಸಮರ್ಪಿಸಿ, ಪ್ರಾಯೋಗಿಕ ತರಗತಿಗಳನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಿ`
+                          : `Special offer: contribute more than ₹${PRACTICAL_SESSIONS_MIN_AMOUNT} to unlock Practical Sessions`)}
+                  </span>
+                  <span className="block text-[11px] font-sans text-[#fef3c7]/70">
+                    {lang === 'kn'
+                      ? '೩ ಪ್ರಾಯೋಗಿಕ YouTube ವೀಡಿಯೊಗಳು — ಸಂಕ್ಷಿಪ್ತ (೩೫ ನಿ), ವಿಸ್ತೃತ (೫೬ ನಿ) ಹಾಗೂ ಗಾಯನ (೬೭ ನಿ) — ನೋಡಿ ಪೂಜೆಯನ್ನು ಸುಲಭವಾಗಿ ಅನುಸರಿಸಿ.'
+                      : '3 YouTube videos of the pooja being performed — concise (35 min), detailed (56 min) and sung (67 min) — to follow along easily.'}
+                    {!unlocksPracticalSessions && (
+                      <span className="ml-1 font-bold text-[#ff9933]">
+                        {lang === 'kn' ? `₹${practicalUnlockAmount} ಆಯ್ಕೆ ಮಾಡಿ →` : `Choose ₹${practicalUnlockAmount} →`}
+                      </span>
+                    )}
+                  </span>
+                </span>
+              </button>
 
               {/* Amount Selection & Custom Dakshina */}
               <div className="space-y-2">

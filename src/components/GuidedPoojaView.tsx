@@ -51,6 +51,8 @@ interface GuidedPoojaViewProps {
   isUnlocked?: boolean;
   onRequestUnlock?: () => void;
   onOpenSupport?: () => void;
+  hasPracticalSessions?: boolean;
+  onRequestPracticalSessions?: () => void;
 }
 
 export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
@@ -63,6 +65,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
   isUnlocked = true,
   onRequestUnlock,
   onOpenSupport,
+  hasPracticalSessions = false,
+  onRequestPracticalSessions,
 }) => {
   // Filter steps based on selected duration mode
   const activeSteps = POOJA_STEPS.filter((step) => step.modes.includes(mode));
@@ -298,6 +302,13 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             <Sparkles className="w-4 h-4" />
             <span>{lang === 'kn' ? `₹${minPrice} ಪಾವತಿಸಿ ಅನ್‌ಲಾಕ್ ಮಾಡಿ` : `Pay ₹${minPrice} to Unlock Now`}</span>
           </button>
+        </div>
+        <div className="mt-5 text-left">
+          <PracticalSessionsSection
+            lang={lang}
+            isUnlocked={hasPracticalSessions}
+            onRequestUnlock={onRequestPracticalSessions}
+          />
         </div>
       </div>
     );
@@ -846,6 +857,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
 
                   <MantraRecordingPlayer
                     key={mantra.id}
+                    showVideoLink={hasPracticalSessions}
                     mantraId={mantra.id}
                     lang={lang}
                     onPlay={() => {
@@ -1033,7 +1045,11 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
       </div>
       </div>
 
-      <PracticalSessionsSection lang={lang} />
+      <PracticalSessionsSection
+        lang={lang}
+        isUnlocked={hasPracticalSessions}
+        onRequestUnlock={onRequestPracticalSessions}
+      />
 
       {/* 10-Minute Free Mode Mobile Floating Quick Controller */}
       {mode === '10min' && (

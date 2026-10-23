@@ -19,7 +19,7 @@ import { AppSupportSection } from './components/AppSupportSection';
 import { SupportModal } from './components/SupportModal';
 import { EmbeddedBackgroundMusicPlayer } from './components/EmbeddedBackgroundMusicPlayer';
 import { PaymentModal } from './components/PaymentModal';
-import { PaymentService } from './services/paymentService';
+import { PaymentService, PRACTICAL_SESSIONS_MIN_AMOUNT } from './services/paymentService';
 import { MudraHandDiagram } from './components/MudraHandDiagram';
 import { PanchaMudraMobileStepper } from './components/PanchaMudraMobileStepper';
 import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraWidget';
@@ -45,6 +45,10 @@ export default function App() {
   );
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [paymentModalTier, setPaymentModalTier] = useState<PoojaMode>('30min');
+  const [paymentModalAmount, setPaymentModalAmount] = useState<number | undefined>(undefined);
+  const [hasPracticalSessions, setHasPracticalSessions] = useState<boolean>(() =>
+    PaymentService.hasPracticalSessionsAccess()
+  );
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [isAnjaniputraOpen, setIsAnjaniputraOpen] = useState(false);
 
@@ -99,12 +103,14 @@ export default function App() {
       setActiveTab('pooja');
     } else {
       setPaymentModalTier(newMode);
+      setPaymentModalAmount(undefined);
       setIsPaymentModalOpen(true);
     }
   };
 
   const handlePaymentSuccess = (tier: PoojaMode) => {
     setUnlockedTiers(PaymentService.getUnlockedTiers());
+    setHasPracticalSessions(PaymentService.hasPracticalSessionsAccess());
     setMode(tier);
     setActiveTab('pooja');
   };
@@ -208,6 +214,13 @@ export default function App() {
               isUnlocked={PaymentService.isTierUnlocked(mode)}
               onRequestUnlock={() => {
                 setPaymentModalTier(mode);
+                setPaymentModalAmount(undefined);
+                setIsPaymentModalOpen(true);
+              }}
+              hasPracticalSessions={hasPracticalSessions}
+              onRequestPracticalSessions={() => {
+                setPaymentModalTier(mode === '10min' ? '30min' : mode);
+                setPaymentModalAmount(PRACTICAL_SESSIONS_MIN_AMOUNT + 1);
                 setIsPaymentModalOpen(true);
               }}
               onOpenSupport={() => setIsSupportModalOpen(true)}
@@ -264,6 +277,7 @@ export default function App() {
       <PaymentModal
         isOpen={isPaymentModalOpen}
         tier={paymentModalTier}
+        initialAmount={paymentModalAmount}
         lang={lang}
         onClose={() => {
           setIsPaymentModalOpen(false);
