@@ -3,6 +3,7 @@ import { acceptInvite, getUser, handleAuthCallback, login, logout, requestPasswo
 import { QRCodeSVG } from 'qrcode.react';
 import { ArrowLeft, ArrowRight, BookOpen, CheckCircle2, Clock, Copy, Download, ExternalLink, Headphones, LockKeyhole, RefreshCw, ShieldCheck } from 'lucide-react';
 import { Language } from '../types';
+import { UpakarmaDownloadsSection } from './UpakarmaDownloadsSection';
 import { KrishnaYajurvedaSteps } from './KrishnaYajurvedaSteps';
 import { PaymentService, UPI_RECIPIENT_ID, UPI_RECIPIENT_NAME } from '../services/paymentService';
 import { SANDHYAVANDANE_PRICE, krishnaYajurvedaSandhyavandane, sandhyavandaneAudio, type SandhyavandaneAccess } from '../data/sandhyavandaneData';
@@ -163,8 +164,8 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
       <button onClick={onBack} className={secondaryClass}><ArrowLeft size={16} />{translate('Back to home', 'ಮುಖಪುಟಕ್ಕೆ ಮರಳಿ')}</button>
       <header className="border-b border-[#ffd700]/20 pb-8">
         <p className="mb-3 text-xs uppercase tracking-[0.2em] text-[#ffbb66]">{translate('Study · Listen · Practise', 'ಅಧ್ಯಯನ · ಶ್ರವಣ · ಅಭ್ಯಾಸ')}</p>
-        <h1 className="font-serif text-3xl leading-tight text-[#ffd700] sm:text-4xl">{translate('Sandhyavandana', 'ಸಂಧ್ಯಾವಂದನೆ')}</h1>
-        <p className="mt-4 max-w-2xl leading-7 text-[#fef3c7]/75">{translate('Choose your Veda shakha to open its guides and recordings for daily practice.', 'ದೈನಂದಿನ ಅಭ್ಯಾಸಕ್ಕಾಗಿ ನಿಮ್ಮ ವೇದ ಶಾಖೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮಾರ್ಗದರ್ಶಿಗಳು ಮತ್ತು ಧ್ವನಿ ಪಾಠಗಳನ್ನು ತೆರೆಯಿರಿ.')}</p>
+        <h1 className="font-serif text-3xl leading-tight text-[#ffd700] sm:text-4xl">{translate('Trikala Sandhyavandane', 'ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ')}</h1>
+        <p className="mt-4 max-w-2xl leading-7 text-[#fef3c7]/75">{translate('Choose your Veda shakha to open its guides and recordings for daily practice. Upakarma and Yajnopaveeta Dharana guides are further below.', 'ದೈನಂದಿನ ಅಭ್ಯಾಸಕ್ಕಾಗಿ ನಿಮ್ಮ ವೇದ ಶಾಖೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮಾರ್ಗದರ್ಶಿಗಳು ಮತ್ತು ಧ್ವನಿ ಪಾಠಗಳನ್ನು ತೆರೆಯಿರಿ. ಉಪಾಕರ್ಮ ಹಾಗೂ ಯಜ್ಞೋಪವೀತ ಧಾರಣೆಯ ಮಾರ್ಗದರ್ಶಿಗಳು ಕೆಳಗಿವೆ.')}</p>
       </header>
 
       <div role="tablist" aria-label={translate('Sandhyavandana tradition', 'ಸಂಧ್ಯಾವಂದನೆ ಶಾಖೆ')} className="grid gap-3 sm:grid-cols-2">
@@ -261,6 +262,9 @@ export function SandhyavandaneSection({ lang, onBack }: { lang: Language; onBack
         </section>}
       </div>
       </div>}
+
+      {/* Yajnopaveeta Dharana belongs with Trikala Sandhyavandane */}
+      <UpakarmaDownloadsSection lang={lang} />
 
       {access?.isAdmin && <section className="rounded-2xl border border-[#ff9933]/40 bg-[#250a0a] p-6 sm:p-8" aria-labelledby="payment-review-heading">
         <div className="flex flex-wrap items-center justify-between gap-3"><h2 id="payment-review-heading" className="flex items-center gap-2 font-serif text-2xl text-[#ffd700]"><ShieldCheck size={22} />{translate('Payment approval queue', 'ಪಾವತಿ ಅನುಮೋದನೆ ವಿನಂತಿಗಳು')}</h2><button className={secondaryClass} disabled={busy} onClick={() => void runAction(refreshAccess)}><RefreshCw size={16} />{translate('Refresh', 'ಪರಿಶೀಲಿಸಿ')}</button></div>

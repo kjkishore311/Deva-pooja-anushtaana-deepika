@@ -68,8 +68,8 @@ export const SupportModal: React.FC<SupportModalProps> = ({
 
             <p className="text-xs text-[#fef3c7]/75 font-sans leading-relaxed">
               {lang === 'kn'
-                ? 'ಆ್ಯಪ್ ವೈಶಿಷ್ಟ್ಯಗಳು, ಆವೃತ್ತಿಗಳ ವಿವರ, ಬಳಕೆ ವಿಧಾನ ಹಾಗೂ ಯಾವುದೇ ಸ್ಪಷ್ಟೀಕರಣಕ್ಕಾಗಿ ಸಂಪರ್ಕಿಸಿ.'
-                : 'Contact for queries, app clarification, feature assistance, and general technical guidance.'}
+                ? 'ಆ್ಯಪ್ ವೈಶಿಷ್ಟ್ಯಗಳು, ಆವೃತ್ತಿಗಳ ವಿವರ, ಬಳಕೆ ವಿಧಾನ, ಯಾವುದೇ ಸ್ಪಷ್ಟೀಕರಣ ಹಾಗೂ ಜಾಲತಾಣದ ಸುಧಾರಣೆಗೆ ನಿಮ್ಮ ಸಲಹೆಗಳಿಗಾಗಿ ಸಂಪರ್ಕಿಸಿ.'
+                : 'Contact for queries, app clarification, feature assistance, and any suggestions or improvements for this website.'}
             </p>
 
             {/* Actions */}

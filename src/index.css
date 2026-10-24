@@ -65,3 +65,16 @@
     display: none;
   }
 }
+
+/* Purpose ticker in the heading: the text is repeated twice so the loop is seamless */
+@keyframes purpose-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.purpose-ticker-track {
+  animation: purpose-ticker 45s linear infinite;
+}
+.purpose-ticker:hover .purpose-ticker-track,
+.purpose-ticker:focus-within .purpose-ticker-track {
+  animation-play-state: paused;
+}

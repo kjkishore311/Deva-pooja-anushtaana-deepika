@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Flame, ChevronRight, Flower2, ChevronDown, ChevronUp } from 'lucide-react';
+import React from 'react';
+import { Flame, ChevronRight, Flower2 } from 'lucide-react';
 import { Language } from '../types';
 
 interface WelcomeBannerProps {
@@ -8,8 +8,6 @@ interface WelcomeBannerProps {
 }
 
 export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ lang, onStartPooja }) => {
-  const [showSwamijiFull, setShowSwamijiFull] = useState(false);
-
   return (
     <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#2a0c0c] via-[#1e0707] to-[#140404] border border-[#ffd700]/30 p-3.5 sm:p-5 shadow-xl text-[#fef3c7]">
       {/* Subtle Aura */}
@@ -71,28 +69,8 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ lang, onStartPooja
             </div>
           </div>
 
-          <button
-            onClick={() => setShowSwamijiFull(!showSwamijiFull)}
-            className="text-[10px] text-[#ff9933] hover:text-[#ffd700] font-sans flex items-center gap-1 shrink-0 ml-auto"
-          >
-            <span>{showSwamijiFull ? (lang === 'kn' ? 'ಸಂಕ್ಷಿಪ್ತಗೊಳಿಸಿ' : 'Show Less') : (lang === 'kn' ? 'ಶ್ರೀಗಳವರ ಸಂದೇಶ' : "Swamiji's Benediction")}</span>
-            {showSwamijiFull ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-          </button>
         </div>
 
-        {/* Expandable Swamiji Full Guidance (Only when user taps "ಶ್ರೀಗಳವರ ಸಂದೇಶ", zero scroll pollution by default) */}
-        {showSwamijiFull && (
-          <div className="bg-[#1a0505] border border-[#ffd700]/20 rounded-xl p-3 text-xs text-[#fef3c7]/90 font-sans space-y-1.5 animate-fade-in">
-            <div className="font-bold text-[#ffd700] flex items-center gap-1.5 font-serif">
-              <span>॥ ಶ್ರೀ ಸತ್ಯಾತ್ಮ ತೀರ್ಥ ಶ್ರೀಪಾದಂಗಳವರ ದೇವಪೂಜಾ ಸಂದೇಶ ॥</span>
-            </div>
-            <p className="leading-relaxed">
-              {lang === 'kn'
-                ? 'ಶ್ರೀಮನ್ ಮಧ್ವಾಚಾರ್ಯರ ತಂತ್ರಸಾರ ಸಂಗ್ರಹೋಕ್ತ ದೇವಪೂಜೆಯು ಕೇವಲ ದೈನಂದಿನ ಕರ್ಮವಲ್ಲ; ಅದು ಸಕಲ ಪಾಪಗಳನ್ನು ಕಳೆದು ಬಿಂಬಮೂರ್ತಿ ಶ್ರೀಹರಿಯ ಅನುಗ್ರಹವನ್ನು ಪಡೆಯುವ ಪರಮೋಚ್ಚ ಸಾಧನ. ಪ್ರತಿಯೊಬ್ಬ ಸದ್ಭಕ್ತನೂ ಶ್ರದ್ಧೆಯಿಂದ, ಪುರುಷ-ಶ್ರೀ ಸೂಕ್ತ ಮಂತ್ರ, ಶಂಖೋದಕ ಹಾಗೂ ತುಳಸೀ ದಳಗಳಿಂದ ಶ್ರೀ ಸಾಲಿಗ್ರಾಮ-ಮೂರ್ತಿಗಳನ್ನು ಅರ್ಚಿಸಿದಾಗ ಆ ಗೃಹದಲ್ಲಿ ಶಾಂತಿ, ಆಯುಷ್ಯ ಮತ್ತು ಸಕಲ ಮಂಗಳಗಳು ನೆಲೆಸುತ್ತವೆ.'
-                : "Deva Pooja as codified in Sri Madhvacharya's Tantrasara Sangraha is the supreme pathway to worship Lord Sri Hari. Worshiping the consecrated Saligramas daily with Vedic Suktas, sanctified Shankhodaka, and sacred Tulasi blesses the home with peace, health, and supreme grace."}
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );
