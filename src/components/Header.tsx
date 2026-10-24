@@ -53,7 +53,23 @@ export const Header: React.FC<HeaderProps> = ({
       <SacredMasthead lang={lang} />
 
       {/* Center-Aligned App Name Block */}
-      <div className="max-w-6xl mx-auto px-3 pt-2.5 pb-1.5 text-center">
+      <div className="relative max-w-6xl mx-auto px-12 sm:px-36 pt-2.5 pb-1.5 text-center">
+        {/* Vayu putra Chatbot: fixed at the far right of the heading */}
+        {onOpenAnjaniputra && (
+          <button
+            id="btn-open-anjaniputra-header"
+            type="button"
+            onClick={onOpenAnjaniputra}
+            className="absolute right-2 sm:right-3 top-2.5 p-1 sm:px-3 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ff9933] to-[#ffd700] hover:from-[#ffaa44] hover:to-[#ffe055] text-[#1a0606] font-bold text-xs flex items-center gap-1.5 border border-[#ffd700] shadow-[0_0_12px_rgba(255,153,51,0.4)] active:scale-95 transition-all group"
+            title={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್ ಮಾರ್ಗದರ್ಶಿ' : 'Vayu putra Guide Chatbot'}
+            aria-label={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ತೆರೆಯಿರಿ' : 'Open Vayu putra'}
+          >
+            <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="h-7 w-7 sm:h-5 sm:w-5 rounded-full object-cover ring-1 ring-[#1a0606]/40 group-hover:scale-110 transition-transform" />
+            <span className="hidden sm:inline font-sans font-bold">
+              {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
+            </span>
+          </button>
+        )}
         <h1>
           <button
             type="button"
@@ -84,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({
         </p>
       </div>
 
-      {/* Options Row Below App Name: Centered with Darshan, Pooja, Music, Language and Vayu putra */}
+      {/* Options Row Below App Name: Centered with Darshan, Pooja, Music and Language */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-1.5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 border-t border-[#ffd700]/10">
         {/* Darshan Trigger */}
         {onOpenDarshan && (
@@ -165,20 +181,6 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </div>
 
-        {/* Vayu putra Chatbot Quick Access */}
-        {onOpenAnjaniputra && (
-          <button
-            id="btn-open-anjaniputra-header"
-            onClick={onOpenAnjaniputra}
-            className="px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ff9933] to-[#ffd700] hover:from-[#ffaa44] hover:to-[#ffe055] text-[#1a0606] font-bold text-xs flex items-center gap-1.5 border border-[#ffd700] shadow-[0_0_12px_rgba(255,153,51,0.4)] active:scale-95 transition-all group shrink-0"
-            title={lang === 'kn' ? 'ವಾಯುಪುತ್ರ ಚಾಟ್‌ಬಾಟ್ ಮಾರ್ಗದರ್ಶಿ' : 'Vayu putra Guide Chatbot'}
-          >
-            <img src="/images/vayuputra/hanuman-sanjeevini-avatar.jpg" alt="" draggable={false} className="h-5 w-5 rounded-full object-cover ring-1 ring-[#1a0606]/40 group-hover:scale-125 transition-transform" />
-            <span className="font-sans font-bold">
-              {lang === 'kn' ? 'ವಾಯುಪುತ್ರ' : 'Vayu putra'}
-            </span>
-          </button>
-        )}
       </div>
 
       {/* Ritual Mode Bar - ONLY VISIBLE WHEN USER CLICKS ON DEVAPOOJA BUTTON */}
