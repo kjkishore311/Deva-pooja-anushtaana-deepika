@@ -10,7 +10,8 @@ import {
   HelpCircle,
   Sparkles,
   Menu,
-  ChevronLeft
+  ChevronLeft,
+  BookOpen
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -33,6 +34,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       labelKn: 'ಮಧ್ವ ಗುರು ಸ್ತುತಿ',
       labelEn: 'Guru Stuti',
       icon: Scroll,
+    },
+    {
+      id: 'mantra-stotra' as TabType,
+      labelKn: 'ಮಂತ್ರ ಸ್ತೋತ್ರ ಸಂಗ್ರಹ',
+      labelEn: 'Mantra Stotra',
+      icon: BookOpen,
     },
     {
       id: 'sandhyavandane' as TabType,

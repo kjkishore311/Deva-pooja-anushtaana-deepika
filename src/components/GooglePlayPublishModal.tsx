@@ -328,7 +328,7 @@ export const GooglePlayPublishModal: React.FC<GooglePlayPublishModalProps> = ({
     {
       "name": "೩೦ ನಿಮಿಷ ಪೂಜೆ (30 Min Pooja)",
       "short_name": "30m Pooja",
-      "description": "Standard 30-Minute Pooja with Sudha Pandita Videos",
+      "description": "Standard 30-Minute Pooja with Ati Sankshipta YouTube videos",
       "url": "/?mode=30min"
     },
     {

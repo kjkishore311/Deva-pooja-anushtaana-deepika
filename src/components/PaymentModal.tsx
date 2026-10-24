@@ -71,17 +71,17 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
   const tierTitleEn =
     tier === '30min'
-      ? '30-Min Daily Pooja & Sudha Pandita Master Videos'
+      ? '30-Min Daily Pooja & Ati Sankshipta Videos'
       : 'Complete Tantrasara Sangraha Paddhati';
 
   const tierDescKn =
     tier === '30min'
-      ? 'ಸುಧಾ ಪಂಡಿತ ಪೂಜ್ಯ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿಯವರ ೨ ಲೈವ್ ವೀಡಿಯೋಗಳು & ಪ್ರತಿಯೊಂದು ಹಂತಕ್ಕೂ ಪೂಜ್ಯರ ಅಧಿಕೃತ ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ'
+      ? 'ಅತಿ ಸಂಕ್ಷಿಪ್ತ ದೇವಪೂಜೆಯ ೩ YouTube ವೀಡಿಯೊಗಳು & ಪ್ರತಿ ಶ್ಲೋಕಕ್ಕೂ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣ'
       : 'ಮಧ್ವಾಚಾರ್ಯರ ತಂತ್ರಸಾರ ಮಂತ್ರಗಳು, ವಿಧಿ-ವಿಧಾನಗಳು, ಋಷಿ-ನ್ಯಾಸ, ಸೂಕ್ತಗಳು ಹಾಗೂ ಆಚಾರ್ಯರ ಪೂರ್ಣ ಶ್ರವಣ';
 
   const tierDescEn =
     tier === '30min'
-      ? 'Unlock 2 Master Videos by Sudha Pandita Shri Venugopalacharya Joshi + Authentic Priest Voice guidance for every step'
+      ? 'Unlock the 3 Ati Sankshipta Deva Pooja YouTube videos + pundit recordings for every shloka'
       : 'Complete Tantrasara Vedic Mantras, Nyasas, Purusha & Sri Suktas, and in-depth Priest Recitation';
 
   const quickAmounts =
@@ -390,8 +390,8 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                 {tier === '30min' && (
                   <p className="text-[11px] text-[#ffd700]/80 font-sans italic bg-[#250a0a] p-2 rounded-xl border border-[#ffd700]/15">
                     {lang === 'kn'
-                      ? 'ಆಯ್ಕೆ: ಕನಿಷ್ಠ ₹150 ಅಥವಾ ₹200 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಇಷ್ಟಾನುಸಾರ ಸೇವಾ ದಕ್ಷಿಣೆ (ಉದಾ: ₹201, ₹250, ₹300, ₹501) ಪಾವತಿಸಿ ಆಚಾರ್ಯರ ೨ ಲೈವ್ ವೀಡಿಯೋ & ಪ್ರತಿಯೊಂದು ಹಂತದ ಧ್ವನಿ ಶ್ರವಣ ಪಡೆಯಿರಿ.'
-                      : 'Option: Pay base ₹150 or any voluntary amount > ₹200 (e.g. ₹201, ₹250, ₹300, ₹501) to unlock Sudha Pandita’s 2 Master Videos & voice for every step.'}
+                      ? 'ಆಯ್ಕೆ: ಕನಿಷ್ಠ ₹150 ಅಥವಾ ₹200 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಇಷ್ಟಾನುಸಾರ ಸೇವಾ ದಕ್ಷಿಣೆ (ಉದಾ: ₹201, ₹250, ₹300, ₹501) ಪಾವತಿಸಿ ಅತಿ ಸಂಕ್ಷಿಪ್ತ ದೇವಪೂಜೆಯ YouTube ವೀಡಿಯೊಗಳು & ಪ್ರತಿ ಶ್ಲೋಕದ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣ ಪಡೆಯಿರಿ.'
+                      : 'Option: Pay base ₹150 or any voluntary amount > ₹200 (e.g. ₹201, ₹250, ₹300, ₹501) to unlock the Ati Sankshipta YouTube videos & pundit recordings for every shloka.'}
                   </p>
                 )}
 
