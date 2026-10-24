@@ -169,10 +169,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
     }, 1100);
   };
 
+  // The parent closes the modal and opens the unlocked pooja; calling onClose here
+  // would send the user back to the main page instead.
   const handleFinishAndOpen = () => {
     onSuccess(tier);
-    onClose();
   };
+
+  // Once payment is confirmed, dismissing the modal still opens the unlocked pooja.
+  const handleDismiss = successRecord ? handleFinishAndOpen : onClose;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md">
@@ -182,7 +186,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
           {/* Prominent Golden Top Back Button */}
           <button
             id="btn-payment-modal-top-back"
-            onClick={onClose}
+            onClick={handleDismiss}
             className="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] hover:from-[#ffaa44] hover:to-[#ffe055] text-[#1a0606] font-bold text-xs sm:text-sm font-sans flex items-center gap-1.5 shadow-[0_0_15px_rgba(255,153,51,0.5)] border border-[#ffd700] transition-all active:scale-95 shrink-0"
             title={lang === 'kn' ? 'ಹಿಂದಕ್ಕೆ ಹೋಗಿ (Back to Main Menu)' : 'Back to Main Menu'}
           >
@@ -214,7 +218,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
           </div>
 
           <button
-            onClick={onClose}
+            onClick={handleDismiss}
             className="p-2 rounded-xl bg-[#250a0a] hover:bg-[#3d1111] text-[#fef3c7]/70 hover:text-[#ffd700] border border-[#ffd700]/20 transition-all shrink-0"
             title={lang === 'kn' ? 'ಮುಚ್ಚಿ' : 'Close'}
           >

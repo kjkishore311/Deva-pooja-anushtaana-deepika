@@ -26,7 +26,6 @@ import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraW
 import { AnjaniputraChatbot } from './components/AnjaniputraChatbot';
 import { SandhyavandaneSection } from './components/SandhyavandaneSection';
 import { SacredDarshanBand } from './components/SacredDarshanBand';
-import { AnjaniputraLauncher } from './components/AnjaniputraLauncher';
 import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
 import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
 import { UpakarmaDownloadsSection } from './components/UpakarmaDownloadsSection';
@@ -112,7 +111,10 @@ export default function App() {
     setUnlockedTiers(PaymentService.getUnlockedTiers());
     setHasPracticalSessions(PaymentService.hasPracticalSessionsAccess());
     setMode(tier);
+    setIsPaymentModalOpen(false);
     setActiveTab('pooja');
+    // Land at the top of the pooja, where the paid video links are shown.
+    window.scrollTo(0, 0);
   };
 
   const handleOpenMudraModal = (mudraId?: string) => {
@@ -274,6 +276,7 @@ export default function App() {
       />
 
       {/* Online Dakshina & Payment Modal for 30-min (₹150+) & Complete Tantrasara (₹350+) */}
+      {isPaymentModalOpen && (
       <PaymentModal
         isOpen={isPaymentModalOpen}
         tier={paymentModalTier}
@@ -285,6 +288,7 @@ export default function App() {
         }}
         onSuccess={handlePaymentSuccess}
       />
+      )}
 
       {/* Embedded Sri Madhwarayara Devataarchane Background Music Player with toggle */}
       <EmbeddedBackgroundMusicPlayer
@@ -321,7 +325,6 @@ export default function App() {
         onNavigateToTab={(tab) => setActiveTab(tab as TabType)}
         onSelectMode={handleSelectMode}
       />
-      <AnjaniputraLauncher lang={lang} visible={!isAnjaniputraOpen} onOpen={() => setIsAnjaniputraOpen(true)} />
 
       {/* Mobile / Tablet Left-Aligned Navigation Bar */}
       <div className="lg:hidden">
