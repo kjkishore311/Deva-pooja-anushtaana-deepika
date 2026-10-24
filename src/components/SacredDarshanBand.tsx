@@ -11,10 +11,10 @@ type Size = 'side' | 'guru' | 'center';
 // The golden Hanuman and Garuda follow the Sri Uttaradi Math website header, both facing the centre.
 const figures: { src: string; nameKn: string; nameEn: string; size: Size; position: string }[] = [
   { src: '/images/uttaradi-math/hanuman-golden.png', nameKn: 'ಶ್ರೀ ಹನುಮಂತ ದೇವರು', nameEn: 'Sri Hanumantha Devaru', size: 'side', position: 'center' },
-  { src: '/images/gurus/sri-satyatma-tirtha.jpg', nameKn: 'ಶ್ರೀ ಸತ್ಯಾತ್ಮ ತೀರ್ಥರು', nameEn: 'Sri Satyatma Tirtharu', size: 'guru', position: 'center 15%' },
+  { src: '/images/gurus/sri-satyatma-tirtha-peetha.jpg', nameKn: 'ಶ್ರೀ ಸತ್ಯಾತ್ಮ ತೀರ್ಥರು', nameEn: 'Sri Satyatma Tirtharu', size: 'guru', position: 'center 25%' },
   { src: '/images/FB_IMG_1787384814245.jpg', nameKn: 'ಶ್ರೀ ಮೂಲರಾಮ ದೇವರು', nameEn: 'Sri Moola Rama Devaru', size: 'center', position: 'center 45%' },
   { src: '/images/FB_IMG_1786024569171.jpg', nameKn: 'ಶ್ರೀ ನರಸಿಂಹ ದೇವರು', nameEn: 'Sri Narasimha Devaru', size: 'center', position: 'center 20%' },
-  { src: '/images/gurus/sri-satyapramoda-tirtha.jpg', nameKn: 'ಶ್ರೀ ಸತ್ಯಪ್ರಮೋದ ತೀರ್ಥರು', nameEn: 'Sri Satyapramoda Tirtharu', size: 'guru', position: 'center 40%' },
+  { src: '/images/gurus/sri-satyapramoda-tirtha-portrait.png', nameKn: 'ಶ್ರೀ ಸತ್ಯಪ್ರಮೋದ ತೀರ್ಥರು', nameEn: 'Sri Satyapramoda Tirtharu', size: 'guru', position: 'center 30%' },
   { src: '/images/uttaradi-math/garuda-golden.png', nameKn: 'ಶ್ರೀ ಗರುಡದೇವರು', nameEn: 'Sri Garuda Devaru', size: 'side', position: 'center' },
 ];
 

@@ -24,13 +24,6 @@ const UPAKARMA_DOCUMENTS = [
     pages: 6,
     size: '243 KB',
   },
-  {
-    file: 'mantrastotra-sangraha-kannada-2024.pdf',
-    nameEn: 'Mantrastotra Sangraha (Kannada, 2024)',
-    nameKn: 'ಮಂತ್ರಸ್ತೋತ್ರ ಸಂಗ್ರಹ (ಕನ್ನಡ, ೨೦೨೪)',
-    pages: 288,
-    size: '2.0 MB',
-  },
 ];
 
 export const UpakarmaDownloadsSection: React.FC<{ lang: Language }> = ({ lang }) => {

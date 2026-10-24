@@ -5,7 +5,6 @@ import { MUDRAS_DATA } from '../data/mudrasData';
 import { audioSynth } from '../services/audioSynth';
 import { humanAudioChanter } from '../services/humanAudioChanter';
 import confetti from 'canvas-confetti';
-import { SudhaPanditaMasterVideosPlayer } from './SudhaPanditaMasterVideosPlayer';
 import {
   AbhishekaWatersProtocol,
   NaivedyaServingProtocol,
@@ -16,6 +15,7 @@ import { SuktaAbhishekaPlayer } from './SuktaAbhishekaPlayer';
 import { PaidRecordingAccess } from './PaidRecordingAccess';
 import { StepRequirementsWidget } from './StepRequirementsWidget';
 import { MantraRecordingPlayer } from './MantraRecordingPlayer';
+import { getMantraRecordings } from '../data/poojaRecordings';
 import { PracticalSessionsSection } from './PracticalSessionsSection';
 import { PoojaVideoLinks } from './PoojaVideoLinks';
 import {
@@ -160,6 +160,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
     setIsNarratingStep(true);
     await humanAudioChanter.chant(fullText, {
       mantraId: `guidance_${currentStep.id}_${lang}`,
+      lang,
       speed: 'slow',
       playbackRate: 0.85,
       onStart: () => setIsNarratingStep(true),
@@ -224,7 +225,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
 
     await humanAudioChanter.chant(textToChant, {
       mantraId: mantra.id,
-      lang: scriptType === 'kn' ? 'kn' : 'sa',
+      lang: scriptType,
       speed: chantSpeed <= 0.75 ? 'very-slow' : 'slow',
       playbackRate: chantSpeed,
       repeatCount: loopCount,
@@ -272,10 +273,10 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             <p className="text-sm text-[#fef3c7]/80 font-sans mt-2 max-w-md mx-auto">
               {lang === 'kn'
                 ? mode === '30min'
-                  ? 'ಈ ೩೦ ನಿಮಿಷದ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹150 ಅಥವಾ ₹200 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಇಷ್ಟಾನುಸಾರ ಮೊತ್ತವನ್ನು ಸೇವಾ ದಕ್ಷಿಣೆಯಾಗಿ ಪಾವತಿಸಿ ಸುಧಾ ಪಂಡಿತ ಪೂಜ್ಯ ಶ್ರೀ ವೇಣುಗೋಪಾಲಾಚಾರ್ಯ ಜೋಶಿಯವರ ೨ ಲೈವ್ ವೀಡಿಯೋಗಳು & ಪ್ರತಿಯೊಂದು ಹಂತದ ಗುರುವಾಣಿ ಧ್ವನಿ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.'
+                  ? 'ಈ ೩೦ ನಿಮಿಷದ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹150 ಅಥವಾ ₹200 ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಇಷ್ಟಾನುಸಾರ ಮೊತ್ತವನ್ನು ಸೇವಾ ದಕ್ಷಿಣೆಯಾಗಿ ಪಾವತಿಸಿ ಅತಿ ಸಂಕ್ಷಿಪ್ತ ದೇವಪೂಜೆಯ ೩ YouTube ವೀಡಿಯೊಗಳು & ಪ್ರತಿ ಶ್ಲೋಕದ ಪಂಡಿತರ ಧ್ವನಿಮುದ್ರಣ ಪಡೆಯಿರಿ.'
                   : `ಈ ಆವೃತ್ತಿಯನ್ನು ಅನ್‌ಲಾಕ್ ಮಾಡಲು ಕನಿಷ್ಠ ₹${minPrice} ಸೇವಾ ದಕ್ಷಿಣೆಯನ್ನು ಯಾವುದೇ ಆನ್‌ಲೈನ್ ಪಾವತಿ (Google Pay, UPI, ಕಾರ್ಡ್ ಅಥವಾ ನೆಟ್‌ಬ್ಯಾಂಕಿಂಗ್) ಮೂಲಕ ಪಾವತಿಸಿ.`
                 : mode === '30min'
-                ? 'To unlock this 30-min tier, please submit a dakshina of ₹150 or any amount > ₹200 to access the 2 Master Live Videos and step-by-step pooja guidance. Includes pundit recordings for every shloka.'
+                ? 'To unlock this 30-min tier, please submit a dakshina of ₹150 or any amount > ₹200 to access the 3 Ati Sankshipta Deva Pooja YouTube videos and step-by-step pooja guidance. Includes pundit recordings for every shloka.'
                 : `To unlock this tier, please submit a dakshina of at least ₹${minPrice} via any online payment method (Google Pay, UPI, Card, or Net Banking).`}
             </p>
           </div>
@@ -465,11 +466,6 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             </div>
           </div>
         </div>
-      )}
-
-      {/* 30-Minute Tier Exclusive: 2 Master Recorded Videos by Sudha Pandita Sri Venugopalacharya Joshi */}
-      {mode === '30min' && (
-        <SudhaPanditaMasterVideosPlayer lang={lang} currentStepIndex={currentIndex} />
       )}
 
       {/* Complete Version Exclusive: 3 Shastric Protocol Diagrams (Image 4, 3, 5) */}
@@ -761,8 +757,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
           <div className="space-y-4">
             <p role="note" className="rounded-xl border border-[#ffd700]/20 bg-[#250a0a] px-4 py-3 text-xs leading-relaxed text-[#fef3c7]/80">
               {lang === 'kn'
-                ? 'ಪ್ರತಿ ಶ್ಲೋಕಕ್ಕೂ ವಿದ್ವಾನ್ ಶ್ರೀರಾಮವಿಟ್ಠಲಾಚಾರ್ಯರ (ಜ್ಞಾನಗಮ್ಯ ಪ್ರಸಾರಣ) "ದೇವಪೂಜಾ ಪದ್ಧತಿ" ಧ್ವನಿಮುದ್ರಣ ಲಭ್ಯವಿದೆ. "AI ಅರ್ಚಕರ ಧ್ವನಿ" ಬಟನ್ ಕೃತಕವಾಗಿ ರಚಿಸಿದ ಧ್ವನಿಯನ್ನು ನುಡಿಸುತ್ತದೆ.'
-                : 'Each shloka has a recording from "Deva Pooja Paddhati" recited by Vid. Sriramavittala Achar (JnanaGamya Prasarana). The "AI Priest Voice" button plays generated speech instead.'}
+                ? 'ಪ್ರತಿ ಶ್ಲೋಕವನ್ನು ವಿದ್ವಾನ್ ಶ್ರೀರಾಮವಿಟ್ಠಲಾಚಾರ್ಯರ (ಜ್ಞಾನಗಮ್ಯ ಪ್ರಸಾರಣ) "ದೇವಪೂಜಾ ಪದ್ಧತಿ" ಧ್ವನಿಮುದ್ರಣದೊಂದಿಗೆ ಆಲಿಸಿ. ಧ್ವನಿಮುದ್ರಣ ಇಲ್ಲದ ಶ್ಲೋಕಗಳಿಗೆ ಮಾತ್ರ "AI ಅರ್ಚಕರ ಧ್ವನಿ" ಬಟನ್ ಇರುತ್ತದೆ.'
+                : 'Listen to each shloka in the "Deva Pooja Paddhati" recording recited by Vid. Sriramavittala Achar (JnanaGamya Prasarana). The "AI Priest Voice" button appears only for shlokas that have no recording.'}
             </p>
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
@@ -814,6 +810,8 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
             {currentStep.mantras.map((mantra) => {
               const isCurrentlyPlaying = isPlayingMantra && activeMantraId === mantra.id;
               const isCurrentlyBuffering = isBufferingAudio && activeMantraId === mantra.id;
+              // Shlokas with a pundit recording are heard from the recording, not the AI voice.
+              const hasRecording = getMantraRecordings(mantra.id).length > 0;
 
               return (
                 <div
@@ -874,6 +872,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                   {/* Human Voice Mantra Audio Chanting Toolbar */}
                   <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2 border-t border-[#ffd700]/10">
                     <div className="flex flex-wrap items-center gap-2">
+                      {!hasRecording && (<>
                       {/* Human Priest Voice Button */}
                       <button
                         onClick={() => handlePlayMantra(mantra)}
@@ -927,10 +926,12 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                           </button>
                         ))}
                       </div>
+                      </>)}
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2">
                       {/* Slow Priest Speed Selector */}
+                      {!hasRecording && (
                       <div className="flex items-center gap-1 text-xs">
                         <span className="text-[11px] text-[#ffd700]/70 font-sans">
                           {lang === 'kn' ? 'ಗತಿ:' : 'Speed:'}
@@ -953,6 +954,7 @@ export const GuidedPoojaView: React.FC<GuidedPoojaViewProps> = ({
                           </button>
                         ))}
                       </div>
+                      )}
 
                       {/* Ambient Temple Tanpura Drone Button */}
                       <button

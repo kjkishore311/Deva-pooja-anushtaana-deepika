@@ -26,6 +26,7 @@ import { TarkshyadiPanchaMudraWidget } from './components/TarkshyadiPanchaMudraW
 import { AnjaniputraChatbot } from './components/AnjaniputraChatbot';
 import { SandhyavandaneSection } from './components/SandhyavandaneSection';
 import { SacredDarshanBand } from './components/SacredDarshanBand';
+import { MantraStotraSangrahaSection } from './components/MantraStotraSangrahaSection';
 import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
 import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
 import { UpakarmaDownloadsSection } from './components/UpakarmaDownloadsSection';
@@ -51,7 +52,7 @@ export default function App() {
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [isAnjaniputraOpen, setIsAnjaniputraOpen] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<TabType>(() => window.location.hash === '#guru-stuti' ? 'guru-stuti' : /^#(sandhyavandane|confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash) ? 'sandhyavandane' : 'darshan');
+  const [activeTab, setActiveTab] = useState<TabType>(() => window.location.hash === '#guru-stuti' ? 'guru-stuti' : window.location.hash === '#mantra-stotra' ? 'mantra-stotra' : /^#(sandhyavandane|confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash) ? 'sandhyavandane' : 'darshan');
   const [landingViewMode, setLandingViewMode] = useState<'video' | 'photo'>('video');
   const [isMudraModalOpen, setIsMudraModalOpen] = useState(false);
   const [selectedMudraId, setSelectedMudraId] = useState<string | undefined>(undefined);
@@ -64,7 +65,8 @@ export default function App() {
     const handleHashChange = () => {
       if (window.location.hash === '#sandhyavandane') setActiveTab('sandhyavandane');
       if (window.location.hash === '#guru-stuti') setActiveTab('guru-stuti');
-      if (!window.location.hash) setActiveTab((current) => ['sandhyavandane', 'guru-stuti'].includes(current) ? 'darshan' : current);
+      if (window.location.hash === '#mantra-stotra') setActiveTab('mantra-stotra');
+      if (!window.location.hash) setActiveTab((current) => ['sandhyavandane', 'guru-stuti', 'mantra-stotra'].includes(current) ? 'darshan' : current);
     };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -72,10 +74,10 @@ export default function App() {
 
   useEffect(() => {
     const path = window.location.pathname + window.location.search;
-    const fragment = activeTab === 'sandhyavandane' ? '#sandhyavandane' : activeTab === 'guru-stuti' ? '#guru-stuti' : '';
+    const fragment = activeTab === 'sandhyavandane' ? '#sandhyavandane' : activeTab === 'guru-stuti' ? '#guru-stuti' : activeTab === 'mantra-stotra' ? '#mantra-stotra' : '';
     if (fragment && !/^#(confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash)) {
       window.history.replaceState(null, '', `${path}${fragment}`);
-    } else if (!fragment && ['#sandhyavandane', '#guru-stuti'].includes(window.location.hash)) {
+    } else if (!fragment && ['#sandhyavandane', '#guru-stuti', '#mantra-stotra'].includes(window.location.hash)) {
       window.history.replaceState(null, '', path);
     }
   }, [activeTab]);
@@ -232,6 +234,8 @@ export default function App() {
           {activeTab === 'panchanga' && <Panchanga lang={lang} />}
 
           {activeTab === 'guru-stuti' && <MadhwaGuruStuti lang={lang} onBack={() => setActiveTab('darshan')} />}
+
+          {activeTab === 'mantra-stotra' && <MantraStotraSangrahaSection lang={lang} onBack={() => setActiveTab('darshan')} />}
 
           {activeTab === 'sandhyavandane' && <SandhyavandaneSection lang={lang} onBack={() => {
             window.history.replaceState(null, '', window.location.pathname + window.location.search);

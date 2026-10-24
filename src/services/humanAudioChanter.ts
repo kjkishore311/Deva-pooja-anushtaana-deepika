@@ -182,22 +182,29 @@ class HumanAudioChanter {
 
     const utterance = new SpeechSynthesisUtterance(spacedText);
     utterance.rate = 0.65; // Slow, dignified priest pace
-    utterance.pitch = 0.82; // Deep male vocal tone
 
-    // Try finding an Indian English or Hindi/Kannada voice
+    // The priest voice must be male: never pick a voice known to be female, and prefer one known to be male.
     const voices = window.speechSynthesis.getVoices();
-    const maleIndianNames = /madhur|hemant|prabhat|gagan|ravi|kiran|male/i;
+    const femaleNames = /female|woman|heera|kalpana|neerja|swara|sapna|lekha|veena|aditi|raveena|kajal|shruti|pallavi|vani|zira|samantha|susan|karen|moira|tessa|fiona|victoria|serena|kate|hazel|libby|sonia|jenny|aria|natasha/i;
+    const maleNames = /\bmale\b|madhur|hemant|prabhat|gagan|ravi|kiran|rishi|aarav|kunal|mohan|prakash|arjun|daniel|david|mark|guy|ryan|thomas|alex|fred|aaron|arthur|oliver|george|james/i;
+    // The voice must be able to read the script: Kannada, Devanagari (Sanskrit/Hindi/Marathi) or English.
+    const scriptLang = options.lang === 'kn' ? /^kn/i : options.lang === 'en' ? /^en/i : /^(sa|hi|mr)/i;
+    const isMale = (v: SpeechSynthesisVoice) => maleNames.test(v.name) && !femaleNames.test(v.name);
+    // Google's Indian-language voices are female unless the name says "Male".
+    const notFemale = (v: SpeechSynthesisVoice) => !femaleNames.test(v.name) && !/google/i.test(v.name);
+    const readable = voices.filter((v) => scriptLang.test(v.lang));
+    const indianFirst = (list: SpeechSynthesisVoice[]) => list.find((v) => /-IN$/i.test(v.lang)) || list[0];
     const priestVoice =
-      voices.find((v) => /^(kn|sa|hi)/i.test(v.lang) && maleIndianNames.test(v.name)) ||
-      voices.find((v) => v.lang.includes('kn') || v.lang.includes('sa')) ||
-      voices.find((v) => v.lang.includes('hi') && v.name.toLowerCase().includes('male')) ||
-      voices.find((v) => v.lang.includes('IN') && !v.name.toLowerCase().includes('female')) ||
-      voices.find((v) => v.lang.includes('IN')) ||
-      voices.find((v) => v.name.toLowerCase().includes('male'));
+      indianFirst(readable.filter(isMale)) ||
+      indianFirst(readable.filter(notFemale)) ||
+      indianFirst(readable);
 
     if (priestVoice) {
       utterance.voice = priestVoice;
+      utterance.lang = priestVoice.lang;
     }
+    // A known male voice keeps a natural, slightly deep tone; any other voice is pitched well down so it sounds male.
+    utterance.pitch = priestVoice && isMale(priestVoice) ? 0.8 : 0.4;
 
     utterance.onstart = () => {
       this.isAudioPlaying = true;

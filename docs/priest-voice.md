@@ -6,7 +6,9 @@ The guided pooja's **AI Priest Voice** buttons play each mantra in a deep, slow 
 
 1. Create an API key at https://aistudio.google.com/apikey.
 2. In Netlify, open **Project configuration → Environment variables** and add `GEMINI_API_KEY` with the key as its value, scoped to Functions.
-3. Redeploy. Until the key is set, the buttons fall back to the visitor's device voice, which prefers a male Indian voice where one is installed.
+3. Redeploy. Until the key is set, the buttons fall back to the visitor's device voice. Voices known to be female are skipped and a male voice that can read the text's script is preferred. If the device only has a female voice for that script, it is pitched well down so the guidance still sounds male.
+
+Shlokas that have a pundit recording (see `src/data/poojaRecordings.ts`) play only that recording. The AI Priest Voice button appears only for shlokas without one.
 
 Optionally, set `GEMINI_TTS_MODEL` to choose a specific Gemini speech model. Otherwise the newest available model is tried first.
 

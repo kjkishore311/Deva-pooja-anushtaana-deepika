@@ -11,10 +11,11 @@ import {
   PhoneCall,
   ChevronLeft,
   ChevronRight,
-  Menu
+  Menu,
+  BookOpen
 } from 'lucide-react';
 
-export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna' | 'sandhyavandane' | 'guru-stuti';
+export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna' | 'sandhyavandane' | 'guru-stuti' | 'mantra-stotra';
 
 interface BottomNavProps {
   activeTab: TabType;
@@ -40,6 +41,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       labelKn: 'ಮಧ್ವ ಗುರು ಸ್ತುತಿ',
       labelEn: 'Guru Stuti',
       icon: Scroll,
+    },
+    {
+      id: 'mantra-stotra' as TabType,
+      labelKn: 'ಮಂತ್ರ ಸ್ತೋತ್ರ ಸಂಗ್ರಹ',
+      labelEn: 'Mantra Stotra',
+      icon: BookOpen,
     },
     {
       id: 'sandhyavandane' as TabType,

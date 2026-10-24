@@ -32,7 +32,7 @@ interface DeityScene {
   };
 }
 
-// All 19 divine photos uploaded in the folder in authentic sequential order
+// All 20 divine photos uploaded in the folder in authentic sequential order
 export const ALL_UPLOADED_IMAGES: DeityScene[] = [
   {
     id: 'img-1',
@@ -279,6 +279,19 @@ export const ALL_UPLOADED_IMAGES: DeityScene[] = [
       crown: 'Ancient Silver Doorway & Arch',
       emerald: 'Nanda Deepa Eternal Flame',
       coral: 'Red Kumkuma & Chandana Markings',
+    },
+  },
+  {
+    id: 'img-20',
+    nameKn: 'ರತ್ನಾಭರಣ ಅಲಂಕಾರ ದರ್ಶನ',
+    nameEn: 'Jewelled Alankara Darshan',
+    subtitleKn: 'ವಜ್ರ, ನೀಲ ಹಾಗೂ ಮುತ್ತಿನ ಆಭರಣಗಳಿಂದ ಅಲಂಕೃತ ದಿವ್ಯ ಸಾನ್ನಿಧ್ಯ',
+    subtitleEn: 'Divine presence adorned with diamond, sapphire and pearl ornaments',
+    imageSrc: '/images/darshan/divine-alankara.jpg',
+    details: {
+      crown: 'Jewelled Kireeta',
+      emerald: 'Sapphire & Ruby Padakam',
+      coral: 'Pearl & Coral Strands',
     },
   },
 ];

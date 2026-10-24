@@ -29,10 +29,17 @@ export function DevotionalHomeWidgets({ lang, onSelect }: DevotionalHomeWidgetsP
       image: '/images/FB_IMG_1787650730425.jpg',
       alt: 'Supplied photograph of the pooja sanctum',
     },
+    {
+      tab: 'mantra-stotra',
+      nameEn: 'Mantra Stotra Sangraha',
+      nameKn: 'ಮಂತ್ರ ಸ್ತೋತ್ರ ಸಂಗ್ರಹ',
+      image: '/images/darshan/divine-alankara.jpg',
+      alt: 'Supplied photograph of a jewelled alankara',
+    },
   ];
 
   return (
-    <nav aria-label={lang === 'kn' ? 'ಪೂಜಾ ವಿಭಾಗಗಳು' : 'Devotional sections'} className="mx-auto grid max-w-lg grid-cols-3 gap-2 sm:gap-4">
+    <nav aria-label={lang === 'kn' ? 'ಪೂಜಾ ವಿಭಾಗಗಳು' : 'Devotional sections'} className="mx-auto grid max-w-2xl grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4">
       {widgets.map((widget) => (
         <button
           key={widget.tab}
