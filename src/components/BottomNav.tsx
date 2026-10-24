@@ -10,12 +10,12 @@ import {
   Sparkles,
   PhoneCall,
   ChevronLeft,
-  ChevronRight,
   Menu,
-  BookOpen
+  BookOpen,
+  Info
 } from 'lucide-react';
 
-export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna' | 'sandhyavandane' | 'guru-stuti' | 'mantra-stotra';
+export type TabType = 'darshan' | 'pooja' | 'panchanga' | 'mudras' | 'samagri' | 'ekadashi' | 'suktas' | 'qna' | 'sandhyavandane' | 'guru-stuti' | 'mantra-stotra' | 'about';
 
 interface BottomNavProps {
   activeTab: TabType;
@@ -50,8 +50,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     },
     {
       id: 'sandhyavandane' as TabType,
-      labelKn: 'ಸಂಧ್ಯಾವಂದನೆ',
-      labelEn: 'Sandhyavandane',
+      labelKn: 'ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ',
+      labelEn: 'Trikala Sandhyavandane',
       icon: Scroll,
     },
     {
@@ -102,13 +102,20 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       labelEn: 'Q&A',
       icon: HelpCircle,
     },
+    {
+      id: 'about' as TabType,
+      labelKn: 'ಉದ್ದೇಶ & ನಮ್ಮ ಬಗ್ಗೆ',
+      labelEn: 'Purpose & About Us',
+      icon: Info,
+    },
   ];
 
   return (
-    <aside aria-label="Quick navigation" className="fixed left-2 sm:left-3 top-1/2 -translate-y-1/2 z-40 flex items-center select-none pointer-events-auto">
-      {/* Left-Aligned Docked Navigation Panel */}
-      {isOpen && <div id="quick-navigation-options" className="flex items-center">
-        <div className="bg-[#1a0505]/95 backdrop-blur-xl border border-[#ffd700]/30 rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-[0_10px_30px_rgba(0,0,0,0.85)] flex flex-col gap-1 max-h-[85vh] overflow-y-auto no-scrollbar">
+    <nav aria-label={lang === 'kn' ? 'ಮೆನು' : 'Menu'} className="relative select-none">
+      {/* Menu panel opens below the button in the heading, which stays pinned to the top of the screen */}
+      {isOpen && <div className="fixed inset-0 z-40" aria-hidden="true" onClick={() => setIsOpen(false)} />}
+      {isOpen && <div id="quick-navigation-options" className="absolute left-0 top-full z-50 mt-2 text-left">
+        <div className="bg-[#1a0505]/95 backdrop-blur-xl border border-[#ffd700]/30 rounded-2xl sm:rounded-3xl p-1.5 sm:p-2 shadow-[0_10px_30px_rgba(0,0,0,0.85)] flex flex-col gap-1 max-h-[70vh] overflow-y-auto no-scrollbar">
           {/* Header with quick hide button */}
           <div className="flex items-center justify-between px-1.5 py-1 border-b border-[#ffd700]/15 mb-0.5">
             <span className="text-[10px] font-serif font-bold text-[#ffd700] tracking-wider">
@@ -191,23 +198,34 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               </span>
             </button>
           )}
+          {/* Live Uttaradimath channel */}
+          <a
+            href="https://www.youtube.com/@uttaradimath/live"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-2 py-1.5 rounded-xl text-left text-red-200 hover:bg-[#3d1111]/80"
+          >
+            <span className="p-1.5"><span className="block w-2.5 h-2.5 rounded-full bg-red-500" /></span>
+            <span className="text-xs font-sans font-bold whitespace-nowrap">
+              {lang === 'kn' ? 'ಉತ್ತರಾದಿಮಠ ಅಧ್ಯಾತ್ಮವಾಣಿ ಚಾನೆಲ್' : 'Uttaradimath Adhyatmavani channel'}
+            </span>
+          </a>
         </div>
       </div>}
 
-      {/* Floating Toggle Button to Hide or View the Left Icons */}
-      {!isOpen && (
-        <button
+      {/* Menu button, fixed at the far left of the heading */}
+      <button
           id="btn-nav-expand-toggle"
+          type="button"
           aria-expanded={isOpen}
           aria-controls="quick-navigation-options"
-          onClick={() => setIsOpen(true)}
-          className="p-2 sm:p-2.5 rounded-2xl bg-gradient-to-r from-[#ff9933] to-[#ffd700] text-[#1a0606] font-bold shadow-[0_4px_16px_rgba(255,153,51,0.5)] border border-[#ffd700] flex items-center gap-1 active:scale-95 transition-all group"
-          title={lang === 'kn' ? 'ಮೆನು ಐಕಾನ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ' : 'View Navigation Icons'}
+          onClick={() => setIsOpen((open) => !open)}
+          className="p-1.5 sm:px-3 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ff9933] to-[#ffd700] text-[#1a0606] font-bold shadow-[0_4px_16px_rgba(255,153,51,0.5)] border border-[#ffd700] flex items-center gap-1 active:scale-95 transition-all group"
+          title={lang === 'kn' ? 'ಮೆನು ತೆರೆಯಿರಿ' : 'Open menu'}
         >
-          <Menu className="w-4 h-4 text-[#1a0606] group-hover:rotate-90 transition-transform" />
-          <ChevronRight className="w-3.5 h-3.5" />
+          <Menu className="w-4 h-4 text-[#1a0606]" />
+          <span className="hidden sm:inline text-xs">{lang === 'kn' ? 'ಮೆನು' : 'Menu'}</span>
         </button>
-      )}
-    </aside>
+    </nav>
   );
 };

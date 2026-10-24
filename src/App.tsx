@@ -8,8 +8,8 @@ import { EkadashiWorkflow } from './components/EkadashiWorkflow';
 import { QnABank } from './components/QnABank';
 import { SuktasReader } from './components/SuktasReader';
 import { DailySummaryPrint } from './components/DailySummaryPrint';
-import { BottomNav, TabType } from './components/BottomNav';
-import { Sidebar } from './components/Sidebar';
+import { TabType } from './components/BottomNav';
+import { AboutSection, PurposeSection, SiteFooter } from './components/AboutPurpose';
 import { CinematicDarshanHero } from './components/CinematicDarshanHero';
 import { SequentialDarshanVideoPlayer } from './components/SequentialDarshanVideoPlayer';
 import { Panchanga } from './components/Panchanga';
@@ -29,7 +29,6 @@ import { SacredDarshanBand } from './components/SacredDarshanBand';
 import { MantraStotraSangrahaSection } from './components/MantraStotraSangrahaSection';
 import { MadhwaGuruStuti } from './components/MadhwaGuruStuti';
 import { DevotionalHomeWidgets } from './components/DevotionalHomeWidgets';
-import { UpakarmaDownloadsSection } from './components/UpakarmaDownloadsSection';
 
 export default function App() {
   const [lang, setLang] = useState<Language>(() => {
@@ -52,7 +51,7 @@ export default function App() {
   const [isSupportModalOpen, setIsSupportModalOpen] = useState(false);
   const [isAnjaniputraOpen, setIsAnjaniputraOpen] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<TabType>(() => window.location.hash === '#guru-stuti' ? 'guru-stuti' : window.location.hash === '#mantra-stotra' ? 'mantra-stotra' : /^#(sandhyavandane|confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash) ? 'sandhyavandane' : 'darshan');
+  const [activeTab, setActiveTab] = useState<TabType>(() => window.location.hash === '#guru-stuti' ? 'guru-stuti' : window.location.hash === '#mantra-stotra' ? 'mantra-stotra' : window.location.hash === '#about' ? 'about' : /^#(sandhyavandane|confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash) ? 'sandhyavandane' : 'darshan');
   const [landingViewMode, setLandingViewMode] = useState<'video' | 'photo'>('video');
   const [isMudraModalOpen, setIsMudraModalOpen] = useState(false);
   const [selectedMudraId, setSelectedMudraId] = useState<string | undefined>(undefined);
@@ -66,7 +65,8 @@ export default function App() {
       if (window.location.hash === '#sandhyavandane') setActiveTab('sandhyavandane');
       if (window.location.hash === '#guru-stuti') setActiveTab('guru-stuti');
       if (window.location.hash === '#mantra-stotra') setActiveTab('mantra-stotra');
-      if (!window.location.hash) setActiveTab((current) => ['sandhyavandane', 'guru-stuti', 'mantra-stotra'].includes(current) ? 'darshan' : current);
+      if (window.location.hash === '#about') setActiveTab('about');
+      if (!window.location.hash) setActiveTab((current) => ['sandhyavandane', 'guru-stuti', 'mantra-stotra', 'about'].includes(current) ? 'darshan' : current);
     };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -74,10 +74,10 @@ export default function App() {
 
   useEffect(() => {
     const path = window.location.pathname + window.location.search;
-    const fragment = activeTab === 'sandhyavandane' ? '#sandhyavandane' : activeTab === 'guru-stuti' ? '#guru-stuti' : activeTab === 'mantra-stotra' ? '#mantra-stotra' : '';
+    const fragment = activeTab === 'sandhyavandane' ? '#sandhyavandane' : activeTab === 'guru-stuti' ? '#guru-stuti' : activeTab === 'mantra-stotra' ? '#mantra-stotra' : activeTab === 'about' ? '#about' : '';
     if (fragment && !/^#(confirmation_token|recovery_token|invite_token|email_change_token|access_token)/.test(window.location.hash)) {
       window.history.replaceState(null, '', `${path}${fragment}`);
-    } else if (!fragment && ['#sandhyavandane', '#guru-stuti', '#mantra-stotra'].includes(window.location.hash)) {
+    } else if (!fragment && ['#sandhyavandane', '#guru-stuti', '#mantra-stotra', '#about'].includes(window.location.hash)) {
       window.history.replaceState(null, '', path);
     }
   }, [activeTab]);
@@ -147,17 +147,10 @@ export default function App() {
         onSelectTab={setActiveTab}
         unlockedTiers={unlockedTiers}
         onOpenAnjaniputra={() => setIsAnjaniputraOpen(true)}
+        onOpenSupport={() => setIsSupportModalOpen(true)}
       />
 
       <div className="flex-1 flex w-full">
-        {/* Desktop Sidebar Navigation */}
-        <Sidebar
-          activeTab={activeTab}
-          onChangeTab={setActiveTab}
-          lang={lang}
-          onOpenAnjaniputra={() => setIsAnjaniputraOpen(true)}
-        />
-
         {/* Main Screen Content View */}
         <main className="flex-1 w-full overflow-y-auto">
           {/* Landing Page (Sequential Darshan, Duration Options & Embedded Music Video) */}
@@ -169,6 +162,9 @@ export default function App() {
             />
 
             <DevotionalHomeWidgets lang={lang} onSelect={setActiveTab} />
+
+            {/* Purpose of the website, right below the widgets */}
+            <PurposeSection lang={lang} onOpenAbout={() => setActiveTab('about')} />
 
             {/* 1. Sequential Deity Video Darshan (6 YouTube Shorts in re-occurring sequence with audio & auto-pause on tab change) */}
             {landingViewMode === 'video' ? (
@@ -202,9 +198,6 @@ export default function App() {
               onSelectMode={handleSelectMode}
               unlockedTiers={unlockedTiers}
             />
-
-            {/* 3. Rigveda Upakarma & Yagnopaveeta Dharana free PDFs */}
-            <UpakarmaDownloadsSection lang={lang} />
           </div>
 
           {activeTab === 'pooja' && (
@@ -237,6 +230,8 @@ export default function App() {
 
           {activeTab === 'mantra-stotra' && <MantraStotraSangrahaSection lang={lang} onBack={() => setActiveTab('darshan')} />}
 
+          {activeTab === 'about' && <AboutSection lang={lang} onBack={() => setActiveTab('darshan')} onOpenSupport={() => setIsSupportModalOpen(true)} />}
+
           {activeTab === 'sandhyavandane' && <SandhyavandaneSection lang={lang} onBack={() => {
             window.history.replaceState(null, '', window.location.pathname + window.location.search);
             setActiveTab('darshan');
@@ -260,6 +255,7 @@ export default function App() {
           {activeTab === 'suktas' && <SuktasReader lang={lang} />}
 
           {activeTab === 'qna' && <QnABank lang={lang} />}
+          <SiteFooter lang={lang} onOpenAbout={() => setActiveTab('about')} onOpenSupport={() => setIsSupportModalOpen(true)} />
         </main>
       </div>
 
@@ -330,16 +326,6 @@ export default function App() {
         onSelectMode={handleSelectMode}
       />
 
-      {/* Mobile / Tablet Left-Aligned Navigation Bar */}
-      <div className="lg:hidden">
-        <BottomNav
-          activeTab={activeTab}
-          onChangeTab={setActiveTab}
-          lang={lang}
-          onOpenSupport={() => setIsSupportModalOpen(true)}
-          onOpenAnjaniputra={() => setIsAnjaniputraOpen(true)}
-        />
-      </div>
     </div>
   );
 }

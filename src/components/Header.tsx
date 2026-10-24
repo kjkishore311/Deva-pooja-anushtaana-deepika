@@ -1,6 +1,8 @@
 import React from 'react';
 import { Language, PoojaMode } from '../types';
 import { SacredMasthead } from './SacredMasthead';
+import { BottomNav, TabType } from './BottomNav';
+import { PurposeTicker } from './PurposeTicker';
 import { Volume2, VolumeX, Sparkles, Languages, Clock, Flame, Lock, CheckCircle2 } from 'lucide-react';
 
 interface HeaderProps {
@@ -18,6 +20,7 @@ interface HeaderProps {
   onSelectTab?: (tab: any) => void;
   unlockedTiers?: PoojaMode[];
   onOpenAnjaniputra?: () => void;
+  onOpenSupport?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -35,6 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
   onSelectTab,
   unlockedTiers = ['10min'],
   onOpenAnjaniputra,
+  onOpenSupport,
 }) => {
   const is30MinUnlocked = unlockedTiers.includes('30min') || unlockedTiers.includes('full');
   const isFullUnlocked = unlockedTiers.includes('full');
@@ -54,6 +58,18 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Center-Aligned App Name Block */}
       <div className="relative max-w-6xl mx-auto px-12 sm:px-36 pt-2.5 pb-1.5 text-center">
+        {/* Menu: fixed at the far left of the heading */}
+        {onSelectTab && (
+          <div className="absolute left-2 sm:left-3 top-2.5 z-50">
+            <BottomNav
+              activeTab={activeTab as TabType}
+              onChangeTab={onSelectTab}
+              lang={lang}
+              onOpenSupport={onOpenSupport}
+              onOpenAnjaniputra={onOpenAnjaniputra}
+            />
+          </div>
+        )}
         {/* Vayu putra Chatbot: fixed at the far right of the heading */}
         {onOpenAnjaniputra && (
           <button
@@ -99,6 +115,9 @@ export const Header: React.FC<HeaderProps> = ({
             : '|| Srimad Uttaradi Matha Sampradaya • Tantrasara Sangraha Tradition ||'}
         </p>
       </div>
+
+      {/* Purpose of the website, scrolling right to left */}
+      <PurposeTicker lang={lang} />
 
       {/* Options Row Below App Name: Centered with Darshan, Pooja, Music and Language */}
       <div className="max-w-4xl mx-auto px-2 sm:px-4 py-1.5 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 border-t border-[#ffd700]/10">

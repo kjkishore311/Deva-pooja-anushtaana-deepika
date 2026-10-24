@@ -10,8 +10,8 @@ export function DevotionalHomeWidgets({ lang, onSelect }: DevotionalHomeWidgetsP
   const widgets: { tab: TabType; nameEn: string; nameKn: string; image: string; alt: string }[] = [
     {
       tab: 'sandhyavandane',
-      nameEn: 'Trikala Sandhyavandana',
-      nameKn: 'ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ',
+      nameEn: 'Trikala Sandhyavandana & Yajnopaveeta Dharana',
+      nameKn: 'ತ್ರಿಕಾಲ ಸಂಧ್ಯಾವಂದನೆ & ಯಜ್ಞೋಪವೀತ ಧಾರಣೆ',
       image: '/images/widgets/sandhyavandane-cover.png',
       alt: 'Cover of the supplied Rigveda Trikala Sandhyavandane book',
     },
