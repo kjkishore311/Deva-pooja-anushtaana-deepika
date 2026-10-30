@@ -278,7 +278,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಅನಧೀತ್ಯಮಹಾಭಾಷ್ಯಂ ವ್ಯಾಖ್ಯಾತಂ ಯದನುಗ್ರಹಾತ್।\nವನ್ದೇ ತಂ ವಿಧಿನಾ ಸತ್ಯನಿಧಿಂ ಸಜ್ಜ್ಞಾನಸಿದ್ಧಯೇ॥",
       "en": "anadhītyamahābhāṣyaṃ vyākhyātaṃ yadanugrahāt|\nvande taṃ vidhinā satyanidhiṃ sajjñānasiddhaye||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-satyanidhi-tirtha.m4a"
   },
   {
     "id": "sri-satyanatha-tirtha",
