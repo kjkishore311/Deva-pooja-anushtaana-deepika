@@ -110,7 +110,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಮಾದ್ಯದದ್ವೈತ್ಯನ್ಧಕಾರಪ್ರದ್ಯೋತನಮಹರ್ನಿಶಮ್।\nವಿದ್ಯಾಧಿರಾಜಂ ಸ್ವಗುರುಂ ಧ್ಯಾಯಾಮಿ ಕರುಣಾಕರಮ್॥",
       "en": "mādyadadvaityandhakārapradyotanamaharniśam|\nvidyādhirājaṃ svaguruṃ dhyāyāmi karuṇākaram||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-vidyadhiraja-tirtha.mp3"
   },
   {
     "id": "sri-kavindra-tirtha",
@@ -124,7 +124,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ವೀನ್ದ್ರಾರೂಢಪದಾಸಕ್ತಂ  ರಾಜೇನ್ದ್ರಮುನಿಸೇವಿತಮ್ ।\nಶ್ರೀಕವೀನ್ದ್ರಮುನಿಂ ವನ್ದೇ ಭಜತಾಂ ಚನ್ದ್ರಸನ್ನಿಭಮ್ ॥",
       "en": "vīndrārūḍhapadāsaktaṃ  rājendramunisevitam |\nśrīkavīndramuniṃ vande bhajatāṃ candrasannibham ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-kavindra-tirtha.mp3"
   },
   {
     "id": "sri-vagisha-tirtha",
@@ -152,7 +152,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ದ್ಯುಮಣ್ಯಭಿಜನಾಬ್ಜೇನ್ದೂರಾಮವ್ಯಾಸಪದಾರ್ಚಕಃ।\nರಾಮಚನ್ದ್ರಗುರುರ್ಭೂಯಾತ್ ಕಾಮಿತಾರ್ಥಪ್ರದಾಯಕಃ॥",
       "en": "dyumaṇyabhijanābjendūrāmavyāsapadārcakaḥ|\nrāmacandragururbhūyāt kāmitārthapradāyakaḥ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-ramachandra-tirtha.mp3"
   },
   {
     "id": "sri-vidyanidhi-tirtha",
@@ -166,7 +166,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಯದ್ಭಕ್ತ್ಯಾ ಮೂಲರಾಮಸ್ಯ ಪೇಟಿಕಾ ತ್ಯಕ್ತಭೂಮಿಕಾ।\nವಿದ್ಯಾನಿಧಿರ್ಧಿಯಂ ದದ್ಯಾತ್ ಅಷ್ಟಷಷ್ಟ್ಯಬ್ದಪೂಜಕಃ॥",
       "en": "yadbhaktyā mūlarāmasya peṭikā tyaktabhūmikā|\nvidyānidhirdhiyaṃ dadyāt aṣṭaṣaṣṭyabdapūjakaḥ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-vidyanidhi-tirtha.mp3"
   },
   {
     "id": "sri-raghunatha-tirtha",
@@ -180,7 +180,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ರಘುನಾಥಗುರುಂ ನೌಮಿ ವಿದ್ಯಾನಿಧಿಕರೋದ್ಭವಮ್।\nಕೂರ್ಮೋ ವರುಣಗಙ್ಗೇ ಚ ಯಸ್ಯ ಪ್ರತ್ಯಕ್ಷತಾಂ ಗತಾಃ॥",
       "en": "raghunāthaguruṃ naumi vidyānidhikarodbhavam|\nkūrmo varuṇagaṅge ca yasya pratyakṣatāṃ gatāḥ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-raghunatha-tirtha.mp3"
   },
   {
     "id": "sri-raghuvarya-tirtha",
@@ -194,7 +194,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಮಹಾಪ್ರವಾಹಿನೀ ಭೀಮಾ ಯಸ್ಯ ಮಾರ್ಗಮದಾನ್ಮುದಾ ।\nರಘುವರ್ಯೋ ಮುದಂ ದದ್ಯಾತ್ಕಾಮಿತಾರ್ಥಪ್ರದಾಯಕಃ ॥",
       "en": "mahāpravāhinī bhīmā yasya mārgamadānmudā |\nraghuvaryo mudaṃ dadyātkāmitārthapradāyakaḥ ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-raghuvarya-tirtha.mp3"
   },
   {
     "id": "sri-raghuttama-tirtha",
@@ -208,7 +208,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಭಾವಬೋಧಕೃತಂ ಸೇವೇ ರಘುತ್ತಮಮಹಾಗುರುಮ್।\nಯಚ್ಛಿಷ್ಯಶಿಷ್ಯಶಿಷ್ಯಾದ್ಯಾಃ ಟಿಪ್ಪಣ್ಯಾಚಾರ್ಯಸಂಜ್ಞಿತಾಃ॥",
       "en": "bhāvabodhakṛtaṃ seve raghuttamamahāgurum|\nyacchiṣyaśiṣyaśiṣyādyāḥ ṭippaṇyācāryasaṃjñitāḥ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-raghuttama-tirtha.m4a"
   },
   {
     "id": "sri-vedavyasa-tirtha",
@@ -222,7 +222,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ನ ದಗ್ಧಂ ಯಸ್ಯ ಕೌಪೀನಂ ಅಗ್ನೌ ದತ್ತಮಪಿ ಸ್ಫುಟಮ್।\nವೇದವ್ಯಾಸಗುರುಂ ನೌಮಿ ಶ್ರೀವೇದೇಶನಮಸ್ಕೃತಮ್॥",
       "en": "na dagdhaṃ yasya kaupīnaṃ agnau dattamapi sphuṭam|\nvedavyāsaguruṃ naumi śrīvedeśanamaskṛtam||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-vedavyasa-tirtha.m4a"
   },
   {
     "id": "sri-vidyadhisha-tirtha",
@@ -236,7 +236,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ಶ್ರೀಮದ್ಸುಧಾದ್ಭುತಾಮ್ಬೋಧಿವಿಕ್ರೀಡನವಿಚಕ್ಷಣಾನ್।\nವಾಕ್ಯಾರ್ಥಚನ್ದ್ರಿಕಾಕಾರಾನ್ ವಿದ್ಯಾಧೀಶಗುರೂನ್ ಭಜೇ॥",
       "en": "śrīmadsudhādbhutāmbodhivikrīḍanavicakṣaṇān|\nvākyārthacandrikākārān vidyādhīśagurūn bhaje||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-vidyadhisha-tirtha.m4a"
   },
   {
     "id": "sri-vedanidhi-tirtha",
@@ -250,7 +250,7 @@ export const madhwaGurus: MadhwaGuru[] = [
       "kn": "ವಿದ್ಯಾಧೀಶಾಬ್ಧಿಸಂಭೂತೋ ವಿದ್ವತ್ಕುಮುದಬಾನ್ಧವಃ ।\nವೇದನಿಧ್ಯಾಖ್ಯಚನ್ದ್ರೋಽಯಂ ಕಾಮಿತಾರ್ಥಾನ್ ಪ್ರಯಚ್ಛತು ॥",
       "en": "vidyādhīśābdhisaṃbhūto vidvatkumudabāndhavaḥ |\nvedanidhyākhyacandro'yaṃ kāmitārthān prayacchatu ||"
     },
-    "audioUrl": null
+    "audioUrl": "/audio/guru-stuti/sri-vedanidhi-tirtha.m4a"
   },
   {
     "id": "sri-satyavrata-tirtha",
